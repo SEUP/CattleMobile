@@ -1,0 +1,19 @@
+// NativeScript core theme
+// @see https://docs.nativescript.org/ui/theme
+@import '~nativescript-theme-core/scss/skins/forest/index';
+@import '~nativescript-theme-core/scss/index';
+
+// Global SCSS styling
+// @see https://docs.nativescript.org/ui/styling
+
+.card {
+  background-color: #fff;
+  color: #4d4d4d;
+  margin: 15rem 15rem 0rem;
+}
+.card-layout {
+  padding: 20rem;
+}
+.card-layout .h1 {
+  margin-bottom: 15rem;
+}
