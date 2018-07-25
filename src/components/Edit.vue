@@ -7,6 +7,7 @@
                 <CardView class="card" elevation="10" radius="10" ios:shadowRadius="3">
                     <StackLayout horizontalAlignment="stretch">
                         <Label style="padding-left: 10rem;" text="รายละเอียด" class="h3" height="30" />
+                        <Image verticalAlignment="top" class="image-profile" src="~/images/NativeScript-Vue.png"/>
                         <Label style="padding-left: 15rem;" text="ชื่อฟาร์ม :" class="h5" height="50" />
                         <Label style="padding-left: 15rem;" text="จำนวนโคทั้งหมด :" class="h5" height="50" />
                         <Label style="padding-left: 15rem;" text="จำนวนโคพ่อพันธ์ุ :" class="h5" height="50" />
@@ -44,5 +45,10 @@
 </script>
 
 <style scoped>
-
+    .image-profile {
+        margin : 5rem;
+        padding : 0 0 0 10rem;
+        width : 100rem;
+        height: 100rem;
+    }
 </style>

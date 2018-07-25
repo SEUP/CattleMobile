@@ -1,6 +1,11 @@
 <template>
     <Page class="page">
-        <ActionBar class="action-bar" title="Home"/>
+        <ActionBar>
+            <StackLayout orientation="horizontal">
+                <Image src="res://icon" width="40" height="40" verticalAlignment="center" />
+                <Label text="ativeScript" fontSize="24" verticalAlignment="center" />
+            </StackLayout>
+        </ActionBar>
 
 
         <ScrollView>
@@ -28,7 +33,10 @@
 
                     </StackLayout>
                 </CardView>
-
+                <Button text="พ่อพันธุ์" class="h2" @tap="editProfile" color="#121258" backgroundColor="#43b883" style="margin-top: 10" margin="5"/>
+                <Button text="แม่พันธุ์" class="h2" @tap="editProfile" color="#121258" backgroundColor="#43b883" margin="5"/>
+                <Button text="โคขุน" class="h2" @tap="editProfile" color="#121258" backgroundColor="#43b883" margin="5"/>
+                <Button text="โคแรกเกิด" class="h2" @tap="editProfile" color="#121258" backgroundColor="#43b883" margin="5" />
             </StackLayout>
         </ScrollView>
     </Page>
