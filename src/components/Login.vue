@@ -67,7 +67,7 @@
         created() {
             console.log("Login/created/", applicationSettings.getString('token', null))
             if (applicationSettings.getString('token', null)) {
-                this.$http.defaults.headers.common['Authorization'] = `Bearer ${applicationSettings.getString('token')}`;
+                this.$store.dispatch("user/reLogin")
                 let userPromise = this.$store.dispatch("user/getUser");
                 userPromise.then((r) => {
                     this.$router.push('/home')

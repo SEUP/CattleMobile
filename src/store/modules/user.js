@@ -1,5 +1,6 @@
 import axios from '../../axios'
 import router from '../../router'
+const applicationSettings = require("application-settings");
 
 const state = {
     user: null,
@@ -12,12 +13,14 @@ const mutations = {
 };
 
 const actions = {
+    reLogin: ({commit}) => {
+        axios.defaults.headers.common['Authorization'] = `Bearer ${applicationSettings.getString('token')}`;
+    },
     login: ({commit}, form) => {
         console.log("user/login", form.username, form.password)
         let promise = axios.post('/api/v1/farmer/login', form)
         promise.then((r) => {
             console.log("user/login", r.data)
-            let applicationSettings = require("application-settings");
             applicationSettings.setString("token", r.data.token);
             axios.defaults.headers.common['Authorization'] = `Bearer ${applicationSettings.getString('token')}`;
             console.log('user/login', 'finish')
@@ -33,9 +36,9 @@ const actions = {
         })
         return promise
     },
-    getAvatar: ({dispatch,state,commit}) => {
+    getAvatar: ({dispatch, state, commit}) => {
         let promise = axios.get(`/api/v1/farmer/farmers/${user.id}/avatar`);
-        promise.then((r)=>{
+        promise.then((r) => {
 
         })
         return promise;
