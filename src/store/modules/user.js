@@ -1,5 +1,6 @@
-import axios from '../../axios'
+import {axios} from '../../axios'
 import router from '../../router'
+import http from 'http'
 const applicationSettings = require("application-settings");
 
 const state = {
@@ -36,13 +37,6 @@ const actions = {
         })
         return promise
     },
-    getAvatar: ({dispatch, state, commit}) => {
-        let promise = axios.get(`/api/v1/farmer/farmers/${user.id}/avatar`);
-        promise.then((r) => {
-
-        })
-        return promise;
-    }
 };
 
 export default {

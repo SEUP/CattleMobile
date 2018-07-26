@@ -70,6 +70,7 @@
                 this.$store.dispatch("user/reLogin")
                 let userPromise = this.$store.dispatch("user/getUser");
                 userPromise.then((r) => {
+                    console.log('GOHOME');
                     this.$router.push('/home')
                 })
             }
@@ -80,13 +81,11 @@
                 let loginPromise = this.$store.dispatch("user/login", this.form);
 
                 loginPromise.then((r) => {
-
                     let userPromise = this.$store.dispatch("user/getUser");
-
                     userPromise.then((r) => {
+                        console.log('GOHOME');
                         this.$router.push('/home')
                     })
-
                 })
 
 

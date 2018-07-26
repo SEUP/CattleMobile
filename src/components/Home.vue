@@ -3,7 +3,7 @@
         <ActionBar title="ระบบบริหารการเลี้ยงโค"></ActionBar>
         <GridLayout rows="200,*">
             <StackLayout row="0" class="user-profile">
-                <Image src="~/images/logo.png" class="avatar"></Image>
+                <Image :src="`${$baseUrl}/api/v1/farmer/farmers/${user.id}/avatar`" class="avatar"></Image>
                 <Label class="header" text="Jane Doe"/>
                 <Label class="subheader" text="jane@mail.com"/>
             </StackLayout>
@@ -25,19 +25,22 @@
 
 <script>
 
-
+    import {mapState} from 'vuex'
 
     export default {
         data() {
             return {}
         },
+        computed : {
+            ...mapState({
+                user : state => state.user.user,
+            })
+        },
         created() {
-
-
 
         },
         mounted() {
-
+            console.log("HOME",this.user)
         },
         methods: {}
     }

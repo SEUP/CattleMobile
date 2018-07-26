@@ -19,10 +19,10 @@ Vue.filter('fonticon', fonticon);
 
 Vue.registerElement('CardView', () => require('nativescript-cardview').CardView)
 
-import axios from './axios'
+import {axios, BaseURL} from './axios'
 
 Vue.prototype.$http = axios;
-
+Vue.prototype.$baseUrl = BaseURL
 
 new Vue({
     router,
