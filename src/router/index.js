@@ -12,8 +12,8 @@ import MaleBreed from '../components/MaleBreed'
 import FemaleBreed from '../components/FemaleBreed'
 import MeatBreed from '../components/MeatBreed'
 import YoungBreed from '../components/YoungBreed'
-import Profile from '../components/Profile'
-import Farm from '../components/Farm'
+import Profile from '../components/Farmer/Profile'
+import Farm from '../components/Farmer/Farm'
 
 const router = new VueRouter({
     pageRouting: true,

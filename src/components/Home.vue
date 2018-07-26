@@ -8,12 +8,12 @@
                 <Label class="subheader" :text="user.email"/>
             </StackLayout>
 
-            <GridLayout class="grid-btn" row="1" rows="*,*,*" columns="*,*" backgroundColor="#212121">
+            <GridLayout class="grid-btn" row="1" rows="*,*,*" columns="*,*" >
 
-                <Button @tap="listMalebreed" class="main-btn" row="0" col="0" text="พ่อพันธุ์"/>
-                <Button @tap="listFemalebreed" class="main-btn" row="0" col="1" text="แม่พันธุ์"/>
-                <Button @tap="listMeatbreed" class="main-btn" row="1" col="0" text="โคขุน"/>
-                <Button @tap="listYoungbreed" class="main-btn" row="1" col="1" text="โคแรกเกิด"/>
+                <Button @tap="listMaleBreed" class="main-btn" row="0" col="0" text="พ่อพันธุ์"/>
+                <Button @tap="listFemaleBreed" class="main-btn" row="0" col="1" text="แม่พันธุ์"/>
+                <Button @tap="listMeatBreed" class="main-btn" row="1" col="0" text="โคขุน"/>
+                <Button @tap="listYoungBreed" class="main-btn" row="1" col="1" text="โคแรกเกิด"/>
                 <Button @tap="listProfile" class="main-btn" row="2" col="0" text="ข้อมูลส่วนตัว"/>
                 <Button @tap="listFarm" class="main-btn" row="2" col="1" text="ข้อมูลฟาร์ม"/>
 
@@ -43,16 +43,16 @@
             console.log("HOME",this.user)
         },
         methods: {
-            listMalebreed : function () {
+            listMaleBreed : function () {
                 this.$router.push('/malebreed')
             },
-            listFemalebreed : function () {
+            listFemaleBreed : function () {
                 this.$router.push('/femalebreed')
             },
-            listMeatbreed : function () {
+            listMeatBreed : function () {
                 this.$router.push('/meatbreed')
             },
-            listYoungbreed : function () {
+            listYoungBreed : function () {
                 this.$router.push('/youngbreed')
             },
             listProfile : function () {
@@ -66,11 +66,6 @@
 </script>
 
 <style scoped>
-
-    ActionBar {
-        background-color: #212121;
-        color: white;
-    }
 
     .grid-btn {
         padding-left: 10rem;
