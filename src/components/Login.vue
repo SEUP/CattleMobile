@@ -51,6 +51,10 @@
     }
 </style>
 <script>
+
+    const applicationSettings = require("application-settings");
+
+
     export default {
         data() {
             return {
@@ -58,6 +62,16 @@
                     username: '',
                     password: '',
                 }
+            }
+        },
+        created() {
+            console.log("Login/created/", applicationSettings.getString('token', null))
+            if (applicationSettings.getString('token', null)) {
+                this.$http.defaults.headers.common['Authorization'] = `Bearer ${applicationSettings.getString('token')}`;
+                let userPromise = this.$store.dispatch("user/getUser");
+                userPromise.then((r) => {
+                    this.$router.push('/home')
+                })
             }
         },
         methods: {

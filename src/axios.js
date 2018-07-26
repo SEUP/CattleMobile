@@ -1,7 +1,7 @@
 import Axios from 'axios'
 
 const axios = Axios.create({
-    baseURL: `http://172.25.103.193:3333`,
+    baseURL: `http://10.0.2.2:3333`,
     timeout: 10000
 });
 

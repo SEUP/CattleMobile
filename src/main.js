@@ -4,6 +4,8 @@ import store from './store';
 import './styles.scss';
 import {TNSFontIcon, fonticon} from 'nativescript-fonticon';
 
+Vue.use(require('nativescript-ui-sidedrawer/vue'))
+
 TNSFontIcon.debug = false;
 TNSFontIcon.paths = {
     'fa': './font-awesome.css',
@@ -23,9 +25,6 @@ Vue.prototype.$http = axios;
 
 
 new Vue({
-
     router,
-
     store,
-
 }).$start();

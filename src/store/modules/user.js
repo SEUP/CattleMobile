@@ -13,7 +13,7 @@ const mutations = {
 
 const actions = {
     login: ({commit}, form) => {
-        console.log("user/login", form)
+        console.log("user/login", form.username, form.password)
         let promise = axios.post('/api/v1/farmer/login', form)
         promise.then((r) => {
             console.log("user/login", r.data)
@@ -32,6 +32,13 @@ const actions = {
             commit("setUser", r.data);
         })
         return promise
+    },
+    getAvatar: ({dispatch,state,commit}) => {
+        let promise = axios.get(`/api/v1/farmer/farmers/${user.id}/avatar`);
+        promise.then((r)=>{
+
+        })
+        return promise;
     }
 };
 
