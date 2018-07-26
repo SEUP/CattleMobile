@@ -10,12 +10,12 @@
 
             <GridLayout class="grid-btn" row="1" rows="*,*,*" columns="*,*" backgroundColor="#212121">
 
-                <Button class="main-btn" row="0" col="0" text="พ่อพันธุ์"/>
-                <Button class="main-btn" row="0" col="1" text="แม่พันธุ์"/>
-                <Button class="main-btn" row="1" col="0" text="โคขุน"/>
-                <Button class="main-btn" row="1" col="1" text="โคแรกเกิด"/>
-                <Button class="main-btn" row="2" col="0" text="ข้อมูลส่วนตัว"/>
-                <Button class="main-btn" row="2" col="1" text="ข้อมูลฟาร์ม"/>
+                <Button @tap="listMalebreed" class="main-btn" row="0" col="0" text="พ่อพันธุ์"/>
+                <Button @tap="listFemalebreed" class="main-btn" row="0" col="1" text="แม่พันธุ์"/>
+                <Button @tap="listMeatbreed" class="main-btn" row="1" col="0" text="โคขุน"/>
+                <Button @tap="listYoungbreed" class="main-btn" row="1" col="1" text="โคแรกเกิด"/>
+                <Button @tap="listProfile" class="main-btn" row="2" col="0" text="ข้อมูลส่วนตัว"/>
+                <Button @tap="listFarm" class="main-btn" row="2" col="1" text="ข้อมูลฟาร์ม"/>
 
 
             </GridLayout>
@@ -42,7 +42,26 @@
         mounted() {
             console.log("HOME",this.user)
         },
-        methods: {}
+        methods: {
+            listMalebreed : function () {
+                this.$router.push('/malebreed')
+            },
+            listFemalebreed : function () {
+                this.$router.push('/femalebreed')
+            },
+            listMeatbreed : function () {
+                this.$router.push('/meatbreed')
+            },
+            listYoungbreed : function () {
+                this.$router.push('/youngbreed')
+            },
+            listProfile : function () {
+                this.$router.push('/profile')
+            },
+            listFarm : function () {
+                this.$router.push('/farm')
+            },
+        }
     }
 </script>
 
