@@ -59,6 +59,6 @@ const router = new VueRouter({
     ],
 });
 
-router.replace('/login');
+router.replace('/home');
 
 module.exports = router;

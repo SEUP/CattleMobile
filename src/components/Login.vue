@@ -63,13 +63,19 @@
         methods: {
             login: function () {
                 console.log("LOGIN");
-                this.$http.post('/api/v1/farmer/login', this.form)
-                    .then((r) => {
-                        let applicationSettings = require("application-settings");
-                        applicationSettings.setString("token", r.data.token);
-                        this.$http.defaults.headers.common['Authorization'] = `Bearer ${applicationSettings.getString('token')}`;
+                let loginPromise = this.$store.dispatch("user/login", this.form);
+
+                loginPromise.then((r) => {
+
+                    let userPromise = this.$store.dispatch("user/getUser");
+
+                    userPromise.then((r) => {
                         this.$router.push('/home')
                     })
+
+                })
+
+
             },
         }
     }

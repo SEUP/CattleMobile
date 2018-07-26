@@ -7,7 +7,8 @@ import store from './store';
 import './styles.scss';
 
 import {TNSFontIcon, fonticon} from 'nativescript-fonticon';
-TNSFontIcon.debug = true;
+
+TNSFontIcon.debug = false;
 TNSFontIcon.paths = {
     'fa': './font-awesome.css',
 };
@@ -20,20 +21,15 @@ Vue.filter('fonticon', fonticon);
 
 Vue.registerElement('CardView', () => require('nativescript-cardview').CardView)
 
-import Axios from 'axios'
-
-const axios = Axios.create({
-    baseURL: `http://172.25.103.193:3333`,
-    timeout: 10000
-});
+import axios from './axios'
 
 Vue.prototype.$http = axios;
 
 
 new Vue({
 
-  router,
+    router,
 
-  store,
+    store,
 
 }).$start();
