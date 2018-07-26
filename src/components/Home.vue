@@ -4,8 +4,8 @@
         <GridLayout rows="200,*">
             <StackLayout row="0" class="user-profile">
                 <Image :src="`${$baseUrl}/api/v1/farmer/farmers/${user.id}/avatar`" class="avatar"></Image>
-                <Label class="header" text="Jane Doe"/>
-                <Label class="subheader" text="jane@mail.com"/>
+                <Label class="header" :text="`${user.firstname} ${user.lastname}`"/>
+                <Label class="subheader" :text="user.email"/>
             </StackLayout>
 
             <GridLayout class="grid-btn" row="1" rows="*,*,*" columns="*,*" backgroundColor="#212121">
