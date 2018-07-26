@@ -1,15 +1,22 @@
 <template>
     <Page class="page">
         <ActionBar title="ระบบบริหารการเลี้ยงโค"></ActionBar>
-
-        <GridLayout rows="auto, *">
-            <StackLayout class="user-profile">
+        <GridLayout rows="200,*">
+            <StackLayout row="0" class="user-profile">
                 <Image src="~/images/logo.png" class="avatar"></Image>
                 <Label class="header" text="Jane Doe"/>
                 <Label class="subheader" text="jane@mail.com"/>
             </StackLayout>
-        </GridLayout>
 
+            <GridLayout row="1" rows="*,*" columns="*,*" backgroundColor="green">
+
+                <Button class="main-btn" row="0" col="0" text="พ่อพันธุ์"/>
+                <Button class="main-btn" row="0" col="1" text="แม่พันธุ์"/>
+                <Button class="main-btn" row="1" col="0" text="โคขุน"/>
+                <Button class="main-btn" row="1" col="1" text="โคแรกเกิด"/>
+
+            </GridLayout>
+        </GridLayout>
     </Page>
 </template>
 
@@ -23,9 +30,19 @@
 </script>
 
 <style scoped>
+
+    .main-btn {
+        background-color: #545454;
+        color: white;
+        text-align: center;
+        font-size: 24em;
+        font-weight: bold;
+        border: gray 1px solid;
+    }
+
     .user-profile {
-        height : 200rem;
-        background-color : #212121;
+        height: 200rem;
+        background-color: #212121;
         padding-top: 10rem;
     }
 

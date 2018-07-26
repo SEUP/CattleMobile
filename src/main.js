@@ -1,11 +1,7 @@
 import Vue from 'nativescript-vue';
-
 import router from './router';
-
 import store from './store';
-
 import './styles.scss';
-
 import {TNSFontIcon, fonticon} from 'nativescript-fonticon';
 
 TNSFontIcon.debug = false;
