@@ -3,7 +3,12 @@
         <ActionBar title="ระบบบริหารการเลี้ยงโค"></ActionBar>
         <GridLayout rows="200,*">
             <StackLayout row="0" class="user-profile">
-                <Image :src="`${$baseUrl}/api/v1/farmer/farmers/${user.id}/avatar`" class="avatar"></Image>
+
+                <Image v-if="!user.image_url" src="~/images/profile.jpg" class="avatar"/>
+                <Image v-else-if="ValidURL(user.image_url)" :src="user.image_url" class="avatar"/>
+                <Image v-else :src="`${$baseUrl}/api/v1/farmer/farmers/${user.id}/avatar`" class="avatar"/>
+
+
                 <Label class="header" :text="`${user.firstname} ${user.lastname}`"/>
                 <Label class="subheader" :text="user.email"/>
             </StackLayout>
@@ -40,9 +45,17 @@
 
         },
         mounted() {
-            console.log("HOME",this.user)
+            console.log("Home Mounted ")
         },
         methods: {
+            ValidURL: function (str) {
+                let regexp = /^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/;
+                if (regexp.test(str)) {
+                    return true;
+                }
+                return false;
+            },
+
             listMaleBreed : function () {
                 this.$router.push('/malebreed')
             },
@@ -78,34 +91,6 @@
         text-align: center;
         font-size: 24em;
         font-weight: bold;
-    }
-
-    .user-profile {
-        height: 200rem;
-        background-color: #212121;
-        padding-top: 10rem;
-    }
-
-    .user-profile .header {
-        color: white;
-        font-size: 24rem;
-        font-weight: bold;
-        text-align: center;
-    }
-
-    .user-profile .subheader {
-        color: white;
-        font-size: 16rem;
-        font-weight: bold;
-        text-align: center;
-    }
-
-    .avatar {
-        border-radius: 50%;
-        width: 100rem;
-        height: 100rem;
-        border-width: 4rem;
-        border-color: #48b1ec;
     }
 </style>
 

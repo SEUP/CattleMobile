@@ -28,6 +28,34 @@ ActionBar {
   color: white;
 }
 
-Page {
+.page {
   background-color : #212121;
+}
+
+.user-profile {
+  height: 200rem;
+  background-color: #212121;
+  padding-top: 10rem;
+}
+
+.user-profile .header {
+  color: white;
+  font-size: 24rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.user-profile .subheader {
+  color: white;
+  font-size: 16rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.avatar {
+  border-radius: 50%;
+  width: 100rem;
+  height: 100rem;
+  border-width: 4rem;
+  border-color: #48b1ec;
 }

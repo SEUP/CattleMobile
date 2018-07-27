@@ -1,3 +1,4 @@
+import "babel-polyfill";
 import Vue from 'nativescript-vue';
 import router from './router';
 import store from './store';

@@ -64,30 +64,29 @@
                 }
             }
         },
-        created() {
+        async created() {
             console.log("Login/created/", applicationSettings.getString('token', null))
             if (applicationSettings.getString('token', null)) {
                 this.$store.dispatch("user/reLogin")
-                let userPromise = this.$store.dispatch("user/getUser");
-                userPromise.then((r) => {
+                let result = await this.$store.dispatch("user/getUser");
+                if (result) {
                     console.log('GOHOME');
                     this.$router.push('/home')
-                })
+                }
+
             }
         },
         methods: {
-            login: function () {
+            login: async function () {
                 console.log("LOGIN");
-                let loginPromise = this.$store.dispatch("user/login", this.form);
+                let result = await this.$store.dispatch("user/login", this.form);
 
-                loginPromise.then((r) => {
-                    let userPromise = this.$store.dispatch("user/getUser");
-                    userPromise.then((r) => {
-                        console.log('GOHOME');
+                if(result){
+                    let user = await this.$store.dispatch('user/getUser');
+                    if(user){
                         this.$router.push('/home')
-                    })
-                })
-
+                    }
+                }
 
             },
         }

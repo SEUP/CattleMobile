@@ -99,6 +99,6 @@ const router = new VueRouter({
     ],
 });
 
-router.replace('/malebreed');
+router.replace('/login');
 
 module.exports = router;
