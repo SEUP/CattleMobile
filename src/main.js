@@ -4,6 +4,7 @@ import router from './router';
 import store from './store';
 import './styles.scss';
 import {TNSFontIcon, fonticon} from 'nativescript-fonticon';
+import * as http from 'http'
 
 Vue.use(require('nativescript-ui-sidedrawer/vue'))
 
@@ -22,8 +23,9 @@ Vue.registerElement('CardView', () => require('nativescript-cardview').CardView)
 
 import {axios, BaseURL} from './axios'
 
-Vue.prototype.$http = axios;
+Vue.prototype.$axios = axios;
 Vue.prototype.$baseUrl = BaseURL
+Vue.prototype.$http = http;
 
 new Vue({
     router,

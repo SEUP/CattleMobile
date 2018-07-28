@@ -3,9 +3,7 @@
         <ActionBar title="ข้อมูลส่วนตัว"></ActionBar>
         <StackLayout>
             <StackLayout row="0" class="user-profile">
-                <Image v-if="!user.image_url" src="~/images/profile.jpg" class="avatar"/>
-                <Image v-else-if="ValidURL(user.image_url)" :src="user.image_url" class="avatar"/>
-                <Image v-else :src="`${$baseUrl}/api/v1/farmer/farmers/${user.id}/avatar`" class="avatar"/>
+                <Avatar/>
 
                 <GridLayout rows="auto" columns="auto,auto">
                     <Button row="0" col="0" class="change-image" @tap="selectImage">เลือกภาพ</Button>
@@ -17,7 +15,6 @@
             <CardView class="cardStyle" margin="10" elevation="40" radius="1">
                 <StackLayout>
                     <Label>{{user.firstname}} {{user.lastname}}</Label>
-                    <Image ref="cropImage" :src="displayImage"/>
                 </StackLayout>
             </CardView>
 
@@ -31,8 +28,6 @@
 
     import {mapState} from 'vuex'
     import * as app from "tns-core-modules/application";
-    import {isAndroid} from "tns-core-modules/platform";
-    import fs from "tns-core-modules/file-system";
     import * as imagepicker from "nativescript-imagepicker";
     import * as camera from "nativescript-camera";
     import {Image} from "ui/image";
@@ -41,12 +36,16 @@
 
     const ImageCropper = require("nativescript-imagecropper").ImageCropper;
 
+    import Avatar from "./Avatar"
+
     export default {
         name: "Profile",
+        components : {
+            Avatar,
+        },
         data() {
             return {
                 imageCropper: new ImageCropper(),
-                displayImage: null
             }
         },
         computed: {
@@ -103,6 +102,8 @@
                         let url = `data:image/jpeg;base64,${base64}`
                         this.displayImage = url;
                         // next upload image here
+                        await this.$store.dispatch('user/uploadAvatar',url)
+
                     }
                 })
 
@@ -127,6 +128,8 @@
                     let url = `data:image/jpeg;base64,${base64}`
                     this.displayImage = url;
                     // next upload image here
+
+                    await this.$store.dispatch('user/uploadAvatar',url)
 
                 }
             },
