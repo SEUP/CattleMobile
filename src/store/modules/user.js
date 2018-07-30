@@ -83,7 +83,19 @@ const actions = {
                     return null
                 })
         return result
-    }
+    },
+
+    async updateUser(context, params) {
+        let result = axios.put(`/api/v1/farmer/farmers/${params.id}`, params)
+            .then(async (response) => {
+                let farmer  = response.data
+                context.commit("setUser", farmer)
+                return farmer;
+            }).catch((error) => {
+                return null
+            })
+        return result
+    },
 };
 
 export default {

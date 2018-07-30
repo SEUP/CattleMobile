@@ -42,7 +42,8 @@
                 userImage: state => state.user.userImage,
             })
         },
-        created() {
+        async created() {
+            await this.$store.dispatch("district/getProvinces")
 
         },
         async mounted() {

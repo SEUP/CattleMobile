@@ -1,22 +1,41 @@
 <template>
     <Page class="page">
-        <ActionBar title="ข้อมูลส่วนตัว"></ActionBar>
+        <ActionBar title="ข้อมูลส่วนตัว">
+            <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" @tap="back"/>
+        </ActionBar>
         <StackLayout>
             <StackLayout row="0" class="user-profile">
                 <Avatar/>
 
-                <GridLayout rows="auto" columns="auto,auto">
+                <GridLayout rows="auto" columns="*,*,*">
                     <Button row="0" col="0" class="change-image" @tap="selectImage">เลือกภาพ</Button>
                     <Button row="0" col="1" class="change-image" @tap="captureImage">ถ่ายภาพ</Button>
+                    <Button row="0" col="2" class="change-image" @tap="editProfile">แก้ไขข้อมูล</Button>
                 </GridLayout>
 
             </StackLayout>
 
-            <CardView class="cardStyle" margin="10" elevation="40" radius="1">
-                <StackLayout>
-                    <Label>{{user.firstname}} {{user.lastname}}</Label>
+            <StackLayout class="data-form">
+                <StackLayout class="data-item">
+                    <Label class="label">ชื่อ-นามสกุล</Label>
+                    <Label class="text">{{user.firstname}} {{user.lastname}}</Label>
                 </StackLayout>
-            </CardView>
+                <StackLayout class="data-item">
+                    <Label class="label">อีเมล์</Label>
+                    <Label class="text">{{user.email}}</Label>
+                </StackLayout>
+                <StackLayout class="data-item">
+                    <Label class="label">รหัสประจำตัว</Label>
+                    <Label class="text">{{user.personal_id}}</Label>
+                </StackLayout>
+                <StackLayout class="data-item">
+                    <Label class="label">ที่อยู่</Label>
+                    <Label class="text"
+                           :text="getAddressText">
+                    </Label>
+                </StackLayout>
+
+            </StackLayout>
 
             <Button class="logout-btn" @tap="logout">ออกจากระบบ</Button>
 
@@ -40,7 +59,7 @@
 
     export default {
         name: "Profile",
-        components : {
+        components: {
             Avatar,
         },
         data() {
@@ -49,6 +68,15 @@
             }
         },
         computed: {
+            getAddressText() {
+                let user = this.user;
+                let district_name = user.houseDistrict ? user.houseDistrict.district_name : ''
+                let amphur_name = user.houseAmphur ? user.houseAmphur.amphur_name : ''
+                let province_name = user.houseProvince ? user.houseProvince.province_name : ''
+                let strAddress = `${user.house_address} ${district_name} ${amphur_name} ${province_name}`
+
+                return strAddress
+            },
             ...mapState({
                 user: state => state.user.user,
             })
@@ -57,6 +85,14 @@
             console.log("Profile created")
         },
         methods: {
+            editProfile: async function () {
+                this.$router.push('/profile-edit')
+            },
+
+            back: async function () {
+
+                this.$router.back()
+            },
             logout: async function () {
                 await this.$store.dispatch('user/logout');
                 this.$router.push('/login')
@@ -102,7 +138,7 @@
                         let url = `data:image/jpeg;base64,${base64}`
                         this.displayImage = url;
                         // next upload image here
-                        await this.$store.dispatch('user/uploadAvatar',url)
+                        await this.$store.dispatch('user/uploadAvatar', url)
 
                     }
                 })
@@ -129,7 +165,7 @@
                     this.displayImage = url;
                     // next upload image here
 
-                    await this.$store.dispatch('user/uploadAvatar',url)
+                    await this.$store.dispatch('user/uploadAvatar', url)
 
                 }
             },
@@ -187,6 +223,31 @@
 </script>
 
 <style scoped>
+
+    .data-form {
+        color: white;
+        background-color: #4e4e4e;
+    }
+
+    .data-item {
+        padding: 10rem;
+        font-size: 18rem;
+
+        border-bottom-style: solid;
+        border-bottom-width: 1rem;
+        border-bottom-color: #b6b6b6;
+
+    }
+
+    .data-item > .label {
+        font-size: 14rem;
+        color: #dfdfdf
+
+    }
+
+    .data-item > .text {
+    }
+
     .user-profile {
         height: auto;
     }
@@ -208,6 +269,11 @@
     .change-image {
         width: 50%;
         margin-top: 10rem;
+        border-color: white;
+        border-width: 5rem;
+        border-style: solid;
+        background-color: #3d5afe;
+        color: white;
 
     }
 </style>

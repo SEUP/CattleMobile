@@ -3,6 +3,8 @@ import Vuex from 'vuex';
 
 import counter from './modules/counter';
 import user from './modules/user';
+import choice from './modules/choice';
+import district from './modules/districtSelect'
 
 Vue.use(Vuex);
 
@@ -12,6 +14,8 @@ const store = new Vuex.Store({
     modules: {
         counter: counter,
         user: user,
+        choice: choice,
+        district: district,
     },
     strict: debug,
 });

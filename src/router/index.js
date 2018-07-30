@@ -13,6 +13,7 @@ import FemaleBreed from '../components/FemaleBreed'
 import MeatBreed from '../components/MeatBreed'
 import YoungBreed from '../components/YoungBreed'
 import Profile from '../components/Farmer/Profile'
+import EditProfile from "../components/Farmer/EditProfile"
 import Farm from '../components/Farmer/Farm'
 
 const router = new VueRouter({
@@ -84,6 +85,13 @@ const router = new VueRouter({
         {
             path: '/profile',
             component: Profile,
+            meta: {
+                title: 'Profile',
+            },
+        },
+        {
+            path: '/profile-edit',
+            component: EditProfile,
             meta: {
                 title: 'Profile',
             },

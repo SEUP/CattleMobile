@@ -16,7 +16,8 @@
     "nativescript-ui-sidedrawer": "^4.1.1",
     "nativescript-mediafilepicker": "^1.0.7",
     "nativescript-imagepicker": "^6.0.3",
-    "nativescript-imagecropper": "^1.0.4"
+    "nativescript-imagecropper": "^1.0.4",
+    "nativescript-drop-down": "^4.0.1"
   },
   "devDependencies": {
     "babel-traverse": "6.26.0",
