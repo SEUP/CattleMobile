@@ -116,8 +116,6 @@ const actions = {
                 })
             return result
         }
-
-
     },
 
     async downloadAvatar(context, params) {
