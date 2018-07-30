@@ -69,9 +69,11 @@
             if (applicationSettings.getString('token', null)) {
                 this.$store.dispatch("user/reLogin")
                 let result = await this.$store.dispatch("user/getUser");
+                let farm = await this.$store.dispatch('user/getFarm')
+
                 if (result) {
                     console.log('GOHOME');
-                    this.$router.push('/home')
+                    this.goHome();
                 }
 
             }
@@ -81,14 +83,19 @@
                 console.log("LOGIN");
                 let result = await this.$store.dispatch("user/login", this.form);
 
-                if(result){
+                if (result) {
                     let user = await this.$store.dispatch('user/getUser');
-                    if(user){
-                        this.$router.push('/home')
+                    await this.$store.dispatch('user/getFarm')
+
+                    if (user) {
+                        this.goHome();
                     }
                 }
 
             },
+            goHome: async function () {
+                this.$router.replace('/home')
+            }
         }
     }
 </script>

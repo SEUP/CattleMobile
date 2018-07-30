@@ -15,6 +15,8 @@ import YoungBreed from '../components/YoungBreed'
 import Profile from '../components/Farmer/Profile'
 import EditProfile from "../components/Farmer/EditProfile"
 import Farm from '../components/Farmer/Farm'
+import EditFarm from "../components/Farmer/EditFarm"
+
 
 const router = new VueRouter({
     pageRouting: true,
@@ -101,6 +103,13 @@ const router = new VueRouter({
             component: Farm,
             meta: {
                 title: 'Farm',
+            },
+        },
+        {
+            path: '/farm-edit',
+            component: EditFarm,
+            meta: {
+                title: 'Profile',
             },
         },
         {path: '*', redirect: '/home'},

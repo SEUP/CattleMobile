@@ -27,6 +27,13 @@ Vue.prototype.$axios = axios;
 Vue.prototype.$baseUrl = BaseURL
 Vue.prototype.$http = http;
 
+const moment = require('moment')
+require('moment/locale/th')
+
+Vue.use(require('vue-moment'),{
+    moment
+});
+
 new Vue({
     router,
     store,

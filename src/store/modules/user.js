@@ -6,6 +6,7 @@ const applicationSettings = require("application-settings");
 
 const state = {
     user: null,
+    farm: null,
     userImage: null,
 };
 
@@ -15,6 +16,10 @@ const mutations = {
     },
     setUserImage(state, dataUrl) {
         state.userImage = dataUrl;
+    },
+    setFarm(state, farm) {
+        console.log('setFarm', farm);
+        state.farm = farm;
     }
 };
 
@@ -27,10 +32,10 @@ const actions = {
         axios.defaults.headers.common['Authorization'] = `Bearer ${applicationSettings.getString('token')}`;
     },
     login: async ({commit}, form) => {
-        console.log("user/login", form.username, form.password)
+        console.log("user/login")
         let result = await axios.post('/api/v1/farmer/login', form)
             .then((r) => {
-                console.log("user/login", r.data)
+                // console.log("user/login", r.data)
                 applicationSettings.setString("token", r.data.token);
                 axios.defaults.headers.common['Authorization'] = `Bearer ${applicationSettings.getString('token')}`;
                 console.log('user/login', 'finish')
@@ -52,6 +57,67 @@ const actions = {
                 console.log(error.stack);
             })
         return result;
+    },
+
+    newFarm: async ({state, commit}) => {
+        console.log('newFarm')
+        let result = await axios.get(`/api/v1/farmer/farmers/${state.user.id}/farms/create`)
+            .then((response) => {
+                commit("setFarm", response.data)
+                return response.data
+            }).catch((error) => {
+                return null
+            })
+        return result
+    },
+    getFarm: async ({state, commit, dispatch}) => {
+        console.log('getFarm', state.user.id)
+
+        let result = await axios.get(`/api/v1/farmer/farmers/${state.user.id}/farms`)
+            .then(async (response) => {
+                if (response.data) {
+                    console.log("getFarm", response.data);
+                    commit("setFarm", response.data)
+                    return response.data
+                } else {
+                    return await dispatch('newFarm');
+                }
+            }).catch((error) => {
+                return null
+            })
+        return result
+    },
+
+    async updateFarm({commit, state}, params) {
+        console.log('updateFarm', state.user.id,params)
+
+        if (params.id) {
+            let result = await axios.put(`/api/v1/farmer/farmers/${state.user.id}/farms/${params.id}`, params)
+                .then(async (response) => {
+                    console.log('success', response.data);
+                    commit("setFarm", response.data)
+                    return response.data;
+                })
+                .catch((error) => {
+                    console.log(error.stack)
+                    return null
+                })
+            return result
+        } else {
+            let result = await axios.post(`/api/v1/farmer/farmers/${state.user.id}/farms`, params)
+                .then(async (response) => {
+                    console.log('success', response.data);
+                    commit("setFarm", response.data)
+                    return response.data;
+                })
+                .catch((error) => {
+                    console.log(error.stack)
+                    return null
+                })
+            return result
+        }
+
+
     },
 
     async downloadAvatar(context, params) {
@@ -88,7 +154,7 @@ const actions = {
     async updateUser(context, params) {
         let result = axios.put(`/api/v1/farmer/farmers/${params.id}`, params)
             .then(async (response) => {
-                let farmer  = response.data
+                let farmer = response.data
                 context.commit("setUser", farmer)
                 return farmer;
             }).catch((error) => {
