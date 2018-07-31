@@ -41,6 +41,7 @@
     .page {
         align-items: center;
         flex-direction: column;
+        background-color: white;
     }
 
     .form {
