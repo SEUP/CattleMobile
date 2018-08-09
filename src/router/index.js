@@ -16,11 +16,26 @@ import Profile from '../components/Farmer/Profile'
 import EditProfile from "../components/Farmer/EditProfile"
 import Farm from '../components/Farmer/Farm'
 import EditFarm from "../components/Farmer/EditFarm"
-
+import CattleAddForm from "../components/Male/CattleAddForm"
+import CattleEditFormMale from "../components/Male/CattleEditFormMale"
 
 const router = new VueRouter({
     pageRouting: true,
     routes: [
+        {
+            path: '/cattle/male/edit',
+            component: CattleEditFormMale,
+            meta: {
+                title: 'EditMaleBreed',
+            },
+        },
+        {
+            path: '/cattle/male/add',
+            component: CattleAddForm,
+            meta: {
+                title: 'AddMaleBreed',
+            },
+        },
         {
             path: '/edit',
             component: Edit,

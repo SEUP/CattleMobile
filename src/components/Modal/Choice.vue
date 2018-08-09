@@ -2,6 +2,13 @@
     <Page class="page">
         <ScrollView>
             <StackLayout class="list">
+                <GridLayout @tap="closeModal(choice.id)" roww="*" columns="*,auto"
+                            class="list-item"
+                            v-for="choice in choices">
+                    <Label row="0" col="0" textWrap=true :text="choice.choice"/>
+                    <Label v-if="choice.id == choice_id" row="0" col="1" textWrap=true class="fa green"
+                           :text="'fa-check' | fonticon"/>
+                </GridLayout>
             </StackLayout>
         </ScrollView>
     </Page>
@@ -15,11 +22,12 @@
 
     export default {
         props: {
-            choice_id: [String, Object]
+            to: String,
+            choice_id: [String, Object],
         },
         data() {
             return {
-                items: null
+                choices: [],
             };
         },
         computed: {
@@ -31,7 +39,8 @@
             })
         },
         async mounted() {
-
+            let choices = await this.$store.dispatch('choice/getChoicesByType', this.to)
+            this.choices = choices
         },
         methods: {
             closeModal: function (item) {

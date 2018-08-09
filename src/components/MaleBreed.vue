@@ -2,19 +2,13 @@
     <Page class="page">
         <ActionBar title="พ่อพันธุ์">
             <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" @tap="back"/>
+            <ActionItem @tap="addForm" ios.systemIcon="1" android.systemIcon="ic_input_add"/>
         </ActionBar>
 
         <ScrollView>
-            <ListView for="item in listOfItems">
+            <ListView for="cattle in cattles">
                 <v-template>
-                    <GridLayout class="cattlelist" rows="auto" columns="1*,5*,auto">
-                        <Image row="0" col="0" src="~/images/NativeScript-Vue.png"/>
-                        <StackLayout class="text" row="0" col="1">
-                            <Label class="cattlelist-header" :text="item.text"/>
-                            <Label class="cattlelist-header" :text="item.text"/>
-                        </StackLayout>
-                        <Label row="0" col="2" class="cattlelist-header" text=">"/>
-                    </GridLayout>
+                    <CattleListItem @tap="editCattle(cattle)" :cattle="cattle"/>
                 </v-template>
             </ListView>
         </ScrollView>
@@ -22,22 +16,32 @@
 </template>
 <script>
     import {mapState} from 'vuex'
-    import * as app from "tns-core-modules/application";
-    import * as imagepicker from "nativescript-imagepicker";
-    import * as camera from "nativescript-camera";
     import {Image} from "ui/image";
-    import * as imageSource from "tns-core-modules/image-source";
-    import * as permissions from "nativescript-permissions";
+    import CattleListItem from "./Cattle/CattleListItem"
 
     export default {
+        components : {
+            CattleListItem : CattleListItem
+        },
         data() {
             return {
-                listOfItems: [
-                    {text: "Eiei"},
-                    {text: "No.15"},
-                    {text: "hello"},
-                    {text: "hello"},
-                    {text: 'world'}
+                cattles: [
+                    {
+                        name: "Eiei",
+                        ear_number: "123"
+                    },
+                    {
+                        name: "Eiei",
+                        ear_number: "123"
+                    },
+                    {
+                        name: "Eiei",
+                        ear_number: "123"
+                    },
+                    {
+                        name: "Eiei",
+                        ear_number: "123"
+                    },
 
                 ],
             }
@@ -50,6 +54,12 @@
 
                 this.$router.back()
             },
+            addForm : function () {
+                this.$router.push('/cattle/male/add')
+            },
+            editCattle :function(cattle){
+                this.$router.push('/cattle/male/edit')
+            }
         },
 
     }
@@ -59,10 +69,12 @@
     .page {
         background-color: white;
     }
+
     .cattlelist {
         padding: 10em;
         margin: 10em;
     }
+
     .cattlelist-header {
         font-size: 18em;
         font-weight: bold;

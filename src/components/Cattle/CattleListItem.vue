@@ -1,16 +1,18 @@
 <template>
-    <GridLayout @tap="cattleTap" class="cattlelist" rows="auto" columns="1*,5*,auto">
+    <GridLayout @tap="editForm" class="cattlelist" rows="auto" columns="1*,5*,auto">
         <Image row="0" col="0" src="~/images/NativeScript-Vue.png"/>
         <StackLayout class="text" row="0" col="1">
-            <Label class="cattlelist-header" text="Data 1"/>
-            <Label class="cattlelist-header" text="Data 2"/>
-            <Label class="cattlelist-header" text="Data 3"/>
+            <Label class="cattlelist-header" :text="cattle.name"/>
+            <Label class="cattlelist-header" :text="cattle.ear_number"/>
         </StackLayout>
-        <Label row="0" col="1" class="fa"
+        <Label row="0" col="2" class="fa"
                :text="'fa-chevron-right' | fonticon"/></GridLayout>
 </template>
 
 <script>
+
+    import router from "../../router"
+
     export default {
         name: "CattleListItem",
         props: {
@@ -21,8 +23,8 @@
 
         },
         methods: {
-            cattleTap: function () {
-
+            editForm : function () {
+                this.$emit('tap')
             }
         }
     }

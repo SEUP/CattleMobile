@@ -137,15 +137,17 @@ const actions = {
 
     async uploadAvatar(context, dataUrl) {
         let url = dataUrl
-
+        console.log('uploadAvatar')
         let result = await
             axios.post(`/api/v1/farmer/farmers/${context.state.user.id}/avatar`, {img: url})
                 .then((response) => {
+                    console.log('uploadAvatar','success')
                     context.commit("setUser", response.data)
                     context.dispatch('downloadAvatar')
                     return response.data
                 })
                 .catch((error) => {
+                    console.log(error.stack)
                     return null
                 })
         return result
