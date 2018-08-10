@@ -30,13 +30,18 @@
                 <Label row="0" col="1" class="fa"
                        :text="'fa-chevron-right' | fonticon"/>
             </GridLayout>
-            <GridLayout rows="auto" columns="*,auto" class="form-item" @tap="setChoice(form,'cattle_breeding','พันธุ์โค')">
+            <GridLayout rows="auto" columns="*,auto" class="form-item"
+                        @tap="setChoice(form,'cattle_breeding','พันธุ์โค')">
                 <Label row="0" column="0"
                        :text="`พันธุ์โค : ${getChoiceTextByID(form.cattle_breeding) || 'ไม่ระบุ'}`"/>
                 <Label row="0" col="1" class="fa"
                        :text="'fa-chevron-right' | fonticon"/>
             </GridLayout>
-            <GridLayout rows="auto" columns="*,auto" class="form-item" @tap="setChoice(form,'cattle_source','แหล่งที่มา')">
+            <StackLayout v-if="form.options && form.options.cattle_breeding" class="form-item">
+                <TextField hint="ระบุ" v-model="form.options.cattle_breeding"/>
+            </StackLayout>
+            <GridLayout rows="auto" columns="*,auto" class="form-item"
+                        @tap="setChoice(form,'cattle_source','แหล่งที่มา')">
                 <Label row="0" column="0"
                        :text="`แหล่งที่มา : ${getChoiceTextByID(form.cattle_source) || 'ไม่ระบุ'}`"/>
                 <Label row="0" col="1" class="fa"
@@ -74,7 +79,7 @@
         methods: {
 
             setChoice: async function (parent, key, to) {
-                console.log('setChoice', parent[key], key, to)
+                console.log('setChoice')
                 let options = {
                     fullscreen: true,
                     animated: true,
@@ -82,11 +87,24 @@
                         propsData: {
                             choice_id: parent[key] ? parent[key] : null,
                             to: to,
+                            remark : parent.options ? parent.options[key] : null,
                         }
                     }
                 }
+                console.log('setChoice',options)
                 let result = await this.$showModal(Choice, options)
-                this.$set(parent, key, result);
+                this.$set(parent, key, result.id);
+                if (result.remark) {
+                    if (!parent.options) {
+                        this.$set(parent, 'options', {})
+                    }
+                    this.$set(parent.options, key, result.remark)
+                } else {
+                    if (!parent.options) {
+                        this.$set(parent, 'options', {})
+                    }
+                    delete parent.options[key];
+                }
                 console.log('setChoice', parent[key]);
             },
             setDate: async function (parent, key) {

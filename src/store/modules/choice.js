@@ -97,7 +97,7 @@ const getters = {
     getChoiceTextByID: (state, getters) => (choice_id) => {
         if (choice_id) {
             let choice = getters.getChoiceByID(choice_id);
-            console.log('getChoiceTextByID', choice, choice_id);
+            // console.log('getChoiceTextByID', choice, choice_id);
             return choice ? choice.choice : null
         }
         return null;
