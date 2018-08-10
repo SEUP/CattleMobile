@@ -42,6 +42,7 @@ const actions = {
         return context.state.choices;
     }
     , getChoicesByType: async function (context, type) {
+        console.log('getChoicesByType',type)
 
         if (type == "พันธุ์โค") {
             return await context.dispatch('getBreedTypes')

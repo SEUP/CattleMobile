@@ -2,7 +2,7 @@
     <Page class="page">
         <ScrollView>
             <StackLayout class="list">
-                <GridLayout @tap="closeModal(choice.id)" roww="*" columns="*,auto"
+                <GridLayout @tap="closeModal(choice.id)" rows="*" columns="*,auto"
                             class="list-item"
                             v-for="choice in choices">
                     <Label row="0" col="0" textWrap=true :text="choice.choice"/>
@@ -39,8 +39,10 @@
             })
         },
         async mounted() {
+            console.log("Choice Mounted",this.choice_id,this.to)
             let choices = await this.$store.dispatch('choice/getChoicesByType', this.to)
             this.choices = choices
+            console.log('choice mounted',this.choices);
         },
         methods: {
             closeModal: function (item) {

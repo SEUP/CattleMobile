@@ -21,7 +21,7 @@
                        :text="'fa-chevron-right' | fonticon"/>
             </GridLayout>
 
-            <GridLayout rows="auto" columns="*,auto" class="form-item" @tap="setChoice(form,'sex','พันธ์ุโค')">
+            <GridLayout rows="auto" columns="*,auto" class="form-item" @tap="setChoice(form,'sex','เพศโค')">
                 <Label row="0" column="0"
                        :text="`เพศโค : ${getChoiceTextByID(form.sex) || 'ไม่ระบุ'}`"/>
                 <Label row="0" col="1" class="fa"
@@ -59,13 +59,13 @@
         methods: {
 
             setChoice: async function (parent, key, to) {
-                console.log('setChoice')
+                console.log('setChoice',parent[key],key,to)
                 let options = {
                     fullscreen: true,
                     animated: true,
                     context: {
-                        propsData: {
-                            choice_id: parent[key],
+                        propsData : {
+                            choice_id: parent[key] ? parent[key] : null ,
                             to: to,
                         }
                     }
