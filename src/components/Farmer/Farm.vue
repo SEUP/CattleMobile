@@ -26,7 +26,8 @@
                 </StackLayout>
                 <StackLayout class="data-item">
                     <Label class="label">วันที่จดทะเบียน</Label>
-                    <Label class="text" :text="`${$moment(farm.farm_issue_date).format('DD MMMM YYYY') || 'ไม่ระบุ'}`"/>
+                    <Label class="text"
+                           :text="`${farm.farm_issue_date ? $moment(farm.farm_issue_date).format('DD MMMM YYYY') : 'ไม่ระบุ'}`"/>
                 </StackLayout>
                 <StackLayout class="data-item">
                     <Label class="label">ละติจูด,ลองจิจูด</Label>

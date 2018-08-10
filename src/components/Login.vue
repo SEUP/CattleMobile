@@ -41,6 +41,7 @@
     .page {
         align-items: center;
         flex-direction: column;
+        background-color: white;
     }
 
     .form {
@@ -64,29 +65,34 @@
                 }
             }
         },
+
         async created() {
             console.log("Login/created/", applicationSettings.getString('token', null))
             if (applicationSettings.getString('token', null)) {
                 this.$store.dispatch("user/reLogin")
-                let result = await this.$store.dispatch("user/getUser");
-                let farm = await this.$store.dispatch('user/getFarm')
+                let result = await this.loadInitialData();
 
                 if (result) {
-                    console.log('GOHOME');
                     this.goHome();
                 }
 
             }
         },
         methods: {
+            async loadInitialData() {
+                let result = await this.$store.dispatch("user/getUser");
+                let farm = await this.$store.dispatch('user/getFarm')
+                let choices = await this.$store.dispatch('choice/load')
+
+                return result;
+            },
+
             login: async function () {
                 console.log("LOGIN");
                 let result = await this.$store.dispatch("user/login", this.form);
 
                 if (result) {
-                    let user = await this.$store.dispatch('user/getUser');
-                    await this.$store.dispatch('user/getFarm')
-
+                    let user = this.loadInitialData()
                     if (user) {
                         this.goHome();
                     }
@@ -94,6 +100,8 @@
 
             },
             goHome: async function () {
+                console.log('GOHOME');
+
                 this.$router.replace('/home')
             }
         }
