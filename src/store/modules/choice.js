@@ -7,14 +7,39 @@ const _ = require('lodash')
 const state = {
     choices: null,
     unGroupChoice: null,
+    breeds: null,
 };
 
 const mutations = {
     setChoices: function (state, c) {
         state.unGroupChoice = c;
-        state.choices = _.groupBy(c, (o) => {
+
+        state.choices = _.groupBy(state.unGroupChoice, (o) => {
             return o.parent_id
         });
+        let breedMaster = _.find(state.unGroupChoice, {choice: "พันธุ์โค"})
+
+        breedMaster.children = state.choices[breedMaster.id]
+
+        breedMaster.children.forEach((c) => {
+            c.children = state.choices[c.id];
+        })
+
+        let join = [];
+
+        _.each(breedMaster.children, function (p) {
+            if (p.children.length > 0) {
+                _.each(p.children, function (c) {
+                    c.choice = `${p.choice} - ${c.choice}`
+                    join.push(c)
+                })
+            } else {
+                join.push(p)
+            }
+        })
+
+        state.breeds = join;
+
     }
 };
 
@@ -42,7 +67,7 @@ const actions = {
         return context.state.choices;
     }
     , getChoicesByType: async function (context, type) {
-        console.log('getChoicesByType',type)
+        console.log('getChoicesByType', type)
 
         if (type == "พันธุ์โค") {
             return await context.dispatch('getBreedTypes')
@@ -54,30 +79,9 @@ const actions = {
         }
     },
     getBreedTypes: async function (context) {
+        console.log('getBreedTypes')
         await context.dispatch('getChoices');
-        let c = context.state.choices;
-        let master = context.state.choices[null]
-        let key = _.findKey(master, {choice: "พันธุ์โค"})
-        let parent = context.state.choices[null][key]
-
-        parent.children = c[parent.id]
-        _.each(parent.children, function (p) {
-            p.children = c[p.id]
-        })
-
-        let join = [];
-
-        _.each(parent.children, function (p) {
-            if (p.children.length > 0) {
-                _.each(p.children, function (c) {
-                    c.choice = `${p.choice} - ${c.choice}`
-                    join.push(c)
-                })
-            } else {
-                join.push(p)
-            }
-        })
-        return join;
+        return state.breeds;
     }
 
 };
@@ -85,7 +89,7 @@ const actions = {
 const getters = {
     getChoiceByID: (state, getters) => (choice_id) => {
         if (choice_id) {
-            let choice = _.find(state.unGroupChoice, {id : choice_id})
+            let choice = _.find(state.unGroupChoice, {id: choice_id})
             return choice;
         }
         return null;
