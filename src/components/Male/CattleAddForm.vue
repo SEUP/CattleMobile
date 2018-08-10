@@ -21,8 +21,8 @@
                        :text="'fa-chevron-right' | fonticon"/>
             </GridLayout>
             <StackLayout orientation="horizontal" class="form-item">
-                <TextField v-model="" width='50%' hint="อายุ"/>
-                <TextField v-model="" width='50%' hint="อายุ"/>
+                <TextField width='50%' hint="อายุ(ปี)"/>
+                <TextField width='50%' hint="อายุ(เดือน)"/>
             </StackLayout>
             <GridLayout rows="auto" columns="*,auto" class="form-item" @tap="setDate(form,'birth_date')">
                 <Label :text="`${ form.birth_date ? $moment(form.buy_date).format('DD MMMM YYYY') : 'วันที่ซื้อ'}`"/>
@@ -30,19 +30,13 @@
                 <Label row="0" col="1" class="fa"
                        :text="'fa-chevron-right' | fonticon"/>
             </GridLayout>
-            <GridLayout rows="auto" columns="*,auto" class="form-item" @tap="setChoice(form,'sex','เพศโค')">
-                <Label row="0" column="0"
-                       :text="`เพศโค : ${getChoiceTextByID(form.sex) || 'ไม่ระบุ'}`"/>
-                <Label row="0" col="1" class="fa"
-                       :text="'fa-chevron-right' | fonticon"/>
-            </GridLayout>
-            <GridLayout rows="auto" columns="*,auto" class="form-item" @tap="setChoice(form,'sex','เพศโค')">
+            <GridLayout rows="auto" columns="*,auto" class="form-item" @tap="setChoice(form,'cattle_breeding','พันธุ์โค')">
                 <Label row="0" column="0"
                        :text="`พันธุ์โค : ${getChoiceTextByID(form.cattle_breeding) || 'ไม่ระบุ'}`"/>
                 <Label row="0" col="1" class="fa"
                        :text="'fa-chevron-right' | fonticon"/>
             </GridLayout>
-            <GridLayout rows="auto" columns="*,auto" class="form-item" @tap="setChoice(form,'sex','เพศโค')">
+            <GridLayout rows="auto" columns="*,auto" class="form-item" @tap="setChoice(form,'cattle_source','แหล่งที่มา')">
                 <Label row="0" column="0"
                        :text="`แหล่งที่มา : ${getChoiceTextByID(form.cattle_source) || 'ไม่ระบุ'}`"/>
                 <Label row="0" col="1" class="fa"
