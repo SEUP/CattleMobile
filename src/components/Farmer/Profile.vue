@@ -29,6 +29,10 @@
                     <Label class="text">{{user.personal_id}}</Label>
                 </StackLayout>
                 <StackLayout class="data-item">
+                    <Label class="label">เบอร์โทรศัพท์</Label>
+                    <Label class="text">{{user.phone_number}}</Label>
+                </StackLayout>
+                <StackLayout class="data-item">
                     <Label class="label">ที่อยู่</Label>
                     <Label class="text"
                            :text="getAddressText">
