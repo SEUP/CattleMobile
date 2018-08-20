@@ -6,11 +6,12 @@
         </ActionBar>
 
         <ScrollView>
-            <ListView for="cattle in cattles">
+         <ListView for="cattle in cattles.data">
                 <v-template>
                     <CattleListItem @tap="editCattle(cattle)" :cattle="cattle"/>
                 </v-template>
             </ListView>
+            
         </ScrollView>
     </Page>
 </template>
@@ -25,28 +26,24 @@
         },
         data() {
             return {
-                cattles: [
-                    {
-                        name: "Eiei",
-                        ear_number: "123"
-                    },
-                    {
-                        name: "Eiei",
-                        ear_number: "123"
-                    },
-                    {
-                        name: "Eiei",
-                        ear_number: "123"
-                    },
-                    {
-                        name: "Eiei",
-                        ear_number: "123"
-                    },
-
-                ],
+                 
+                cattles: null,
             }
+        },  computed: {
+             
+            ...mapState({
+                choices: state => state.choice.choices,
+                breedsMale: state => state.cattle.breedsMale,
+            })
+        },
+         created() {
+            this.breederMale();
         },
         methods: {
+            breederMale: async function(){ 
+               this.cattles = this.breedsMale;
+              
+            },
             editProfile: function () {
                 this.$router.push('/edit')
             },

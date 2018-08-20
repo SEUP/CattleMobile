@@ -83,6 +83,7 @@
                 let result = await this.$store.dispatch("user/getUser");
                 let farm = await this.$store.dispatch('user/getFarm')
                 let choices = await this.$store.dispatch('choice/load')
+                let breedMale =  await  this.$store.dispatch('cattle/load',result.id)
 
                 return result;
             },

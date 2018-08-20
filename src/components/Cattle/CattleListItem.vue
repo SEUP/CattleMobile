@@ -1,6 +1,7 @@
 <template>
     <GridLayout @tap="editForm" class="cattlelist" rows="auto" columns="1*,5*,auto">
-        <Image row="0" col="0" src="~/images/NativeScript-Vue.png"/>
+        
+        	<Image  :src="'http://mct.ict.up.ac.th:10008/'+cattle.image_url" class="thumb img-circle" /> 
         <StackLayout class="text" row="0" col="1">
             <Label class="cattlelist-header" :text="cattle.name"/>
             <Label class="cattlelist-header" :text="cattle.ear_number"/>

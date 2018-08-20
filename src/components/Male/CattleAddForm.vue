@@ -3,7 +3,7 @@
         <ActionBar title="เพิ่มพ่อพันธ์ุ">
             <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" @tap="$router.go(-1)"/>
 
-            <ActionItem ios.systemIcon="3" @tap="save" android.systemIcon="ic_menu_save" ios.position="right"/>
+            <ActionItem ios.systemIcon="3" @tap="saveBreedsMale" android.systemIcon="ic_menu_save" ios.position="right"/>
             <ActionItem @tap="$router.go(-1)" ios.systemIcon="1" android.systemIcon="ic_menu_close_clear_cancel"/>
         </ActionBar>
 
@@ -47,6 +47,9 @@
                 <Label row="0" col="1" class="fa"
                        :text="'fa-chevron-right' | fonticon"/>
             </GridLayout>
+            
+                       <Button text="Button" @tap="saveBreedsMale" />
+                       	<Label :text="tre" />
         </StackLayout>
 
     </Page>
@@ -56,7 +59,7 @@
 
     import DatePickerModal from "../Modal/DatePickerModal";
     import Choice from "../Modal/Choice"
-    import {mapGetters} from 'vuex'
+    import {mapGetters,mapState} from 'vuex'
 
     export default {
         name: "CattleAddForm",
@@ -65,7 +68,8 @@
         },
         data() {
             return {
-                form: {}
+                form: {},
+                tre:null,
             }
         },
         async create() {
@@ -74,10 +78,20 @@
         computed: {
             ...mapGetters({
                 getChoiceTextByID: 'choice/getChoiceTextByID'
+            }),
+            ...mapState({
+                user: state => state.user.user, 
             })
         },
         methods: {
-
+            saveBreedsMale: async function(){
+                this.form.farmer_id = this.user.id;
+                this.form.cattle_status = "010100";
+            this.form.cattle_type =  "020100";
+            this.form.cattle_sex = "030100";
+                 let farmer = await this.$store.dispatch("cattle/createCattle", this.form);
+                    this.tre = farmer;
+             },
             setChoice: async function (parent, key, to) {
                 console.log('setChoice')
                 let options = {
