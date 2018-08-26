@@ -1,6 +1,6 @@
 import Axios from 'axios'
 
-const BaseURL = `http://10.0.2.2:3333`;
+const BaseURL = `http://mct.ict.up.ac.th:10008/`;
 
 const axios = Axios.create({
     baseURL: BaseURL,

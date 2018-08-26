@@ -54,8 +54,9 @@
             addForm : function () {
                 this.$router.push('/cattle/male/add')
             },
-            editCattle :function(cattle){
-                this.$router.push('/cattle/male/edit')
+            editCattle :function(cattles){
+               // this.$router.push('/cattle/male/edit')
+                this.$router.push({ name:'male_edit',params: {cattle: cattles} })
             }
         },
 

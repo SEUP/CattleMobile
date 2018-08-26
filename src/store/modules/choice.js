@@ -37,7 +37,7 @@ const mutations = {
                 join.push(p)
             }
         })
-
+       
         state.breeds = join;
 
     }
@@ -50,14 +50,14 @@ const actions = {
         let result = await axios.get("/api/v1/farmer/cattle-choices",
             {params: {all: true}})
             .then((response) => {
-                let choices = response.data
+                let choices = response.data 
                 return choices;
             })
             .catch((error) => {
                 console.log(error.stack);
                 return null
             })
-
+         
         context.commit("setChoices", result);
     },
     getChoices: async function (context) {

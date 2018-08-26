@@ -3,9 +3,8 @@
         <ActionBar title="ระบบบริหารการเลี้ยงโค"></ActionBar>
 
         <FlexboxLayout class="page">
-            <StackLayout class="form">
-                <Image src="~/images/logo.png" class="logo"></Image>
-
+            <Image src="https://www.picz.in.th/images/2018/08/27/f4wz6g.png" class="logo"></Image>
+            <StackLayout class="form"> 
                 <StackLayout class="input-field">
                     <TextField v-model="form.username" hint="Username" class="input"/>
                     <StackLayout class="hr-light"></StackLayout>
@@ -15,7 +14,7 @@
                     <TextField v-model="form.password" hint="Password" secure="true" class="input"/>
                     <StackLayout class="hr-light"></StackLayout>
                 </StackLayout>
-                <Button text="Log In" @tap="login" color="#121258" backgroundColor="#43b883"/>
+                <Button text="Log In" @tap="login" class="btn"/>
             </StackLayout>
             <StackLayout orientation="horizontal">
                 <Label text="Don’t have an account?"/>
@@ -27,29 +26,43 @@
 </template>
 
 <style scoped>
-    .home-panel {
-        vertical-align: center;
-        font-size: 20rem;
-        margin: 20rem;
+	 .fa { font-family: FontAwesome; }
+    .btn{
+		 border-radius: 50%;
+        color:#1E90FF;
+        background:white;
+
     }
 
-    .logo {
-        width: 150rem;
-        margin-bottom: 50rem;
+    .page{
+		 background: #1E90FF;
     }
+	.home-panel {
+		vertical-align: center;
+		font-size: 20rem;
+		margin: 20rem;
+	}
 
-    .page {
-        align-items: center;
-        flex-direction: column;
-        background-color: white;
-    }
+	.logo {
+		width: 100%;
+	 
+	}
 
-    .form {
-        margin-left: 30rem;
-        margin-right: 30rem;
-        flex-grow: 2;
-        vertical-align: middle;
-    }
+	.page {
+		align-items: center;
+		flex-direction: column;
+		 
+	}
+.input{
+	 placeholder-color:white;
+    color:white;
+}
+	.form {
+		margin-left: 30rem;
+		margin-right: 30rem;
+		flex-grow: 2;
+		vertical-align: middle;
+	}
 </style>
 <script>
 

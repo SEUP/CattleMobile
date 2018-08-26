@@ -6,6 +6,7 @@ const _ = require('lodash')
 
 const state = {
     breedsMale:null,
+    cattle:null,
 };
 
 const mutations = {
@@ -40,6 +41,30 @@ const actions = {
             return "error"
           });
        
+      },
+      getCattleById: async function (context, form) { 
+          let cattle = null;
+        let result = await axios.get('/api/v1/farmer/farmer/'+form.id+'/cattles/' + form.param)
+          .then(async (response) => {
+            cattle = response.data;
+          })
+          .catch((error) => {
+            context.dispatch("error/setError", error.response.data, {root: true});
+         
+          })
+            state.cattle = cattle;
+      },
+      updateCattle: async function (context, form) {
+        let respond = 0;
+        let result = await axios.put('/api/v1/farmer/farmer/'+form.farmer_id+'/cattles/' + form.id, form)
+          .then((response) => { 
+            respond =  1;
+          })
+          .catch((error) => {
+            context.dispatch("error/setError", error.response.data, {root: true});
+            respond =  0;
+          });
+         return respond;
       }
    
 };

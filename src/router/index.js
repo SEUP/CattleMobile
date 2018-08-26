@@ -24,6 +24,7 @@ const router = new VueRouter({
     routes: [
         {
             path: '/cattle/male/edit',
+            name: 'male_edit',
             component: CattleEditFormMale,
             meta: {
                 title: 'EditMaleBreed',
