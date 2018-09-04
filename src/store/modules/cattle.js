@@ -32,15 +32,17 @@ const actions = {
        
     },
     createCattle: async function (context, form) { 
+      let res = 0;
         let result = await axios.post(`/api/v1/farmer/farmer/115/cattles`, form)
           .then((response) => {
-            return "OK";
+            res = 1;
+            alert("บันทึกข้อมูลสำเร็จ"); 
           })
           .catch((error) => {
             context.dispatch("error/setError", error.response.data, {root: true});
-            return "error"
+            alert(error.response.data); 
           });
-       
+          return res;
       },
       getCattleById: async function (context, form) { 
           let cattle = null;
@@ -55,17 +57,19 @@ const actions = {
             state.cattle = cattle;
       },
       updateCattle: async function (context, form) {
-        let respond = 0;
+        let res = 0;
         let result = await axios.put('/api/v1/farmer/farmer/'+form.farmer_id+'/cattles/' + form.id, form)
           .then((response) => { 
-            respond =  1;
+            res =  1;
+            alert("แก้ไขข้อมูลสำเร็จ");
           })
           .catch((error) => {
             console.log(error.response.data);
             //context.dispatch("error/setError", error.response.data, {root: true});
-            respond =  0;
+            alert(error.response.data.message);
+          
           });
-         return respond;
+         return res;
       }
    
 };

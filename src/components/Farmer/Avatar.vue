@@ -1,11 +1,10 @@
 <template>
-   
-
-   	<WrapLayout style="  width:20%; height:100%;" orientation="horizontal">
-        <Image class="border " v-if="!user.image_url" src="~/images/profile.jpg" />
-        <Image class="border " v-else-if="ValidURL(user.image_url)" :src="$baseUrl+user.image_url" />
-        <Image class="border " v-else :src="$baseUrl+user.image_url" />
-</WrapLayout>
+   <StackLayout>
+        <Image v-if="!user.image_url" src="~/images/profile.jpg" class="avatar"/>
+        <Image v-else-if="ValidURL(user.image_url)" :src="$baseUrl+user.image_url" class="avatar"/>
+        <Image v-else :src="$baseUrl+user.image_url" class="avatar"/>
+   </StackLayout>
+ 
 </template>
 
 <script>
@@ -36,13 +35,13 @@
 </script>
 
 <style scoped>
-    	.border {
+	.border {
 		border-style: solid;
 		border-width: 7px;
-		border-color: #92a8d1;
+		border-color: white;
 		-webkit-border-radius: 50%;
 		-moz-border-radius: 50%;
-        border-radius: 50%;  
+		border-radius: 50%;
+ 
 	}
-
 </style>

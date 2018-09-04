@@ -9,7 +9,7 @@ import cattle from './modules/cattle'
 Vue.use(Vuex);
 
 const debug = process.env.NODE_ENV !== 'production';
-
+ 
 const store = new Vuex.Store({
     modules: {
         counter: counter,
@@ -18,7 +18,7 @@ const store = new Vuex.Store({
         district: district,
         cattle:cattle,
     },
-    strict: debug,
+ 
 });
 
 Vue.prototype.$store = store;

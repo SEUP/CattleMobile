@@ -7,8 +7,8 @@
 
         <ScrollView>
          <ListView for="cattle in cattles.data">
-                <v-template>
-                    <CattleListItem @tap="editCattle(cattle)" :cattle="cattle"/>
+                <v-template >
+                    <CattleListItem v-if="cattle.cattle_type == '020200'"  @tap="editCattle(cattle)" :cattle="cattle"/>
                 </v-template>
             </ListView>
             
@@ -52,7 +52,7 @@
                 this.$router.back()
             },
             addForm : function () {
-                this.$router.push('/cattle/Female/add')
+                this.$router.push('/cattle/female/add')
             },
             editCattle :function(cattles){
                // this.$router.push('/cattle/male/edit')

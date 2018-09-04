@@ -8,7 +8,7 @@
         <ScrollView>
          <ListView for="cattle in cattles.data">
                 <v-template >
-                    <CattleListItem v-if="cattle.cattle_type == '020100'" @tap="editCattle(cattle)" :cattle="cattle"/>
+                    <CattleListItem v-if="cattle.cattle_type == '020100'"  @tap="editCattle(cattle)" :cattle="cattle"/>
                 </v-template>
             </ListView>
             
@@ -40,11 +40,9 @@
             this.breederMale();
         },
         methods: {
-            breederMale: async function(){  
-         
-                this.cattles = this.breedsMale;
-               
-            
+            breederMale: async function(){ 
+               this.cattles = this.breedsMale;
+              
             },
             editProfile: function () {
                 this.$router.push('/edit')

@@ -3,10 +3,19 @@
         <ActionBar title="ข้อมูลส่วนตัว">
             <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" @tap="back"/>
         </ActionBar>
-        <StackLayout>
-            <StackLayout row="0" class="user-profile">
-                <Avatar/>
 
+        <StackLayout>
+             <WrapLayout class="header" style="margin-top:4%; margin-left:4%;" orientation="horizontal" height="70">
+		
+                   	<WrapLayout style="  width:20%; height:100%;" orientation="horizontal">
+					       <Avatar/>
+				</WrapLayout>
+				<WrapLayout @tap="profile" style=" padding-left:3%;width:80%; height:100%;" orientation="vertical">
+					<Label style="margin-top:10%; color:white; font-size:25px;" :text="`${user.firstname} ${user.lastname}`" />
+					<Label style="color:white;" :text="user.email" />
+				</WrapLayout>
+			</WrapLayout>
+            <StackLayout row="0" class="user-profile"> 
                 <GridLayout rows="auto" columns="*,*,*">
                     <Button row="0" col="0" class="change-image" @tap="selectImage">เลือกภาพ</Button>
                     <Button row="0" col="1" class="change-image" @tap="captureImage">ถ่ายภาพ</Button>
@@ -227,7 +236,7 @@
 </script>
 
 <style scoped>
-
+ 
     .data-form {
         color: white;
         background-color: #4e4e4e;

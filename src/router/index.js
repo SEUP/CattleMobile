@@ -18,16 +18,53 @@ import Farm from '../components/Farmer/Farm'
 import EditFarm from "../components/Farmer/EditFarm"
 import CattleAddForm from "../components/Male/CattleAddForm"
 import CattleEditFormMale from "../components/Male/CattleEditFormMale"
+import CattleAddFormFeMale from "../components/Female/CattleAddForm"
 
+import CattleAddKhun from "../components/Khun/CattleAddForm"
+import CattleAddYoung from "../components/Young/CattleAddForm"
+
+import Manage from "../components/Manage/menu"
 const router = new VueRouter({
     pageRouting: true,
     routes: [
+        {
+            path: '/cattle/manage',
+            name: 'manage_cattle',
+            component: Manage,
+            meta: {
+                title: 'Manage',
+            },
+        },
         {
             path: '/cattle/male/edit',
             name: 'male_edit',
             component: CattleEditFormMale,
             meta: {
                 title: 'EditMaleBreed',
+            },
+        },
+        {
+            path: '/cattle/female/add',
+            name: 'female_add',
+            component: CattleAddFormFeMale,
+            meta: {
+                title: 'AddFemaleBreed',
+            },
+        },
+        {
+            path: '/cattle/khun/add',
+            name: 'female_add',
+            component: CattleAddKhun,
+            meta: {
+                title: 'AddFemaleBreed',
+            },
+        },
+        {
+            path: '/cattle/young/add',
+            name: 'female_add',
+            component: CattleAddYoung,
+            meta: {
+                title: 'AddFemaleBreed',
             },
         },
         {
