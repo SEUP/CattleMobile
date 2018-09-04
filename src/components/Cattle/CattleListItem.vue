@@ -1,5 +1,5 @@
 <template>
-    <GridLayout @tap="editForm" class="cattlelist" rows="auto" columns="1*,5*,auto">
+    <GridLayout  @tap="editForm" class="cattlelist" rows="auto" columns="1*,5*,auto">
         
         	<Image  :src="'http://mct.ict.up.ac.th:10008/'+cattle.image_url" class="thumb img-circle" /> 
         <StackLayout class="text" row="0" col="1">

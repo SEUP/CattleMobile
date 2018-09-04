@@ -61,7 +61,8 @@ const actions = {
             respond =  1;
           })
           .catch((error) => {
-            context.dispatch("error/setError", error.response.data, {root: true});
+            console.log(error.response.data);
+            //context.dispatch("error/setError", error.response.data, {root: true});
             respond =  0;
           });
          return respond;

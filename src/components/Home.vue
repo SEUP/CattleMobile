@@ -8,7 +8,7 @@
 
 
                 <Label class="header" :text="`${user.firstname} ${user.lastname}`"/>
-                <Label class="subheader" :text="user.email"/>
+                <Label class="subheader" :text="user.email"/> 
             </StackLayout>
 
             <GridLayout class="grid-btn" row="1" rows="*,*,*" columns="*,*">
@@ -30,7 +30,7 @@
 
     import {mapState} from 'vuex'
     import Avatar from "./Farmer/Avatar";
-
+   
     export default {
         components: {Avatar},
         data() {

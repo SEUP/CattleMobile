@@ -3,18 +3,19 @@
         <ActionBar title="ระบบบริหารการเลี้ยงโค"></ActionBar>
 
         <FlexboxLayout class="page">
-            <Image src="https://www.picz.in.th/images/2018/08/27/f4wz6g.png" class="logo"></Image>
+            <Image src="~/images/bglogo.png" class="logo"/>
             <StackLayout class="form"> 
-                <StackLayout class="input-field">
+                <StackLayout class="input-field"> 
                     <TextField v-model="form.username" hint="Username" class="input"/>
                     <StackLayout class="hr-light"></StackLayout>
                 </StackLayout>
 
                 <StackLayout class="input-field">
+                    <Label class="fa">{{'fa-search' | fonticon}} Search</Label>
                     <TextField v-model="form.password" hint="Password" secure="true" class="input"/>
                     <StackLayout class="hr-light"></StackLayout>
                 </StackLayout>
-                <Button text="Log In" @tap="login" class="btn"/>
+                <Button  android:drawableLeft="@drawable/icon" text="Log In" @tap="login" class="btn"/>
             </StackLayout>
             <StackLayout orientation="horizontal">
                 <Label text="Don’t have an account?"/>
@@ -73,8 +74,8 @@
         data() {
             return {
                 form: {
-                    username: '',
-                    password: '',
+                    username: 'farmer',
+                    password: 'password',
                 }
             }
         },
@@ -96,7 +97,7 @@
                 let result = await this.$store.dispatch("user/getUser");
                 let farm = await this.$store.dispatch('user/getFarm')
                 let choices = await this.$store.dispatch('choice/load')
-                let breedMale =  await  this.$store.dispatch('cattle/load',result.id)
+                  let breedMale =  await  this.$store.dispatch('cattle/load',result.id)
 
                 return result;
             },

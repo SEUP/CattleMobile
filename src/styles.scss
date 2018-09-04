@@ -5,7 +5,9 @@
 
 // Global SCSS styling
 // @see https://docs.nativescript.org/ui/styling
-
+.fa {
+  font-family: FontAwesome, fontawesome-webfont;
+}
 .card {
   background-color: #fff;
   color: #4d4d4d;
