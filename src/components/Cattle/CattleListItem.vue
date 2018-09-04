@@ -2,9 +2,9 @@
     <GridLayout @tap="editForm" class="cattlelist" rows="auto" columns="1*,5*,auto">
            <Image v-if="!cattle.image_url" src="~/images/logo.png" class="thumb img-circle"/>
         	<Image v-if="cattle.image_url"  :src="'http://mct.ict.up.ac.th:10008/'+cattle.image_url" class="thumb img-circle" /> 
-        <StackLayout  style="padding-left:3%;"class="text" row="0" col="1">
-            <Label class="cattlelist-header" :text="'ชื่อโค'+cattle.name"/>
-            <Label class="cattlelist-header" :text="'เบอร์หู'+cattle.ear_number"/>
+        <StackLayout  style="padding-left:9%; padding-top:9%;" class="text" row="0" col="1">
+            <Label class="cattlelist-header" style="font-size:18px;" :text="'ชื่อโค: '+cattle.name"/>
+            <Label class="cattlelist-header" :text="'เบอร์หู: '+cattle.ear_number"/>
         </StackLayout>
         <Label row="0" col="2" class="fa"
                :text="'fa-chevron-right' | fonticon"/></GridLayout>
