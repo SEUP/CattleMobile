@@ -14,7 +14,19 @@ const mutations = {
 };
 
 const actions = {
+  choiceLoad: async function(context,id){
+    let ui = null;
+    let result = await axios.get("/api/v1/farmer/cattle-choices")
+    .then((response) => {
+      ui = response.data  
+    })
+    .catch((error) => {
+      ui = null;
+    })
+    
+    return ui;
 
+  },
     load: async function (context,id) {
         console.log('breeder/load');
         let breeders = null; 
@@ -70,6 +82,50 @@ const actions = {
           
           });
          return res;
+      },
+      changeType: async function(context, form){
+        let res = 0;
+        let result = await axios.put('/api/v1/farmer/cattles/'+form.id+'/type', form)
+          .then((response) => { 
+            res =  1;
+            alert("แก้ไขข้อมูลสำเร็จ");
+          })
+          .catch((error) => {
+            console.log(error.response.data); 
+            alert(error.response.data);
+          
+          });
+         return res;
+      },
+      
+      wormingSave: async function(context, form){
+        alert(form.id); 
+        let res = 0;
+        let result = await axios.post('/api/v1/farmer/cattles/'+form.id+'/worming', form)
+          .then((response) => {
+            res = 1;
+            alert("บันทึกข้อมูลสำเร็จ"); 
+          })
+          .catch((error) => { 
+            console.log(error.response.data);
+            alert(error.response.data); 
+          });
+          return res;
+      },
+   
+      vaccineSave: async function(context, form){
+        alert(form.id); 
+        let res = 0;
+        let result = await axios.post('/api/v1/farmer/cattles/'+form.id+'/vaccine', form)
+          .then((response) => {
+            res = 1;
+            alert("บันทึกข้อมูลสำเร็จ"); 
+          })
+          .catch((error) => { 
+            console.log(error.response.data);
+            alert(error.response.data); 
+          });
+          return res;
       }
    
 };

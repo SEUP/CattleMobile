@@ -24,9 +24,72 @@ import CattleAddKhun from "../components/Khun/CattleAddForm"
 import CattleAddYoung from "../components/Young/CattleAddForm"
 
 import Manage from "../components/Manage/menu"
+
+import change from "../components/Manage/change_type"
+import mbreed from "../components/Manage/breed_male"
+import vaccine from "../components/Manage/vaccine"
+import worms from "../components/Manage/worms"
+import doctor from "../components/Manage/doctor"
+import khun from "../components/Manage/doctor"
+import milk from "../components/Manage/doctor"
+
 const router = new VueRouter({
     pageRouting: true,
     routes: [
+        {
+            path: '/cattle/manage/change',
+            name: 'change',
+            component: change,
+            meta: {
+                title: 'change',
+            },
+        },{
+            path: '/cattle/manage/mbreed',
+            name: 'mbreed',
+            component: mbreed,
+            meta: {
+                title: 'mbreed',
+            },
+        },
+        {
+            path: '/cattle/manage/vaccine',
+            name: 'vaccine',
+            component: vaccine,
+            meta: {
+                title: 'vaccine',
+            },
+        },
+        {
+            path: '/cattle/manage/worms',
+            name: 'worms',
+            component: worms,
+            meta: {
+                title: 'worms',
+            },
+        },{
+            path: '/cattle/manage/doctor',
+            name: 'doctor',
+            component: doctor,
+            meta: {
+                title: 'doctor',
+            },
+        },
+        {
+            path: '/cattle/manage/khun',
+            name: 'khun',
+            component: khun,
+            meta: {
+                title: 'khun',
+            },
+        },
+        {
+            path: '/cattle/manage/milk',
+            name: 'milk',
+            component: milk,
+            meta: {
+                title: 'milk',
+            },
+        },
         {
             path: '/cattle/manage',
             name: 'manage_cattle',

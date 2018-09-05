@@ -122,6 +122,7 @@ import { mapGetters, mapState } from "vuex";
                 let data_cattle_send = {
                     id: this.form.id,
                     type: this.form.cattle_type,
+                    farmer_id:this.form.farmer_id
                 }
                  this.$router.push({ name:'manage_cattle',params: {cattle: data_cattle_send} })
                
