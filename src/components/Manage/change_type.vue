@@ -4,9 +4,9 @@
 			<NavigationButton text="Go Back" android.systemIcon="ic_menu_back" @tap="$router.go(-1)" />
 			<ActionItem ios.systemIcon="3" @tap="update" android.systemIcon="ic_menu_save" ios.position="right" />
 			<ActionItem @tap="$router.go(-1)" ios.systemIcon="1" android.systemIcon="ic_menu_close_clear_cancel" />
-		</ActionBar> 
-		<StackLayout orientation="vertical" width="100%" height="100%" backgroundColor="white"> 
-			<Button @tap="preUpdate()" text="เลือกประเภทที่ต้องการเปลี่ยน"/>
+		</ActionBar>
+		<StackLayout orientation="vertical" width="100%" height="100%" backgroundColor="white">
+			<Button @tap="preUpdate()" style="margin-top:5%;" class="circle bg-violet wh" text="เลือกประเภทที่ต้องการเปลี่ยน"/>
 		</StackLayout>
 	</Page>
 </template>
@@ -42,15 +42,20 @@ export default {
         }
         if (result == "โคแรกเกิด") {
           type = "020400";
-		}
+    }
+       
+      if(type != ''){
 	  this.form.cattle_type = type;
       this.update();
+    }
+
       });
    
+
     },
     update: async function() {
       this.preData();
-      let farmer = await this.$store.dispatch("cattle/changeType", this.form);
+      let farmer = await this.$store.dispatch("change_type/update", this.form);
       if (farmer == 1) {
         let data = await this.$store.dispatch(
           "cattle/load",

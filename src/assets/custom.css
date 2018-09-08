@@ -1,0 +1,53 @@
+.f30{
+    font-size:30px;
+}
+.bg-violet{
+    background-color: #5c03af;
+}
+.bg-white{
+    background-color: azure;
+}
+.bg-wh{
+    background-color: white;; 
+}
+.dark{
+    color:white;
+}
+.light{
+    color:black;
+}
+
+.card{
+    padding:5%;
+}
+
+.card-menu{
+    width:100%;
+    height:auto;
+        border-radius:5%; 
+        padding:10%; 
+}
+
+.txt{
+    margin-top:30px; 
+    margin-bottom:30px; 
+    padding-left:50px;
+    background-color:white; 
+
+    color:black; height:150px;
+}
+
+.circle{
+    border-radius:50%; 
+}
+
+.txt-gr{
+    padding:5%; height:auto;
+}
+.gr{height:150px;}
+.gr-label{
+    background-color:#e1e0e2; height:100%;  padding:15%;
+}
+.gr-text{
+    padding-left:5%; background-color:#fbf9fc;
+}

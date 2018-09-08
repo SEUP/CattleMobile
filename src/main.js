@@ -5,7 +5,7 @@ import store from './store';
 import './styles.scss';
 import {TNSFontIcon, fonticon} from 'nativescript-fonticon';
 import * as http from 'http'
-
+import './assets/custom.css';
 Vue.use(require('nativescript-ui-sidedrawer/vue'))
 
 TNSFontIcon.debug = false;
@@ -35,6 +35,7 @@ Vue.use(require('vue-moment'),{
 });
 
 new Vue({
+
     router,
     store,
 }).$start();

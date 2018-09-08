@@ -8,7 +8,7 @@
 					       <Avatar/>
 				</WrapLayout>
 				<WrapLayout @tap="profile" style=" padding-left:3%;width:80%; height:100%;" orientation="vertical">
-					<Label style="margin-top:10%; color:white; font-size:25px;" :text="`${user.firstname} ${user.lastname}`" />
+					<Label style="margin-top:10%; color:white; font-size:20px;" :text="`${user.firstname} ${user.lastname}`" />
 					<Label style="color:white;" :text="user.email" />
 				</WrapLayout>
 			</WrapLayout>
@@ -21,7 +21,7 @@
 								<Image style="margin:10%; height:50;width:50;" src="https://www.img.live/images/2018/09/03/we.png" />
 							</WrapLayout>
 							<WrapLayout style=" width:80%; height:100%;" orientation="vertical">
-								<Label style="margin-top:10%; color:white; font-size:25px;" text="พ่อพันธ์ุ" />
+								<Label style="margin-top:10%; color:white; font-size:20px;" text="พ่อพันธ์ุ" />
 								<Label style="color:white;" text="จัดการข้อมูลพ่อพันธุ์โคของคุณเช่น เพิ่ม ลบ แก้ไข" />
 							</WrapLayout>
 						</WrapLayout>
@@ -33,7 +33,7 @@
 								<Image style="margin:10%; height:50;width:50;" src="https://www.img.in.th/images/89a1f4bca6a4e5185f942eaed214b90b.png" />
 							</WrapLayout>
 							<WrapLayout style=" width:80%; height:100%;" orientation="vertical">
-								<Label style="margin-top:10%; color:white; font-size:25px;" text="แม่พันธ์ุ" />
+								<Label style="margin-top:10%; color:white; font-size:20px;" text="แม่พันธ์ุ" />
 								<Label style="color:white;" text="จัดการข้อมูลแม่พันธ์ุโคของคุณเช่น เพิ่ม ลบ แก้ไข" />
 							</WrapLayout>
 						</WrapLayout>
@@ -45,7 +45,7 @@
 								<Image style="margin:10%; height:50;width:50;" src="https://www.img.in.th/images/578fe9ccdf5f8752c0be6ff4dd6f065a.png" />
 							</WrapLayout>
 							<WrapLayout style=" width:80%; height:100%;" orientation="vertical">
-								<Label style="margin-top:10%; color:white; font-size:25px;" text="โคขุน" />
+								<Label style="margin-top:10%; color:white; font-size:20px;" text="โคขุน" />
 								<Label style="color:white;" text="จัดการข้อมูลโคขุนของคุณเช่น เพิ่ม ลบ แก้ไข" />
 							</WrapLayout>
 						</WrapLayout>
@@ -57,7 +57,7 @@
 								<Image style="margin:10%; height:50;width:50;" src="https://www.img.in.th/images/4cbed897568f2144aa716d11c3d2a782.png" />
 							</WrapLayout>
 							<WrapLayout style=" width:80%; height:100%;" orientation="vertical">
-								<Label style="margin-top:10%; color:white; font-size:25px;" text="โคแรกเกิด" />
+								<Label style="margin-top:10%; color:white; font-size:20px;" text="โคแรกเกิด" />
 								<Label style="color:white;" text="จัดการข้อมูลโคแรกเกิดของคุณเช่น เพิ่ม ลบ แก้ไข" />
 							</WrapLayout>
 						</WrapLayout>
@@ -70,7 +70,7 @@
 								/>
 							</WrapLayout>
 							<WrapLayout style=" width:80%; height:100%;" orientation="vertical">
-								<Label style="margin-top:10%; color:white; font-size:25px;" text="ข้อมูลผู้ใช้" />
+								<Label style="margin-top:10%; color:white; font-size:20px;" text="ข้อมูลผู้ใช้" />
 								<Label style="color:white;" text="จัดการข้อมูลผู้ใช้ของคุณ" />
 							</WrapLayout>
 						</WrapLayout>
@@ -83,7 +83,7 @@
 								/>
 							</WrapLayout>
 							<WrapLayout style=" width:80%; height:100%;" orientation="vertical">
-								<Label style="margin-top:10%; color:white; font-size:25px;" text="ข้อมูลฟาร์ม" />
+								<Label style="margin-top:10%; color:white; font-size:20px;" text="ข้อมูลฟาร์ม" />
 								<Label style="color:white;" text="จัดการข้อมูลฟาร์มของคุณ" />
 							</WrapLayout>
 						</WrapLayout>

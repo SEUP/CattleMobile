@@ -2,113 +2,199 @@
 	<Page class="page">
 		<ActionBar title="การจัดการ">
 			<NavigationButton text="Go Back" android.systemIcon="ic_menu_back" @tap="$router.go(-1)" />
-			<ActionItem ios.systemIcon="3" @tap="update" android.systemIcon="ic_menu_save" ios.position="right" />
+			<ActionItem ios.systemIcon="3" @tap="create" android.systemIcon="ic_menu_save" ios.position="right" />
 			<ActionItem @tap="$router.go(-1)" ios.systemIcon="1" android.systemIcon="ic_menu_close_clear_cancel" />
 		</ActionBar> 
-		 <Label style="color:black; font-size:30px;" text="อาการ"/>
-		<StackLayout orientation="vertical" width="100%" height="100%" backgroundColor="white">
-			 <GridLayout style="height:150px;"   rows="auto" columns="*,auto" class="form-item" @tap="setDate(form,'worming_date')">
-               <Label style="color:black; font-size:20px;" :text="`${ form.worming_date ? $moment(form.worming_date).format('DD MMMM YYYY') : 'วันเกิด'}`"/>
-               </GridLayout>
-		
-		 <Label style="color:black; font-size:30px;" text="ak[0].choice"/>
-		<ListPicker :items="choices.choice"  />
+    	 	<ScrollView width="100%" height="100%;" class="bg-wh">
+			<StackLayout>
 
-		<Label style="color:black; font-size:30px;" text="ผลการรักษา"/>
+				<StackLayout class="card">
+					<StackLayout class="card-menu bg-violet" orientation="vertical">
+					 <Label text="อาการ" class="f30 dark" />
+						<GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*">
+							<StackLayout class="gr">
+								<Label class="gr-label light" text="วันที่สังเกตอาการ" row="0" col="0" />
+							</StackLayout>
+							<TextField class="gr-text" row="0" col="1" @tap="setDate(form,'observation_date')" hint="โปรดกรอกข้อมูล" :text="`${ form.observation_date ? $moment(form.observation_date).format('DD MMMM YYYY') : 'โปรดกรอกข้อมูล'}`" />
+						</GridLayout>
+						 <GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*"> 
+							<StackLayout class="gr">
+								<Label class="gr-label light" text="ลักษณะอาการ" row="0" col="0" />
+							</StackLayout>
+							<TextField v-model="form.initial_symptoms" class="gr-text" row="0" col="1"  hint="โปรดกรอกข้อมูล" />
+						</GridLayout>
+
+
+					 	 <GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*">
+							<StackLayout class="gr">
+								<Label class="gr-label light" text="กลุ่มอาการ" row="0" col="0" />
+							</StackLayout>
+							<TextField class="gr-text" row="0" col="1"  @tap="setChoice(form,'symptom_group','กลุ่มอาการ')" :text="`${getChoiceTextByID(form.symptom_group) || 'ไม่ระบุ'}`" />
+						</GridLayout>
  
-		</StackLayout>
-	</Page>
+  					<GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*">
+							<StackLayout class="gr">
+								<Label class="gr-label light" text="โรค" row="0" col="0" />
+							</StackLayout>
+							<TextField class="gr-text" row="0" col="1"  @tap="setChoice(form,'disease','โรค')" :text="`${getChoiceTextByID(form.disease) || 'ไม่ระบุ'}`" />
+						</GridLayout>
+ 					
+					</StackLayout>
+				</StackLayout>
+
+						<StackLayout class="card">
+						<StackLayout class="card-menu bg-violet" orientation="vertical">
+					 <Label text="การรักษา" class="f30 dark" />
+						<GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*">
+							<StackLayout class="gr">
+								<Label class="gr-label light" text="วันที่รักษา" row="0" col="0" />
+							</StackLayout>
+							<TextField class="gr-text" row="0" col="1" @tap="setDate(form,'therapy_date')" hint="โปรดกรอกข้อมูล" :text="`${ form.therapy_date ? $moment(form.therapy_date).format('DD MMMM YYYY') : 'โปรดกรอกข้อมูล'}`" />
+						</GridLayout>
+			  
+					 	 <GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*">
+							<StackLayout class="gr">
+								<Label class="gr-label light" text="ผู้รักษา" row="0" col="0" />
+							</StackLayout>
+							<TextField class="gr-text" row="0" col="1"  @tap="setChoice(form,'therapist','ผู้รักษา')" :text="`${getChoiceTextByID(form.therapist) || 'ไม่ระบุ'}`" />
+						</GridLayout>
+ 
+  			 	 <GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*"> 
+							<StackLayout class="gr">
+								<Label class="gr-label light" text="วิธีการรักษา" row="0" col="0" />
+							</StackLayout>
+							<TextField v-model="form.therapy_method" class="gr-text" row="0" col="1"  hint="โปรดกรอกข้อมูล" />
+						</GridLayout>
+
+							 <GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*"> 
+							<StackLayout class="gr">
+								<Label class="gr-label light" text="ยาที่รักษา" row="0" col="0" />
+							</StackLayout>
+							<TextField v-model="form.medication" class="gr-text" row="0" col="1"  hint="โปรดกรอกข้อมูล" />
+						</GridLayout>
+ 					
+					</StackLayout>
+					</StackLayout>
+
+							<StackLayout class="card">
+						<StackLayout class="card-menu bg-violet" orientation="vertical">
+					 <Label text="ผลการรักษา" class="f30 dark" />
+						 			<GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*">
+							<StackLayout class="gr">
+								<Label class="gr-label light" text="วันที่ตรวจอีกครั้ง" row="0" col="0" />
+							</StackLayout>
+							<TextField class="gr-text" row="0" col="1" @tap="setDate(form,'check_therapy_date')" hint="โปรดกรอกข้อมูล" :text="`${ form.check_therapy_date ? $moment(form.check_therapy_date).format('DD MMMM YYYY') : 'โปรดกรอกข้อมูล'}`" />
+						</GridLayout> 
+
+						<GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*">
+							<StackLayout class="gr">
+								<Label class="gr-label light" text="ผลการรักษา" row="0" col="0" />
+							</StackLayout>
+							<TextField class="gr-text" row="0" col="1"  @tap="setChoice(form,'therapy_result','ผลการรักษา')" :text="`${getChoiceTextByID(form.therapy_result) || 'ไม่ระบุ'}`" />
+						</GridLayout>
+ 					
+					</StackLayout>
+	 				</StackLayout>
+					  <ListView class="list-group" for="list in listData" style="height:1250px">
+					<v-template>
+						<FlexboxLayout flexDirection="row" class="list-group-item">
+							<Label  :text="`${getChoiceTextByID(list.disease) || 'ไม่ระบุ'}`" class="list-group-item-heading" style="width: 60%" />
+							<Label  :text="$moment(list.check_therapy_date).format('DD-MM-YYYY')" class="list-group-item-heading" style="font-size:16px; width: 60%" />
+						</FlexboxLayout>
+					</v-template>
+				</ListView>
+				</StackLayout> 
+			</StackLayout>
+		</ScrollView>
+
+    
+	</Page> 
 </template>
 
 <script>
 import DatePickerModal from "../Modal/DatePickerModal";
+import Choice from "../Modal/Choice";
+import { mapGetters, mapState } from "vuex";
 export default {
     data() {
         return {
-			ak:{},
-			ro:{},
-			choices:{},
+					listData:[],
 			form:{},
+			data:{}
 		};
-	},created() {
-		this.choiceData();
-	},
-	methods:{
+    },created() {
 		
-		choiceData(){
-			this.choices =  this.$store.dispatch("cattle/choiceLoad");
-			this.ak = this.getChoiceById('140000');
-			this.ro = this.getChoiceById('150000');
-		},
-	getChoiceById(id){
-		let ch = {};
-		let j=0;
-		for(let i=0; i< this.choices.length ; i++){
-			if(this.choices[i].parent_id == id ){
-			 
-				ch[j] = this.choices[i].choice;
-				j++;
-			}
-		}
-		return ch;
+		this.load();
 	},
-		chooseDoc(){
-		 
-			let result = this.i_doc;
-  	 		let type = "";
-     
-        if (result == 0) {
-          type = "080100";
-        }
-        if (result == 1) {
-          type = "080200";
-        }
-        if (result == 2) {
-          type = "080300";
-        } 
-	 
-		this.form.maker = type;
+	 computed: {
+    ...mapGetters({
+      getChoiceTextByID: "choice/getChoiceTextByID"
+    }),
+    ...mapState({
+      user: state => state.user.user
+    })
+  },
+	methods:{
+	
+		create: async function(){
+		//	this.form.breeding_date = this.$moment(this.form.breeding_date ).format('YYYY-MM-DD')
+			let farmer = await this.$store.dispatch("treat/create", this.form);
+      if (farmer == 1) {
+        let data = await this.$store.dispatch(
+          "cattle/load",
+          this.data.farmer_id
+        );
+      this.read();
+      }
+                  
 		},
-
-		chooseVac(){
-		let type = "";
-		let result = this.i_vac;
-
-       
-        if (result == 0) {
-          type = "070100";
-        }
-        if (result == 1) {
-          type = "070200";
-		}
-		if (result == 2) {
-          type = "070300";
-        }
-        if (result == 3) {
-          type = "070400";
-		}
-		 if (result == 3) {
-          type = "070500";
-        } 
-		this.form.worming_type = type;
+		read: async function(){
+			let preData= await this.$store.dispatch("treat/read", this.data.id);
+					this.listData = preData.data; 
 		},
-		update: async function(){
-			this.chooseDoc();
-			this.chooseVac(); 
-			let y =  this.$route.params.cattle;
-				this.form.id = y.id;
-			   let vac = await this.$store.dispatch("cattle/wormingSave", this.form);
-			if (vac == 1) { 
-				this.$router.go(-1);
-			}
+			 load(){
+            
+			  this.data =  this.$route.params.cattle; 
+				this.form.cattle_id = this.data.id;
+				this.read();
 		},
-		setDate: async function(parent, key) {
+		setChoice: async function(parent, key, to) {
+      console.log("setChoice");
+      let options = {
+        fullscreen: true,
+        animated: true,
+        context: {
+          propsData: {
+            choice_id: parent[key] ? parent[key] : null,
+            to: to,
+            remark: parent.options ? parent.options[key] : null
+          }
+        }
+      };
+      console.log("setChoice", options);
+      let result = await this.$showModal(Choice, options);
+      this.$set(parent, key, result.id);
+      if (result.remark) {
+        if (!parent.options) {
+          this.$set(parent, "options", {});
+        }
+        this.$set(parent.options, key, result.remark);
+      } else {
+        if (!parent.options) {
+          this.$set(parent, "options", {});
+        }
+        delete parent.options[key];
+      }
+      console.log("setChoice", parent[key]);
+    },
+    setDate: async function(parent, key) {
       console.log("setDate");
       let result = await this.$showModal(DatePickerModal);
-	  this.$set(parent, key, result); 
-	  alert(this.form.worming_date);
-    }
-	}
+      this.$set(parent, key, result);
+      console.log("setDate", parent[key]); 
+    } 
+  },
+    
 };
 </script>
 

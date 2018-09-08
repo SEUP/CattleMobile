@@ -2,88 +2,139 @@
 	<Page class="page">
 		<ActionBar title="การจัดการ">
 			<NavigationButton text="Go Back" android.systemIcon="ic_menu_back" @tap="$router.go(-1)" />
-			<ActionItem ios.systemIcon="3" @tap="update" android.systemIcon="ic_menu_save" ios.position="right" />
+			<ActionItem ios.systemIcon="3" @tap="create" android.systemIcon="ic_menu_save" ios.position="right" />
 			<ActionItem @tap="$router.go(-1)" ios.systemIcon="1" android.systemIcon="ic_menu_close_clear_cancel" />
 		</ActionBar> 
-		<StackLayout orientation="vertical" width="100%" height="100%" backgroundColor="white">
-			 <GridLayout style="height:150px;"   rows="auto" columns="*,auto" class="form-item" @tap="setDate(form,'vaccine_date')">
-               <Label style="color:black; font-size:20px;" :text="`${ form.vaccine_date ? $moment(form.vaccine_date).format('DD MMMM YYYY') : 'วันเกิด'}`"/>
-               </GridLayout>
-			 <Label style="color:black; font-size:20px;" text="เลือกผู้ทำ"/>
-		<ListPicker :items="doc" v-model="i_doc" />
-			<Label style="color:black; font-size:20px;" text="เลือกวัคซีน"/>
-	 	<ListPicker :items="vac" v-model="i_vac" />
-		</StackLayout>
-	</Page>
+    	 	<ScrollView width="100%" height="100%;" class="bg-wh">
+			<StackLayout>
+
+				<StackLayout class="card">
+					<StackLayout class="card-menu bg-violet" orientation="vertical">
+					 <Label text="การให้วัคซีน" class="f30 dark" />
+						<GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*">
+							<StackLayout class="gr">
+								<Label class="gr-label light" text="วัน/เดือน/ปี" row="0" col="0" />
+							</StackLayout>
+							<TextField class="gr-text" row="0" col="1" @tap="setDate(form,'vaccine_date')" hint="โปรดกรอกข้อมูล" :text="`${ form.vaccine_date ? $moment(form.vaccine_date).format('DD MMMM YYYY') : 'โปรดกรอกข้อมูล'}`" />
+						</GridLayout>
+
+					 	 <GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*">
+							<StackLayout class="gr">
+								<Label class="gr-label light" text="ชนิดวัคซีน" row="0" col="0" />
+							</StackLayout>
+							<TextField class="gr-text" row="0" col="1"  @tap="setChoice(form,'vaccine_type','ชนิดวัคซีน')" :text="`${getChoiceTextByID(form.vaccine_type) || 'ไม่ระบุ'}`" />
+						</GridLayout>
+
+            <GridLayout  class="txt-gr" columns="*, 2*" rows="2*, 3*">
+							<StackLayout class="gr">
+								<Label class="gr-label light" text="ผู้ทำ" row="0" col="0" />
+							</StackLayout>
+							<TextField class="gr-text" row="0" col="1"  @tap="setChoice(form,'maker','ผู้ทำ')" :text="`${getChoiceTextByID(form.maker) || 'ไม่ระบุ'}`" />
+						</GridLayout>
+ 
+
+					</StackLayout>
+	 
+					  <ListView class="list-group" for="list in listData" style="height:1250px">
+					<v-template>
+						<FlexboxLayout flexDirection="row" class="list-group-item">
+							<Label  :text="`${getChoiceTextByID(list.vaccine_type) || 'ไม่ระบุ'}`" class="list-group-item-heading" style="width: 60%" />
+							<Label  :text="$moment(list.vaccine_date).format('DD-MM-YYYY')" class="list-group-item-heading" style="font-size:16px; width: 60%" />
+						</FlexboxLayout>
+					</v-template>
+				</ListView>
+				</StackLayout> 
+			</StackLayout>
+		</ScrollView>
+
+    
+	</Page> 
 </template>
 
 <script>
 import DatePickerModal from "../Modal/DatePickerModal";
+import Choice from "../Modal/Choice";
+import { mapGetters, mapState } from "vuex";
 export default {
     data() {
         return {
-			i_vac:null,
-			i_doc:null,
-			vac:["ปากและเท้าเปื่อย", "วรรณโรค","คอบวม", "อื่นๆ"],
-			doc:["เจ้าหน้าที่", "ทำเอง","อื่นๆ"],
+					listData:[],
 			form:{},
+			data:{}
 		};
+    },created() {
+		
+		this.load();
 	},
+	 computed: {
+    ...mapGetters({
+      getChoiceTextByID: "choice/getChoiceTextByID"
+    }),
+    ...mapState({
+      user: state => state.user.user
+    })
+  },
 	methods:{
-		chooseDoc(){
-		 
-			let result = this.i_doc;
-  	 		let type = "";
-     
-        if (result == 0) {
-          type = "080100";
-        }
-        if (result == 1) {
-          type = "080200";
-        }
-        if (result == 2) {
-          type = "080300";
-        } 
-	 
-		this.form.maker = type;
+	
+		create: async function(){
+		//	this.form.breeding_date = this.$moment(this.form.breeding_date ).format('YYYY-MM-DD')
+			let farmer = await this.$store.dispatch("vaccine/create", this.form);
+      if (farmer == 1) {
+        let data = await this.$store.dispatch(
+          "cattle/load",
+          this.data.farmer_id
+        );
+      this.read();
+      }
+                  
 		},
-
-		chooseVac(){
-		let type = "";
-		let result = this.i_vac;
-
-       
-        if (result == 0) {
-          type = "060100";
-        }
-        if (result == 1) {
-          type = "060200";
-		}
-		if (result == 2) {
-          type = "060300";
-        }
-        if (result == 3) {
-          type = "060400";
-        }  
-		this.form.vaccine_type = type;
+		read: async function(){
+			let preData= await this.$store.dispatch("vaccine/read", this.data.id);
+					this.listData = preData.data; 
 		},
-		update: async function(){
-			this.chooseDoc();
-			this.chooseVac(); 
-			let y =  this.$route.params.cattle;
-				this.form.id = y.id;
-			   let vac = await this.$store.dispatch("cattle/vaccineSave", this.form);
-			if (vac == 1) { 
-				this.$router.go(-1);
-			}
+			 load(){
+            
+			  this.data =  this.$route.params.cattle; 
+				this.form.cattle_id = this.data.id;
+				this.read();
 		},
-		setDate: async function(parent, key) {
+		setChoice: async function(parent, key, to) {
+      console.log("setChoice");
+      let options = {
+        fullscreen: true,
+        animated: true,
+        context: {
+          propsData: {
+            choice_id: parent[key] ? parent[key] : null,
+            to: to,
+            remark: parent.options ? parent.options[key] : null
+          }
+        }
+      };
+      console.log("setChoice", options);
+      let result = await this.$showModal(Choice, options);
+      this.$set(parent, key, result.id);
+      if (result.remark) {
+        if (!parent.options) {
+          this.$set(parent, "options", {});
+        }
+        this.$set(parent.options, key, result.remark);
+      } else {
+        if (!parent.options) {
+          this.$set(parent, "options", {});
+        }
+        delete parent.options[key];
+      }
+      console.log("setChoice", parent[key]);
+    },
+    setDate: async function(parent, key) {
       console.log("setDate");
       let result = await this.$showModal(DatePickerModal);
-	  this.$set(parent, key, result); 
-	  alert(this.form.vaccine_date);
-    }
-	}
+      this.$set(parent, key, result);
+      console.log("setDate", parent[key]); 
+    } 
+  },
+    
 };
 </script>
 

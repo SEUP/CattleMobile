@@ -30,12 +30,20 @@ import mbreed from "../components/Manage/breed_male"
 import vaccine from "../components/Manage/vaccine"
 import worms from "../components/Manage/worms"
 import doctor from "../components/Manage/doctor"
-import khun from "../components/Manage/doctor"
-import milk from "../components/Manage/doctor"
-
+import khun from "../components/Manage/khun"
+import milk from "../components/Manage/milk"
+import sell from "../components/Manage/sell"
 const router = new VueRouter({
     pageRouting: true,
     routes: [
+        {
+            path: '/cattle/manage/sell',
+            name: 'sell',
+            component: sell,
+            meta: {
+                title: 'sell',
+            },
+        },
         {
             path: '/cattle/manage/change',
             name: 'change',
