@@ -33,9 +33,74 @@ import doctor from "../components/Manage/doctor"
 import khun from "../components/Manage/khun"
 import milk from "../components/Manage/milk"
 import sell from "../components/Manage/sell"
+
+import fbreed from "../components/Manage/breed_female/menu"
+import step1 from "../components/Manage/breed_female/step1"
+import step2 from "../components/Manage/breed_female/step2"
+import step3 from "../components/Manage/breed_female/step3"
+import step4 from "../components/Manage/breed_female/step4"
+import step5 from "../components/Manage/breed_female/step5"
+import step6 from "../components/Manage/breed_female/step6"
+
 const router = new VueRouter({
     pageRouting: true,
     routes: [
+        {
+            path: '/cattle/manage/fbreed',
+            name: 'fbreed',
+            component: fbreed,
+            meta: {
+                title: 'fbreed',
+            },
+        },
+        {
+            path: '/cattle/manage/step1',
+            name: 'step1',
+            component: step1,
+            meta: {
+                title: 'step1',
+            },
+        },
+        {
+            path: '/cattle/manage/step2',
+            name: 'step2',
+            component: step2,
+            meta: {
+                title: 'step2',
+            },
+        },
+        {
+            path: '/cattle/manage/step3',
+            name: 'step3',
+            component: step3,
+            meta: {
+                title: 'step3',
+            },
+        },
+        {
+            path: '/cattle/manage/step4',
+            name: 'step4',
+            component: step4,
+            meta: {
+                title: 'step4',
+            },
+        },
+        {
+            path: '/cattle/manage/step5',
+            name: 'step5',
+            component: step6,
+            meta: {
+                title: 'step5',
+            },
+        },
+        {
+            path: '/cattle/manage/step6',
+            name: 'step6',
+            component: fbreed,
+            meta: {
+                title: 'step6',
+            },
+        },
         {
             path: '/cattle/manage/sell',
             name: 'sell',

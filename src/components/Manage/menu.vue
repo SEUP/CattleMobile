@@ -47,7 +47,7 @@ export default {
                     name: "การผสมพันธุ์",
                     imageSrc: "https://image.flaticon.com/icons/png/512/194/194627.png",
                         type:"020200",
-                        link:"",
+                        link:"fbreed",
                 },
                 {
                     name: "การขุน",

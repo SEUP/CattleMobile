@@ -31,13 +31,7 @@
 							</StackLayout>
 							<TextField class="gr-text" row="0" col="1"  @tap="setChoice(form,'maker','ผู้ทำ')" :text="`${getChoiceTextByID(form.maker) || 'ไม่ระบุ'}`" />
 						</GridLayout>
-
-            <GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*"> 
-							<StackLayout class="gr">
-								<Label class="gr-label light" text="หมายเหตุ" row="0" col="0" />
-							</StackLayout>
-							<TextField v-model="form.breed_detail" class="gr-text" row="0" col="1"  hint="โปรดกรอกข้อมูล" />
-						</GridLayout>
+ 
 
 					</StackLayout>
 	 
