@@ -3,7 +3,7 @@
         <ActionBar title="ระบบบริหารการเลี้ยงโค"></ActionBar>
 
         <FlexboxLayout class="page">
-            <Image src="~/images/bglogo.png" class="logo"/>
+            <Image src="~/images/login.png" class="logo"/>
             <StackLayout class="form"> 
                 <StackLayout class="input-field"> 
                     <TextField v-model="form.username" hint="ชื่อผู้ใช้" class="input"/>

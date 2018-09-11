@@ -41,10 +41,18 @@ import step3 from "../components/Manage/breed_female/step3"
 import step4 from "../components/Manage/breed_female/step4"
 import step5 from "../components/Manage/breed_female/step5"
 import step6 from "../components/Manage/breed_female/step6"
-
+import Notificate from "../components/Notificate"
 const router = new VueRouter({
     pageRouting: true,
     routes: [
+        {
+            path: '/Notificate',
+            name: 'Notificate',
+            component: Notificate,
+            meta: {
+                title: 'Notificate',
+            },
+        },
         {
             path: '/cattle/manage/fbreed',
             name: 'fbreed',
@@ -88,7 +96,7 @@ const router = new VueRouter({
         {
             path: '/cattle/manage/step5',
             name: 'step5',
-            component: step6,
+            component: step5,
             meta: {
                 title: 'step5',
             },
@@ -96,7 +104,7 @@ const router = new VueRouter({
         {
             path: '/cattle/manage/step6',
             name: 'step6',
-            component: fbreed,
+            component: step6,
             meta: {
                 title: 'step6',
             },

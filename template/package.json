@@ -17,7 +17,8 @@
     "nativescript-mediafilepicker": "^1.0.7",
     "nativescript-imagepicker": "^6.0.3",
     "nativescript-imagecropper": "^1.0.4",
-    "nativescript-drop-down": "^4.0.1"
+    "nativescript-drop-down": "^4.0.1",
+    "nativescript-local-notifications": "^2.0.5"
   },
   "devDependencies": {
     "babel-traverse": "6.26.0",

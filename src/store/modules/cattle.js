@@ -7,6 +7,7 @@ const _ = require('lodash')
 const state = {
     breedsMale:null,
     cattle:null,
+    notificationState:0,
 };
 
 const mutations = {
@@ -14,6 +15,30 @@ const mutations = {
 };
 
 const actions = {
+  getNotificationState: async function(context){
+    console.log(state.notificationState);
+    return state.notificationState;
+  },
+  setNotificationState: async function(context){
+    if(state.notificationState == 0){
+      state.notificationState = 1;
+    } 
+  }, 
+  dataNotification: async function(context,id){ 
+        let res = null; 
+        console.log("UserId is :"+id);
+        let result = await axios.get("/api/v1/farmer/farmers/"+id+"/reports/cattleEvents",
+            {params: {all: true}})
+            .then((response) => {
+              res = response.data  
+            })
+            .catch((error) => { 
+            })
+            console.log(res);
+           return res; 
+  },
+
+
   choiceLoad: async function(context,id){
     let ui = null;
     let result = await axios.get("/api/v1/farmer/cattle-choices")

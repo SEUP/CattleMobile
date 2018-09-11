@@ -5,89 +5,68 @@
             <ActionItem ios.systemIcon="3" @tap="saveBreedsMale" android.systemIcon="ic_menu_save" ios.position="right"/>
             <ActionItem @tap="$router.go(-1)" ios.systemIcon="1" android.systemIcon="ic_menu_close_clear_cancel"/>
         </ActionBar>
-           <StackLayout  class="bg" orientation="vertical"> 
-                 <ScrollView sdkExampleTitle sdkToggleNavButton style="margin-top:5%; height:100%;">
-				<GridLayout rows="auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto">
+         <StackLayout  class="bg" orientation="vertical"> 
+               
+                 <ScrollView sdkExampleTitle sdkToggleNavButton style="margin-top:2%; height:100%;">
+                    	<StackLayout> 
+                       <StackLayout class="card">
+					<StackLayout class="card-menu " style="background-color:#6A5ACD;" orientation="vertical">
+					 <Label text="ข้อมูลโค" class="f30 dark" /> 
+						 <GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*"> 
+							<StackLayout class="gr">
+								<Label class="gr-label light" text="ชื่อ" row="0" col="0" />
+							</StackLayout>
+							<TextField v-model="form.name" class="gr-text" row="0" col="1"  hint="โปรดกรอกข้อมูล" />
+						</GridLayout> 
 
-                    <WrapLayout row="0" style="padding:5%;" orientation="horizontal" height="100">
-						<WrapLayout style="  padding:8%; background-color:#6600cc; color:white;  width:100%; height:100%;" orientation="horizontal"> 
-						 
-								<Label style="margin-top:10%; font-size:20px;" text="ชื่อโค" />
-								<TextField v-model="form.name" style="margin-top:-6%; width:100%;" hint="โปรดระบุชื่อโค" /> 
-						 
-						</WrapLayout>
-					</WrapLayout>
+                         <GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*"> 
+							<StackLayout class="gr">
+								<Label class="gr-label light" text="เบอร์หู" row="0" col="0" />
+							</StackLayout>
+							<TextField v-model="form.ear_number" class="gr-text" row="0" col="1"  hint="โปรดกรอกข้อมูล" />
+						</GridLayout>
 
-                     <WrapLayout row="1" style="padding:5%;" orientation="horizontal" height="100">
-						<WrapLayout style="  padding:8%; background-color:#009933; color:white;  width:100%; height:100%;" orientation="horizontal"> 
-						 
-								<Label style="margin-top:10%; font-size:20px;" text="เบอร์หู" />
-								<TextField v-model="form.ear_number" style="margin-top:-6%; width:100%;" hint="โปรดระบุเบอร์หู" /> 
-						 
-						</WrapLayout>
-					</WrapLayout>
+                        <GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*">
+							<StackLayout class="gr">
+								<Label class="gr-label light" text="วันเกิด" row="0" col="0" />
+							</StackLayout>
+							<TextField class="gr-text" row="0" col="1" @tap="setDate(form,'birth_date')" hint="โปรดกรอกข้อมูล" :text="`${ form.birth_date ? $moment(form.birth_date).format('DD MMMM YYYY') : 'โปรดกรอกข้อมูล'}`" />
+						</GridLayout>
 
-                    <WrapLayout row="2" style="padding:5%;" orientation="horizontal" height="100">
-						<WrapLayout style="  padding:8%; background-color:#009999; color:white;  width:100%; height:100%;" orientation="horizontal"> 
-						    <GridLayout   rows="auto" columns="*,auto" class="form-item" @tap="setDate(form,'birth_date')">
-                                <Label style="color:white;" :text="`${ form.birth_date ? $moment(form.birth_date).format('DD MMMM YYYY') : 'วันเกิด'}`"/>
+                        <GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*"> 
+							<StackLayout class="gr">
+								<Label class="gr-label light" text="อายุ" row="0" col="0" />
+							</StackLayout>
+							<TextField  :text="yearOld()+'ปี'+' '+monthOld()+'เดือน'" class="gr-text" row="0" col="1"  hint="โปรดกรอกข้อมูล" />
+						</GridLayout>
 
-                                <Label row="0" col="1" class="fa" :text="'fa-chevron-right' | fonticon"/>
-                            </GridLayout> 	
-                        </WrapLayout>
-					</WrapLayout>
-
-                    <WrapLayout row="3" style="padding:5%;" orientation="horizontal" height="100">
-						<WrapLayout style="  padding:8%; background-color:#a34600; color:white;  width:100%; height:100%;" orientation="horizontal"> 
-                        <WrapLayout style="margin-top:10%; font-size:20px; color:white" orientation="vertical"> 
-                             	<Label  text="อายุ" />
-                        </WrapLayout>
-                        <WrapLayout orientation="vertical"> 
-                            <TextField :text="yearOld()" width='50%' hint="อายุ(ปี)"/>
-                                <TextField :text="monthOld()" w width='50%' hint="อายุ(เดือน)"/>
-                        </WrapLayout>
-        
-						
-						</WrapLayout>
-					</WrapLayout>
-
-                    <WrapLayout row="4" style="padding:5%;" orientation="horizontal" height="100">
-						<WrapLayout style="  padding:8%; background-color:#660066; color:white;  width:100%; height:100%;" orientation="horizontal"> 
-						    <GridLayout   rows="auto" columns="*,auto" class="form-item" @tap="setDate(form,'buy_date')">
-                                <Label style="color:white;" :text="`${ form.buy_date ? $moment(form.buy_date).format('DD MMMM YYYY') : 'วันที่ซื้อ'}`"/>
-
-                                <Label row="0" col="1" class="fa" :text="'fa-chevron-right' | fonticon"/>
-                            </GridLayout> 	
-                        </WrapLayout>
-					</WrapLayout>
-
-                    <WrapLayout row="5" style="padding:5%;" orientation="horizontal" height="100">
-						<WrapLayout style="  padding:8%; background-color:#07198e; color:white;  width:100%; height:100%;" orientation="horizontal"> 
-                            <GridLayout  rows="auto" columns="*,auto" class="form-item"  @tap="setChoice(form,'cattle_breeding','พันธุ์โค')">
-                            
-                            <Label style="color:white;" row="0" column="0" :text="`พันธุ์โค : ${getChoiceTextByID(form.cattle_breeding) || 'ไม่ระบุ'}`"/>
                         
-                        </GridLayout>
-						</WrapLayout>
-					</WrapLayout>
+                        <GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*">
+							<StackLayout class="gr">
+								<Label class="gr-label light" text="วันที่ซื้อ" row="0" col="0" />
+							</StackLayout>
+							<TextField class="gr-text" row="0" col="1" @tap="setDate(form,'buy_date')" hint="โปรดกรอกข้อมูล" :text="`${ form.buy_date ? $moment(form.buy_date).format('DD MMMM YYYY') : 'โปรดกรอกข้อมูล'}`" />
+						</GridLayout>
 
-                    <WrapLayout row="6" style="padding:5%;" orientation="horizontal" height="100">
-						<WrapLayout style="  padding:8%; background-color:#271a30; color:white;  width:100%; height:100%;" orientation="horizontal"> 
-                              <GridLayout rows="auto" columns="*,auto" class="form-item" @tap="setChoice(form,'cattle_source','แหล่งที่มา')">
-                                <Label style="color:white;" row="0" column="0" :text="`แหล่งที่มา : ${getChoiceTextByID(form.cattle_source) || 'ไม่ระบุ'}`"/>
-                    
-                            </GridLayout>
-						</WrapLayout>
-					</WrapLayout>
+                        <GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*">
+							<StackLayout class="gr">
+								<Label class="gr-label light" text="พันธุ์โค" row="0" col="0" />
+							</StackLayout>
+							<TextField class="gr-text" row="0" col="1"  @tap="setChoice(form,'cattle_breeding','พันธุ์โค')" :text="`${getChoiceTextByID(form.cattle_breeding) || 'ไม่ระบุ'}`" />
+						</GridLayout>
 
-                     <WrapLayout row="7" style="padding:5%;" orientation="horizontal" height="100">
-						
-					</WrapLayout>
-
-				</GridLayout>
+                        <GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*">
+							<StackLayout class="gr">
+								<Label class="gr-label light" text="พันธุ์โค" row="0" col="0" />
+							</StackLayout>
+							<TextField class="gr-text" row="0" col="1"  @tap="setChoice(form,'cattle_source','แหล่งที่มา')" :text="`${getChoiceTextByID(form.cattle_source) || 'ไม่ระบุ'}`" />
+						</GridLayout>
+					</StackLayout>
+                   </StackLayout>
+ 
+                	</StackLayout>
                  </ScrollView>
            </StackLayout>
-
     </Page>
 </template>
 

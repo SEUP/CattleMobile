@@ -2,7 +2,7 @@
     <Page class="page" actionBarHidden="true" > 
 
             <StackLayout  class="bg" orientation="vertical"> 
-            <WrapLayout class="header" style="margin-top:4%; margin-left:4%;" orientation="horizontal" height="70">
+            <WrapLayout  class="header" style="margin-top:4%; margin-left:4%;" orientation="horizontal" height="70">
 		
                    	<WrapLayout style="  width:20%; height:100%;" orientation="horizontal">
 					       <Avatar/>
@@ -89,6 +89,19 @@
 						</WrapLayout>
 					</WrapLayout>
 
+					<WrapLayout @tap="listNoti" row="6" style="padding-top:8%;" orientation="horizontal" height="70">
+						<WrapLayout class="btns" orientation="horizontal">
+							<WrapLayout style="  width:20%; height:100%;" orientation="horizontal">
+								<Image style="margin:10%; height:50;width:50;" src="https://cdn4.iconfinder.com/data/icons/web-ui-color/128/Mail-512.png"
+								/>
+							</WrapLayout>
+							<WrapLayout style=" width:80%; height:100%;" orientation="vertical">
+								<Label style="margin-top:10%; color:white; font-size:20px;" text="การแจ้งเตือน" />
+								<Label style="color:white;" text="ดูการแจ้งเตือนทั้งหมดของคุณ" />
+							</WrapLayout>
+						</WrapLayout>
+					</WrapLayout>
+				<WrapLayout row="7" style="padding-top:8%;" orientation="horizontal" height="70"></WrapLayout>
  
 
 
@@ -103,9 +116,9 @@
 
 <script>
 
-    import {mapState} from 'vuex'
+    import { mapGetters, mapState } from "vuex";
     import Avatar from "./Farmer/Avatar";
-   
+   	 import  * as LocalNotifications from "nativescript-local-notifications";
     export default {
         components: {Avatar},
         data() {
@@ -119,15 +132,63 @@
         },
         async created() {
             await this.$store.dispatch("district/getProvinces")
-
+			 
         },
         async mounted() {
             console.log("Home Mounted ")
-            await this.$store.dispatch("user/downloadAvatar")
+			await this.$store.dispatch("user/downloadAvatar")
+	 
+			this.checkState();
         },
         methods: {
+			checkState :async function(){
+				let notification = await this.$store.dispatch("cattle/getNotificationState");
+				
+			 	if(notification == "0"){  
+					 let notificationChangeState = await this.$store.dispatch("cattle/setNotificationState");
+					 let dataficationChangeState = await this.$store.dispatch("cattle/dataNotification",this.user.id);
+					 let notiData = {};
+					 for(let i=0; i < dataficationChangeState.length; i++ ){
+						 	if(dataficationChangeState[i].title){
+								 alert(dataficationChangeState[i].title);
+								 notiData.title = dataficationChangeState[i].title;
+								 notiData.start = dataficationChangeState[i].start;
+								 break;
+							 }
+					 }
+					this.notification(notiData); 
+				 }
+			},
 
-
+			startNotification(){
+				 LocalNotifications.addOnMessageReceivedCallback(
+				function (notification) {
+					console.log("ID: " + notification.id);
+					console.log("Title: " + notification.title);
+					console.log("Body: " + notification.body);
+					alert(notification.title);
+				}
+			).then(
+				function () {
+					console.log("Listener added");
+				}
+			)
+			}, 
+			notification(data){
+				this.startNotification();
+			LocalNotifications.schedule([{
+					id: 1,
+					title: data.title,
+					body: data.start,
+					ticker: "Cattle Farmer",
+					at: new Date(new Date().getTime() + (5 * 1000))
+				}]).then(() => {
+					console.log("Notification scheduled");
+				}, (error) => {
+					console.log("ERROR", error);
+				}); 
+			
+			},
             listMaleBreed: function () {
                 this.$router.push('/malebreed')
             },
@@ -145,6 +206,9 @@
             },
             listFarm: function () {
                 this.$router.push('/farm')
+			},
+			listNoti: function () {
+                this.$router.push('/Notificate')
             },
         }
     }

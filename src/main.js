@@ -6,8 +6,8 @@ import './styles.scss';
 import {TNSFontIcon, fonticon} from 'nativescript-fonticon';
 import * as http from 'http'
 import './assets/custom.css';
-Vue.use(require('nativescript-ui-sidedrawer/vue'))
-
+//Vue.use(require('nativescript-ui-sidedrawer/vue'))
+ 
 TNSFontIcon.debug = false;
 TNSFontIcon.paths = {
     'fa': './font-awesome.css',
