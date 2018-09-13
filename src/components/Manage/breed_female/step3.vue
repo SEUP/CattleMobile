@@ -71,7 +71,7 @@
 
  				<GridLayout v-if="form.breed_type == '090200'" class="txt-gr" columns="*, 2*" rows="2*, 3*">
 							<StackLayout class="gr">
-								<Label class="gr-label light" text="พันธุ์โค" row="0" col="0" />
+								<Label class="gr-label light" text="ผู้ให้บริการ" row="0" col="0" />
 							</StackLayout>
 							<TextField class="gr-text" row="0" col="1"  @tap="setChoice(form,'ivf_provider','ผู้ให้บริการผสมเทียม')" :text="`${getChoiceTextByID(form.ivf_provider) || 'ไม่ระบุ'}`" />
 						</GridLayout>

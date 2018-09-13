@@ -19,8 +19,14 @@ const actions = {
         
       },
 
-    read: async function(context, form){
-
+    read: async function(context, id){
+      let res = {};
+      let result = await axios.get('/api/v1/farmer/cattles/'+id+'/femalebreed')
+        .then((response) => {
+          res = response.data; 
+      })
+        .catch((error) => {console.log('เกิดข้อผิดพลาด');});  
+       return res; 
     },
 
     update: async function(context, form){
@@ -47,22 +53,7 @@ const actions = {
           });
           console.log(res);
          return res; 
-    },
-    step2: async function(context, form){
-        
-    },
-    step3: async function(context, form){
-        
-    },
-    step4: async function(context, form){
-        
-    },
-    step5: async function(context, form){
-        
-    },
-    step6: async function(context, form){
-        
-    },
+    } 
  
 };
 

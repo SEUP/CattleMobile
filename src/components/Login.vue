@@ -106,7 +106,7 @@
                 let result = await this.$store.dispatch("user/login", this.form);
 
                 if (result) {
-                    let user = this.loadInitialData()
+                    let user = await this.loadInitialData()
                     if (user) {
                         this.goHome();
                     }

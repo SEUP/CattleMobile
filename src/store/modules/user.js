@@ -39,7 +39,7 @@ const actions = {
                 applicationSettings.setString("token", r.data.token);
                 axios.defaults.headers.common['Authorization'] = `Bearer ${applicationSettings.getString('token')}`;
                 console.log('user/login', 'finish')
-
+               
                 return r.data;
             })
 

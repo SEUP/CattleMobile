@@ -3,7 +3,7 @@
         <ActionBar title="ข้อมูลส่วนตัว">
             <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" @tap="back"/>
         </ActionBar>
-
+ 	<ScrollView width="100%" height="100%;" >
         <StackLayout>
              <WrapLayout class="header" style="margin-top:4%; margin-left:4%;" orientation="horizontal" height="70">
 		
@@ -45,14 +45,20 @@
                     <Label class="label">ที่อยู่</Label>
                     <Label class="text"
                            :text="getAddressText">
-                    </Label>
+                    </Label> 
+                     
                 </StackLayout>
-
+                    <StackLayout class="data-item">
+                 
+                       <Button class="logout-btn" @tap="logout">ออกจากระบบ</Button>
+                     
+                </StackLayout>
             </StackLayout>
 
-            <Button class="logout-btn" @tap="logout">ออกจากระบบ</Button>
+        
 
         </StackLayout>
+ 	</ScrollView>
     </Page>
 </template>
 

@@ -8,6 +8,14 @@
     	 	<ScrollView width="100%" height="100%;" class="bg-wh">
 			<StackLayout>
         <Button text="เพิ่มข้อมูลการผสมพันธุ์" @tap="gotoBreeder()"/>
+         <ListView class="list-group" for="list in listData" style="height:1250px">
+					<v-template>
+						<FlexboxLayout flexDirection="row" class="list-group-item">
+							<Label  :text="`${getChoiceTextByID(list.breed_type) || 'ไม่ระบุ'}`" class="list-group-item-heading" style="width: 60%" />
+							<Label  :text="$moment(list.breeding_date).format('DD-MM-YYYY')" class="list-group-item-heading" style="font-size:16px; width: 60%" />
+						</FlexboxLayout>
+					</v-template>
+				</ListView>
 			</StackLayout>
 		</ScrollView>
 
@@ -23,7 +31,8 @@ export default {
     data() {
         return { 
 			form:{},
-			data:{}
+      data:{},
+      listData:{},
 		};
     },created() {
 		
@@ -42,9 +51,10 @@ export default {
 		create: async function(){ 
                   
 		},
-		read: async function(){
-			  
-    },
+	    read: async function(){
+			let preData= await this.$store.dispatch("breeder_female/read", this.data.id);
+					this.listData = preData.data; 
+		},
     gotoBreeder(){
       this.$router.push({ name:'step1',params: {cattle: this.data} }) 
     },
