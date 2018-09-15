@@ -1,10 +1,10 @@
 <template>
     <Page class="page">
-        <ActionBar title="ข้อมูลฟาร์ม">
+        <ActionBar class="bg-blue"  title="ข้อมูลฟาร์ม">
             <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" @tap="$router.go(-1)"/>
         </ActionBar>
         <StackLayout>
-            <StackLayout row="0" class="user-profile">
+            <StackLayout style="background: rgba(73, 155, 234, 1);" row="0" class="user-profile">
                 <Avatar/>
                 <Label class="header" :text="`${user.firstname} ${user.lastname}`"/>
                 <Label class="subheader" :text="user.email"/>
@@ -43,7 +43,7 @@
 <script>
 
     import {mapState} from 'vuex'
-    import * as app from "tns-core-modules/application";
+    import * as applicationSettings from 'tns-core-modules/application-settings'
     import * as imagepicker from "nativescript-imagepicker";
     import * as camera from "nativescript-camera";
     import {Image} from "ui/image";
@@ -83,10 +83,12 @@
 </script>
 
 <style scoped>
-
+ .page{
+    background: rgba(73, 155, 234, 1);
+ }
     .data-form {
         color: white;
-        background-color: #4e4e4e;
+        background: rgba(0, 96, 186, 1); 
     }
 
     .data-item {

@@ -1,6 +1,6 @@
 <template>
     <Page class="page">
-        <ActionBar title="ข้อมูลส่วนตัว">
+        <ActionBar class="bg-blue" title="ข้อมูลส่วนตัว">
             <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" @tap="back"/>
         </ActionBar>
  	<ScrollView width="100%" height="100%;" >
@@ -65,7 +65,7 @@
 <script>
 
     import {mapState} from 'vuex'
-    import * as app from "tns-core-modules/application";
+ 
     import * as imagepicker from "nativescript-imagepicker";
     import * as camera from "nativescript-camera";
     import {Image} from "ui/image";
@@ -73,7 +73,8 @@
     import * as permissions from "nativescript-permissions";
 
     const ImageCropper = require("nativescript-imagecropper").ImageCropper;
-
+   	import { isAndroid, isIOS, device, screen } from "platform";
+ 
     import Avatar from "./Avatar"
 
     export default {
@@ -138,15 +139,19 @@
                 });
 
                 console.log('selectImage', selection);
-                let firstImage = selection[0];
+                 
+                let firstImage = selection[0]; 
                 firstImage.getImageAsync(async (source) => {
                     console.log('source', source);
+                  
                     let selectedImgSource = imageSource.fromNativeSource(source);
 
                     let args = await this.imageCropper.show(selectedImgSource, options)
                         .then((args) => {
+                      
                             return args
                         }).catch((e) => {
+                             
                             console.log(e.stack);
                         })
 
@@ -159,6 +164,8 @@
                         // next upload image here
                         await this.$store.dispatch('user/uploadAvatar', url)
 
+                    }else{
+                        alert('Error');
                     }
                 })
 
@@ -193,7 +200,7 @@
 
                 let options = {width: 400, height: 400, lockSquare: true}
                 if (camera.isAvailable()) {
-                    if (app.android) {
+                    if (isAndroid) {
                         await permissions.requestPermission([
                             android.Manifest.permission.CAMERA,
                             android.Manifest.permission.WRITE_EXTERNAL_STORAGE
@@ -211,7 +218,7 @@
                         this.cropImage(options);
                     }
                 } else {
-                    if (!app.android) {
+                    if (!isAndroid) {
                         // to make it work in iOS emulator
                         this.takingImage({lockSquare: true});
                     }
@@ -242,10 +249,12 @@
 </script>
 
 <style scoped>
- 
+ .page{
+    background: rgba(73, 155, 234, 1);
+ }
     .data-form {
         color: white;
-        background-color: #4e4e4e;
+       background: rgba(0, 96, 186, 1); 
     }
 
     .data-item {
@@ -268,6 +277,7 @@
     }
 
     .user-profile {
+        background: rgba(0, 96, 186, 1); 
         height: auto;
     }
 

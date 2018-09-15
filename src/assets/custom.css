@@ -1,6 +1,12 @@
 .f30{
     font-size:30px;
 }
+ActionBar{
+    background: rgba(0, 96, 186, 1); 
+}
+.bg-blue{
+    background: rgba(0, 96, 186, 1); 
+}
 .bg-violet{
     background-color: #5c03af;
 }

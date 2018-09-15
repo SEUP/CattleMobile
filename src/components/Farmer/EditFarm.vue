@@ -1,31 +1,57 @@
 <template>
     <Page class="page">
-        <ActionBar title="แก้ไขข้อมูลส่วนตัว">
+        <ActionBar class="bg-blue"  title="แก้ไขข้อมูลฟาร์ม">
             <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" @tap="$router.go(-1)"/>
 
-            <ActionItem ios.systemIcon="3" @tap="save" android.systemIcon="ic_menu_save" ios.position="right"/>
-            <ActionItem @tap="$router.go(-1)" ios.systemIcon="1" android.systemIcon="ic_menu_close_clear_cancel"/>
+            <ActionItem ios.systemIcon="3" @tap="save" android.systemIcon="ic_menu_save" ios.position="right"/> 
         </ActionBar>
-        <StackLayout class="form">
-            <StackLayout class="form-item">
-                <TextField v-model="form.name" hint="ชื่อฟาร์ม"/>
-            </StackLayout>
-            <StackLayout class="form-item">
-                <TextField v-model="form.farm_issue_id" hint="เลขจดทะบเียน"/>
-            </StackLayout>
-            <GridLayout rows="auto" columns="*,auto" class="form-item" @tap="setDate(form,'farm_issue_date')">
-                <Label :text="`${ form.farm_issue_date ? $moment(form.farm_issue_date).format('DD MMMM YYYY') : 'วันที่จดทะเบียน'}`"/>
 
-                <Label row="0" col="1" class="fa"
-                       :text="'fa-chevron-right' | fonticon"/>
-            </GridLayout>
-            <StackLayout class="form-item">
-                <TextField v-model="form.farm_lat" hint="ละติจูด"/>
-            </StackLayout>
-            <StackLayout class="form-item">
-                <TextField v-model="form.farm_lng" hint="ลองจิจูด"/>
-            </StackLayout>
+        <ScrollView>
+            <StackLayout>
+
+        <StackLayout class="card">
+                    <StackLayout class="card-menu bg-blue" style=" " orientation="vertical">
+
+                        <GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*">
+                            <StackLayout class="gr">
+                                <Label class="gr-label light" text="ชื่อฟาร์ม" row="0" col="0" />
+                            </StackLayout>
+                            <TextField v-model="form.name" hint="ชื่อฟาร์ม" class="gr-text" row="0" col="1" />
+                        </GridLayout>
+
+                         <GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*">
+                            <StackLayout class="gr">
+                                <Label class="gr-label light" text="เลขจดทะบเียน" row="0" col="0" />
+                            </StackLayout>
+                            <TextField v-model="form.farm_issue_id" hint="เลขจดทะบเียน" class="gr-text" row="0" col="1" />
+                        </GridLayout>
+
+                         <GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*">
+                            <StackLayout class="gr">
+                                <Label class="gr-label light" text="วันที่จดทะเบียน" row="0" col="0" />
+                            </StackLayout>
+                            <TextField @tap="setDate(form,'farm_issue_date')"  :text="`${ form.farm_issue_date ? $moment(form.farm_issue_date).format('DD MMMM YYYY') : 'วันที่จดทะเบียน'}`" class="gr-text" row="0" col="1" />
+                        </GridLayout>
+
+                        <GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*">
+                            <StackLayout class="gr">
+                                <Label class="gr-label light" text="ละติจูด" row="0" col="0" />
+                            </StackLayout>
+                            <TextField v-model="form.farm_lat" hint="ละติจูด" class="gr-text" row="0" col="1" />
+                        </GridLayout>
+
+                        <GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*">
+                            <StackLayout class="gr">
+                                <Label class="gr-label light" text="ลองจิจูด" row="0" col="0" />
+                            </StackLayout> 
+                            <TextField  v-model="form.farm_lng" hint="ลองจิจูด" class="gr-text" row="0" col="1" />
+                        </GridLayout>
+
+                    </StackLayout>
         </StackLayout>
+            </StackLayout>
+        </ScrollView>
+  
     </Page>
 </template>
 
