@@ -166,7 +166,12 @@
 					console.log("ID: " + notification.id);
 					console.log("Title: " + notification.title);
 					console.log("Body: " + notification.body);
-					alert(notification.title);
+					  alert({
+                            title: "การเเจ้งเตือนล่าสุด",
+                            message: notification.title,
+                            okButtonText: "ตกลง"
+                            });
+				
 				}
 			).then(
 				function () {
@@ -186,7 +191,7 @@
 					console.log("Notification scheduled");
 				}, (error) => {
 					console.log("ERROR", error);
-				}); 
+				});  
 			
 			},
             listMaleBreed: function () {
