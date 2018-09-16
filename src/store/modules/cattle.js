@@ -38,7 +38,18 @@ const actions = {
            return res; 
   },
 
-
+  deleteCattle: async function(context,form){
+    let res = null; 
+    console.log("UserId is :"+form.id);
+    let result = await axios.delete("api/v1/farmer/farmer/"+form.farmer_id+"/cattles/"+form.id)
+        .then((response) => {
+          alert("ลบข้อมูลสำเร็จ");
+        })
+        .catch((error) => { 
+          alert("เกิดข้อผิดพลาดในการลบข้อมูล");
+        })
+         
+  }, 
   choiceLoad: async function(context,id){
     let ui = null;
     let result = await axios.get("/api/v1/farmer/cattle-choices")

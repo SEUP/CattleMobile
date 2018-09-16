@@ -63,7 +63,7 @@ export default {
                 },
                 {
                     name: "ถ่ายพยาธิ",
-                    imageSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTL_F_RqYCar5JzWVF3fwok17bdRsFIFIfm9B9EqGuviSKmFbBx",
+                    imageSrc: "http://cdn.onlinewebfonts.com/svg/img_52430.png",
                     type:"nal",
                     link:"worms",
                 },
@@ -75,7 +75,7 @@ export default {
                     link:"doctor",
                 },
                 {
-                    name: "การอย่านม",
+                    name: "การหย่านม",
                     imageSrc: "https://www.smahcp.co.uk/content/media/1710/icon_03_1l.png",
                         type:"020400",
                         link:'milk'

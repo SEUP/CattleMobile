@@ -2,15 +2,14 @@
 	<Page class="page">
 		<ActionBar title="การจัดการ">
 			<NavigationButton text="Go Back" android.systemIcon="ic_menu_back" @tap="$router.go(-1)" />
-			<ActionItem ios.systemIcon="3" @tap="update" android.systemIcon="ic_menu_save" ios.position="right" />
-			<ActionItem @tap="$router.go(-1)" ios.systemIcon="1" android.systemIcon="ic_menu_close_clear_cancel" />
+			<ActionItem ios.systemIcon="3" @tap="update" android.systemIcon="ic_menu_save" ios.position="right" /> 
 		</ActionBar> 
     	 	<ScrollView width="100%" height="100%;" class="bg-wh">
 			<StackLayout>
 
 				<StackLayout class="card">
 					<StackLayout class="card-menu bg-violet" orientation="vertical">
-					 <Label text="เริ่มขุน" class="f30 dark" />
+					 <Label text="ข้อมูลเเรกเกิด" class="f30 dark" />
 						<GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*">
 							<StackLayout class="gr">
 								<Label class="gr-label light" text="วัน/เดือน/ปี" row="0" col="0" />
@@ -53,7 +52,7 @@
 
 					<StackLayout class="card">
 					<StackLayout class="card-menu bg-violet" orientation="vertical">
-					 <Label text="สิ้นสุดการขุน" class="f30 dark" />
+					 <Label text="ข้อมูลเมื่อหย่านม" class="f30 dark" />
 						<GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*">
 							<StackLayout class="gr">
 								<Label class="gr-label light" text="วัน/เดือน/ปี" row="0" col="0" />

@@ -2,8 +2,8 @@
     <Page  class="page">
         <ActionBar title="แก้ไข">
             <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" @tap="$router.go(-1)"/>
-            <ActionItem ios.systemIcon="3" @tap="update" android.systemIcon="ic_menu_save" ios.position="right"/>
-            <ActionItem @tap="$router.go(-1)" ios.systemIcon="1" android.systemIcon="ic_menu_close_clear_cancel"/>
+            <ActionItem ios.systemIcon="3" @tap="update" android.systemIcon="ic_menu_save" ios.position="right"/> 
+            <ActionItem @tap="deleteCattle" ios.systemIcon="1" android.systemIcon="ic_menu_delete" ios.position="right"/>
         </ActionBar>
         <StackLayout  class="bg" orientation="vertical"> 
               
@@ -57,12 +57,12 @@
 
                         <GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*">
 							<StackLayout class="gr">
-								<Label class="gr-label light" text="พันธุ์โค" row="0" col="0" />
+								<Label class="gr-label light" text="แหล่งที่มา" row="0" col="0" />
 							</StackLayout>
 							<TextField class="gr-text" row="0" col="1"  @tap="setChoice(form,'cattle_source','แหล่งที่มา')" :text="`${getChoiceTextByID(form.cattle_source) || 'ไม่ระบุ'}`" />
 						</GridLayout>
                     <Button text="การจัดการ" class="circle" style="background-color:white; color:#284677;" @tap="gotoManage" />
-
+                   
 					</StackLayout>
                    </StackLayout>
  
@@ -107,6 +107,30 @@ import { mapGetters, mapState } from "vuex";
                 }
                  this.$router.push({ name:'manage_cattle',params: {cattle: data_cattle_send} })
                
+            },
+            deleteCattle(){
+                let de = 0;
+                confirm({
+                title: "การลบข้อมูล",
+                message: "คุณแน่ใจใช่ไหมที่จะลบข้อมูล",
+                okButtonText: "ลบข้อมูล",
+                cancelButtonText: "ยกเลิก"
+                }).then(result => {
+                    
+                if(result){
+                  
+                    this.deleteCattleOK();
+
+                    }
+                });
+               
+              
+            },
+            deleteCattleOK:async function(){
+             
+                             let farmer = await this.$store.dispatch("cattle/deleteCattle", this.form);
+                            let data = await this.$store.dispatch("cattle/load", this.form.farmer_id);
+                            this.$router.go(-2);
             },
 
              monthOld(){ 

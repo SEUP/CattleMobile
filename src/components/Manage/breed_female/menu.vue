@@ -2,8 +2,6 @@
 	<Page class="page">
 		<ActionBar title="การจัดการ">
 			<NavigationButton text="Go Back" android.systemIcon="ic_menu_back" @tap="$router.go(-1)" />
-			<ActionItem ios.systemIcon="3" @tap="create" android.systemIcon="ic_menu_save" ios.position="right" />
-			<ActionItem   ios.systemIcon="1" android.systemIcon="ic_menu_close_clear_cancel" />
 		</ActionBar> 
     	 	<ScrollView width="100%" height="100%;" class="bg-wh">
 			<StackLayout>

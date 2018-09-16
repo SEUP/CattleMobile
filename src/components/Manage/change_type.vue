@@ -3,10 +3,9 @@
 		<ActionBar title="เปลี่ยนประเภทโค">
 			<NavigationButton text="Go Back" android.systemIcon="ic_menu_back" @tap="$router.go(-1)" />
 			<ActionItem ios.systemIcon="3" @tap="update" android.systemIcon="ic_menu_save" ios.position="right" />
-			<ActionItem @tap="$router.go(-1)" ios.systemIcon="1" android.systemIcon="ic_menu_close_clear_cancel" />
 		</ActionBar>
 		<StackLayout orientation="vertical" width="100%" height="100%" backgroundColor="white">
-			<Button @tap="preUpdate()" style="margin-top:5%;" class="circle bg-violet wh" text="เลือกประเภทที่ต้องการเปลี่ยน"/>
+			<Button @tap="preUpdate()" style="margin-top:5%; color:white;" class="circle bg-violet wh" text="เลือกประเภทที่ต้องการเปลี่ยน"/>
 		</StackLayout>
 	</Page>
 </template>
