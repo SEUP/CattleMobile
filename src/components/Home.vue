@@ -150,7 +150,11 @@
 					 let notiData = {};
 					 for(let i=0; i < dataficationChangeState.length; i++ ){
 						 	if(dataficationChangeState[i].title){
-								 alert(dataficationChangeState[i].title);
+								   alert({
+                            title: "การเเจ้งเตือนล่าสุด",
+                            message: dataficationChangeState[i].title,
+                            okButtonText: "ตกลง"
+                            }); 
 								 notiData.title = dataficationChangeState[i].title;
 								 notiData.start = dataficationChangeState[i].start;
 								 break;
