@@ -108,8 +108,17 @@
                 if (result) {
                     let user = await this.loadInitialData()
                     if (user) {
+                        
                         this.goHome();
+                    }else{
+                        alert('เกิดข้อผิดพลาดในการเข้าสู่ระบบ');
                     }
+                }else{
+                     alert({
+                            title: "เกิดข้อผิดพลาดในการเข้าสู่ระบบ",
+                            message: "กรุณาตรวจสอบ ชื่อผู้ใช้ หรือ รหัสผ่าน",
+                            okButtonText: "ลองอีกครั้ง"
+                            });
                 }
 
             },
