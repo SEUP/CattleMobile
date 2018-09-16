@@ -138,11 +138,12 @@
                     return selection
                 });
 
-                console.log('selectImage', selection);
+                //console.log('selectImage', selection);
                  
                 let firstImage = selection[0]; 
+                console.log('Pongvarid',firstImage);
                 firstImage.getImageAsync(async (source) => {
-                    console.log('source', source);
+                  //  console.log('source', source);
                   
                     let selectedImgSource = imageSource.fromNativeSource(source);
 
