@@ -17,8 +17,7 @@
                 <Button  android:drawableLeft="@drawable/icon" text="เข้าสู่ระบบ" @tap="login" class="btn"/>
             </StackLayout>
             <StackLayout orientation="horizontal">
-                <Label text="Don’t have an account?"/>
-                <Label color="blue" text="Sign up" @tap="login"/>
+           
             </StackLayout>
         </FlexboxLayout>
 
