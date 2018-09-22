@@ -87,7 +87,7 @@ export default {
       tre: null
     };
   },
-  async create() {},
+  async create() {      this.$store.dispatch("mobile/allowBack",'malebreed')},
   computed: {
     ...mapGetters({
       getChoiceTextByID: "choice/getChoiceTextByID"
@@ -97,6 +97,7 @@ export default {
     })
   },
   methods: {
+        
          monthOld(){ 
                return this.$moment().diff(this.form.birth_date, 'month')%12;
             },
@@ -117,7 +118,7 @@ export default {
       this.goBack();
     },
     goBack() {
-      this.$router.push("/malebreed");
+      this.$router.go(-1);
     },
     setChoice: async function(parent, key, to) {
       console.log("setChoice");

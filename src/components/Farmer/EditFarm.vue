@@ -79,6 +79,7 @@
             ...mapGetters({})
         },
         mounted() {
+                  this.$store.dispatch("mobile/allowBack")
             console.log("Edit Profile")
             this.form = JSON.parse(JSON.stringify(this.farm));
             // console.log("USER FORM : ", this.form)

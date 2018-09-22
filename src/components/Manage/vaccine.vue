@@ -30,6 +30,27 @@
 							</StackLayout>
 							<TextField class="gr-text" row="0" col="1"  @tap="setChoice(form,'maker','ผู้ทำ')" :text="`${getChoiceTextByID(form.maker) || 'ไม่ระบุ'}`" />
 						</GridLayout>
+
+							<GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*">
+							<StackLayout class="gr">
+								<Label class="gr-label light" text="ชุดการผลิต" row="0" col="0" />
+							</StackLayout>
+							<TextField class="gr-text" row="0" col="1"  hint="โปรดกรอกข้อมูล" v-model="form.vaccine_set" />
+						</GridLayout>
+
+							<GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*">
+							<StackLayout class="gr">
+								<Label class="gr-label light" text="วันผลิต" row="0" col="0" />
+							</StackLayout>
+							<TextField class="gr-text" row="0" col="1" @tap="setDate(form,'mfg_date')" hint="โปรดกรอกข้อมูล" :text="`${ form.mfg_date ? $moment(form.mfg_date).format('DD MMMM YYYY') : 'โปรดกรอกข้อมูล'}`" />
+						</GridLayout>
+  
+							<GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*">
+							<StackLayout class="gr">
+								<Label class="gr-label light" text="วันหมดอายุ" row="0" col="0" />
+							</StackLayout>
+							<TextField class="gr-text" row="0" col="1" @tap="setDate(form,'exp_date')" hint="โปรดกรอกข้อมูล" :text="`${ form.exp_date ? $moment(form.exp_date).format('DD MMMM YYYY') : 'โปรดกรอกข้อมูล'}`" />
+						</GridLayout>
  
 
 					</StackLayout>

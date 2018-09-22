@@ -6,6 +6,7 @@ const _ = require('lodash')
 
 const state = {
     breedsMale:null,
+    breedSell:null,
     cattle:null,
     notificationState:0,
 };
@@ -14,7 +15,59 @@ const mutations = {
    
 };
 
-const actions = {
+const actions = { 
+  backSell: async function(context,form){ 
+    let cattles = null;
+    let resultv = await axios.get('/api/v1/farmer/farmer/'+form.farmer_id+'/cattles/'+form.id)
+    .then((response) => {
+      cattles = response.data  
+    })
+    .catch((error) => {
+ 
+    })
+
+    cattles.cattle_status = "010100"
+    let result = await axios.put('/api/v1/farmer/farmer/'+form.farmer_id+'/cattles/'+form.id,cattles)
+      .then((response) => {
+        alert('ยกเลิกการจำหน่ายสำเร็จ');
+        
+      })
+      .catch((error) => {
+        console.log(error.stack);
+        alert('เกิดข้อผิดพลาดยกเลิกการจำหน่าย');
+      });
+    
+  },
+  loadSell: async function (context,id) {
+    console.log('breeder/load');
+    let breeders = null; 
+    let result = await axios.get("/api/v1/farmer/farmer/"+id+"/cattles?keyword=&cattle_status=010200",
+        {params: {all: true}})
+        .then((response) => {
+            breeders = response.data  
+        })
+        .catch((error) => {
+            breeders = null;
+        })
+
+        state.breedSell =  breeders;
+       //state.breedsMale =  "id = "+id;
+   
+},
+   
+
+  uploadAvatar: async function(context,form){ 
+    let result = await axios.post('/api/v1/farmer/cattles/'+form.id+'/avatar', {img:form.img})
+      .then((response) => {
+        alert('เปลี่ยนรูปโคสำเร็จ');
+       // router.go(-2); 
+      })
+      .catch((error) => {
+        console.log(error.stack);
+        alert('เกิดข้อผิดพลาดเปลี่ยนรูป');
+      });
+    
+  },
   getNotificationState: async function(context){
     console.log(state.notificationState);
     return state.notificationState;
@@ -103,6 +156,7 @@ const actions = {
          
           })
             state.cattle = cattle;
+            return cattle;
       },
       updateCattle: async function (context, form) {
         let res = 0;

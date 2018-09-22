@@ -151,6 +151,7 @@
             })
         },
         mounted() {
+                  this.$store.dispatch("mobile/allowBack")
             console.log("Edit Profile")
             this.form = JSON.parse(JSON.stringify(this.user));
             // console.log("USER FORM : ", this.form)

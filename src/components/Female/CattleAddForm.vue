@@ -86,7 +86,7 @@ export default {
       tre: null
     };
   },
-  async create() {},
+  async create() {      this.$store.dispatch("mobile/allowBack",'femalebreed')},
   computed: {
     ...mapGetters({
       getChoiceTextByID: "choice/getChoiceTextByID"

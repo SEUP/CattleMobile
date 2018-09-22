@@ -42,9 +42,18 @@ import step4 from "../components/Manage/breed_female/step4"
 import step5 from "../components/Manage/breed_female/step5"
 import step6 from "../components/Manage/breed_female/step6"
 import Notificate from "../components/Notificate"
+import Sellbreed from "../components/Sell"
 const router = new VueRouter({
     pageRouting: true,
     routes: [
+        {
+            path: '/Sellbreed',
+            name: 'Sellbreed',
+            component: Sellbreed,
+            meta: {
+                title: 'Sellbreed',
+            },
+        },
         {
             path: '/Notificate',
             name: 'Notificate',

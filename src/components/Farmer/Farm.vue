@@ -71,6 +71,7 @@
             })
         },
         async created() {
+                  this.$store.dispatch("mobile/allowBack")
             console.log("Profile created")
         },
         methods: {

@@ -1,14 +1,13 @@
 <template>
     <Page class="page">
-        <ActionBar title="โคขุน">
-            <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" @tap="back"/>
-            <ActionItem @tap="addForm" ios.systemIcon="1" android.systemIcon="ic_input_add"/>
+        <ActionBar title="การจำหน่ายโค">
+            <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" @tap="back"/> 
         </ActionBar>
 
         <ScrollView>
          <ListView for="cattle in cattles.data">
                 <v-template >
-                    <CattleListItem v-if="cattle.cattle_type == '020300'"  @tap="editCattle(cattle)" :cattle="cattle"/>
+                    <CattleListItem  @tap="editCattle(cattle)" :cattle="cattle"/>
                 </v-template>
             </ListView>
             
@@ -32,32 +31,48 @@
         },  computed: {
              
             ...mapState({
+                user: state => state.user.user,
                 choices: state => state.choice.choices,
-                breedsMale: state => state.cattle.breedsMale,
+                breedSell: state => state.cattle.breedSell,
             })
         },
          created() {
                    this.$store.dispatch("mobile/allowBack",'home')
+              let sellMale =  this.$store.dispatch('cattle/loadSell', this.user.id)
+        
             this.breederMale();
         },
         methods: {
             breederMale: async function(){ 
-               this.cattles = this.breedsMale;
+              
+               this.cattles = this.breedSell;
               
             },
             editProfile: function () {
-                this.$router.push('/edit')
+               
             },
             back: async function () {
 
                 this.$router.back()
             },
             addForm : function () {
-                this.$router.push('/cattle/khun/add')
+        
             },
-            editCattle :function(cattles){
-               // this.$router.push('/cattle/male/edit')
-                this.$router.push({ name:'male_edit',params: {cattle: cattles} })
+            editCattle :function(cattle){
+                let res = 0;
+                confirm({
+                title: "เมนู",
+                message: "ยกเลิกการจำหน่าย",
+                okButtonText: "ตกลง",
+                cancelButtonText: "ยกเลิก"
+                }).then(result => {
+                    if(result){
+                         let sellMale =  this.$store.dispatch('cattle/backSell',cattle)
+                        let load =  this.$store.dispatch('cattle/loadSell', this.user.id)
+                        this.cattles = this.breedSell;
+                    }
+                });
+                
             }
         },
 

@@ -16,7 +16,7 @@ import worm from './modules/manage/C4_worm';
 import treat from './modules/manage/C5_treat';
 import milk from './modules/manage/C5_milk';
 import sell from './modules/manage/C6_sell';
-
+import mobile from './modules/mobile';
 Vue.use(Vuex);
 
 const debug = process.env.NODE_ENV !== 'production';
@@ -37,6 +37,7 @@ const store = new Vuex.Store({
         treat:treat,
         milk:milk,
         sell:sell,
+        mobile:mobile,
     },
  
 });

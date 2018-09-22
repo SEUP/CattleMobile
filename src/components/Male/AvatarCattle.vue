@@ -1,8 +1,7 @@
 <template>
    <StackLayout>
-        <Image v-if="!user.image_url" src="~/images/profile.jpg" class="avatar"/>
-        <Image v-else-if="ValidURL(user.image_url)" :src="$baseUrl+user.image_url" class="avatar"/>
-        <Image v-else :src="$baseUrl+user.image_url" class="avatar"/>
+        <Image v-if="!cattle.image_url" src="~/images/logo.png" class="avatar"/> 
+        <Image v-else :src="$baseUrl+cattle.image_url" class="avatar"/>
    </StackLayout>
  
 </template>
@@ -11,7 +10,10 @@
     import {mapState} from 'vuex'
 
     export default {
-        name: "Avatar",
+        name: "AvatarCattle",
+         props: {
+             cattle:[Object]
+        },
         computed: {
             ...mapState({
                 user: state => state.user.user,
@@ -19,7 +21,6 @@
             })
         },
         async mounted() {
-            
             console.log("Home Mounted ")
             await this.$store.dispatch("user/downloadAvatar")
         },

@@ -9,7 +9,7 @@
             <v-template>
                 <FlexboxLayout v-if="noti.title" flexDirection="row" class="list-group-item"> 
                 <Label :text="noti.title" class="list-group-item-heading" style="width: 60%" />
-								<Label :text="noti.start" class="list-group-item-heading" style="font-size:16px; width: 60%" />
+								<Label :text="$moment(noti.start).format('dddd-DD-MM-YYYY')" class="list-group-item-heading" style="font-size:16px; width: 60%" />
                 </FlexboxLayout>
             </v-template>
             </ListView>
@@ -31,6 +31,7 @@ export default {
 			data:{}
 		};
     },async created() {
+			      this.$store.dispatch("mobile/allowBack",'home')
 			this.load();
 	},
 	 computed: {

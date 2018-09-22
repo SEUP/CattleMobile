@@ -62,7 +62,7 @@ export default {
 			data:{}
 		};
     },created() {
-		
+		      this.$store.dispatch("mobile/allowBack")
 		this.load();
 	},
 	 computed: {

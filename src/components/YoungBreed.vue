@@ -37,6 +37,7 @@
             })
         },
          created() {
+              this.$store.dispatch("mobile/allowBack",'home')
             this.breederMale();
         },
         methods: {

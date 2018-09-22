@@ -34,6 +34,8 @@ Vue.use(require('vue-moment'),{
     moment
 });
 
+ 
+
 new Vue({
 
     router,

@@ -63,7 +63,19 @@
 						</WrapLayout>
 					</WrapLayout>
 
-					<WrapLayout @tap="listProfile" row="4" style="padding-top:8%;" orientation="horizontal" height="70">
+						<WrapLayout @tap="listSellBreed" row="4" style="padding-top:8%;" orientation="horizontal" height="70">
+						<WrapLayout class="btns" orientation="horizontal">
+							<WrapLayout style="  width:20%; height:100%;" orientation="horizontal">
+								<Image style="margin:10%; height:50;width:50;" src="http://sg.heregotsale.com/sites/default/files/hgs/sale_icon.png" />
+							</WrapLayout>
+							<WrapLayout style=" width:80%; height:100%;" orientation="vertical">
+								<Label style="margin-top:10%; color:white; font-size:20px;" text="การจำหน่ายโค" />
+								<Label style="color:white;" text="จัดการข้อมูลการจำหน่ายโคของคุณ" />
+							</WrapLayout>
+						</WrapLayout>
+					</WrapLayout>
+
+					<WrapLayout @tap="listProfile" row="5" style="padding-top:8%;" orientation="horizontal" height="70">
 						<WrapLayout class="btns" orientation="horizontal">
 							<WrapLayout style="  width:20%; height:100%;" orientation="horizontal">
 								<Image style="margin:10%; height:50;width:50;" src="https://cdn4.iconfinder.com/data/icons/web-ui-color/128/Account-128.png"
@@ -76,7 +88,7 @@
 						</WrapLayout>
 					</WrapLayout>
 
-					<WrapLayout @tap="listFarm" row="5" style="padding-top:8%;" orientation="horizontal" height="70">
+					<WrapLayout @tap="listFarm" row="6" style="padding-top:8%;" orientation="horizontal" height="70">
 						<WrapLayout class="btns" orientation="horizontal">
 							<WrapLayout style="  width:20%; height:100%;" orientation="horizontal">
 								<Image style="margin:10%; height:50;width:50;" src="https://cdn0.iconfinder.com/data/icons/free-skycons-mix-april-1/128/yumminky-skycons-mix-01-128.png"
@@ -89,7 +101,7 @@
 						</WrapLayout>
 					</WrapLayout>
 
-					<WrapLayout @tap="listNoti" row="6" style="padding-top:8%;" orientation="horizontal" height="70">
+					<WrapLayout @tap="listNoti" row="7" style="padding-top:8%;" orientation="horizontal" height="70">
 						<WrapLayout class="btns" orientation="horizontal">
 							<WrapLayout style="  width:20%; height:100%;" orientation="horizontal">
 								<Image style="margin:10%; height:50;width:50;" src="https://cdn4.iconfinder.com/data/icons/web-ui-color/128/Mail-512.png"
@@ -119,6 +131,8 @@
     import { mapGetters, mapState } from "vuex";
     import Avatar from "./Farmer/Avatar";
    	 import  * as LocalNotifications from "nativescript-local-notifications";
+ 
+
     export default {
         components: {Avatar},
         data() {
@@ -131,16 +145,21 @@
             })
         },
         async created() {
+		
+		 this.$store.dispatch('cattle/loadSell', this.user.id)
+			 this.$store.dispatch("mobile/screenLock")
+			 this.$store.dispatch("mobile/blockBack")
             await this.$store.dispatch("district/getProvinces")
 			 
         },
         async mounted() {
-            console.log("Home Mounted ")
+          	 this.$store.dispatch("mobile/blockBack")
 			await this.$store.dispatch("user/downloadAvatar")
 	 
 			this.checkState();
         },
         methods: {
+			
 			checkState :async function(){
 				let notification = await this.$store.dispatch("cattle/getNotificationState");
 				
@@ -206,6 +225,9 @@
             },
             listMeatBreed: function () {
                 this.$router.push('/meatbreed')
+			},
+			 listSellBreed: function () {
+                this.$router.push('/Sellbreed')
             },
             listYoungBreed: function () {
                 this.$router.push('/youngbreed')
