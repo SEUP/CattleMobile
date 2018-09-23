@@ -17,6 +17,13 @@
 							<TextField class="gr-text" row="0" col="1" @tap="setDate(form,'sale_date')" hint="โปรดกรอกข้อมูล" :text="`${ form.sale_date ? $moment(form.sale_date).format('DD MMMM YYYY') : 'โปรดกรอกข้อมูล'}`" />
 						</GridLayout>
 
+							<GridLayout  class="txt-gr" columns="*, 2*" rows="2*, 3*"> 
+							<StackLayout class="gr">
+								<Label class="gr-label light" text="จำนวนวันที่เลี้ยง" row="0" col="0" />
+							</StackLayout>
+							<TextField class="gr-text" row="0" col="1" :text="date()"  hint="โปรดกรอกข้อมูล" />
+						</GridLayout>
+
 					 	 <GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*">
 							<StackLayout class="gr">
 								<Label class="gr-label light" text="หมายเหตุ" row="0" col="0" />
@@ -44,6 +51,8 @@
 							</StackLayout>
 							<TextField v-model="form.length_sale" class="gr-text" row="0" col="1"  hint="โปรดกรอกข้อมูล" />
 						</GridLayout>
+
+				
 
 						  <GridLayout v-if="form.sale_note == '220100'"  class="txt-gr" columns="*, 2*" rows="2*, 3*"> 
 							<StackLayout class="gr">
@@ -115,6 +124,14 @@ export default {
 		read: async function(){
 			let preData= await this.$store.dispatch("sell/read", this.data.id);
 					this.listData = preData.data; 
+		},
+
+		date(){
+			let birthDate = this.$moment(this.data.birth_date)
+      let saleDate = this.$moment(this.form.sale_date)
+			 
+			let dateDiff = birthDate.diff(saleDate,'day')
+			return dateDiff;
 		},
 			 load(){
             

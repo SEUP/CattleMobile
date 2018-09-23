@@ -85,7 +85,7 @@ export default {
 			 }
 			// alert(this.form.worming_type.length);
 			let farmer = await this.$store.dispatch("worm/create", this.form);
-      if (farmer == 1) {this.read();}
+      if (farmer == 1) {this.read(); this.$router.go(-1); }
                   
 		},
 		read: async function(){

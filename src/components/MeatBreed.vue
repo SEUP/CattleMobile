@@ -6,11 +6,13 @@
         </ActionBar>
 
         <ScrollView>
-         <ListView for="cattle in cattles.data">
-                <v-template >
-                    <CattleListItem v-if="cattle.cattle_type == '020300'"  @tap="editCattle(cattle)" :cattle="cattle"/>
-                </v-template>
-            </ListView>
+         <ListView for="cattle in l.filter(cattles.data,function(item){return  item.cattle_type.indexOf('020300')>-1;})"> 
+             <v-template>
+     <CattleListItem   @tap="editCattle(cattle)" :cattle="cattle"/>
+             </v-template>
+               
+              
+        </ListView>
             
         </ScrollView>
     </Page>
@@ -26,8 +28,8 @@
         },
         data() {
             return {
-                 
-                cattles: null,
+                 l :require('lodash'),
+                cattles: null, 
             }
         },  computed: {
              
@@ -37,17 +39,22 @@
             })
         },
          created() {
-                   this.$store.dispatch("mobile/allowBack",'home')
+            
+           this.$store.dispatch("mobile/allowBack",'home')
             this.breederMale();
+            
+ 
+ 
         },
         methods: {
             breederMale: async function(){ 
                this.cattles = this.breedsMale;
-              
+         
+  
             },
             editProfile: function () {
                 this.$router.push('/edit')
-            },
+            }, 
             back: async function () {
 
                 this.$router.back()

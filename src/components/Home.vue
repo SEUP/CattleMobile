@@ -113,7 +113,7 @@
 							</WrapLayout>
 						</WrapLayout>
 					</WrapLayout>
-				<WrapLayout row="7" style="padding-top:8%;" orientation="horizontal" height="70"></WrapLayout>
+				<WrapLayout row="8" style="padding-top:8%;" orientation="horizontal" height="100"></WrapLayout>
  
 
 
@@ -174,11 +174,12 @@
                             message: dataficationChangeState[i].title,
                             okButtonText: "ตกลง"
                             }); 
-								 notiData.title = dataficationChangeState[i].title;
+								 notiData.title = dataficationChangeState[i].title ;
 								 notiData.start = dataficationChangeState[i].start;
 								 break;
 							 }
 					 }
+					notiData.start  =  this.$moment(notiData.start).format('dddd-DD-MM-YYYY');
 					this.notification(notiData); 
 				 }
 			},
@@ -191,7 +192,7 @@
 					console.log("Body: " + notification.body);
 					  alert({
                             title: "การเเจ้งเตือนล่าสุด",
-                            message: notification.title,
+                            message: $moment(notification.title).format('dddd-DD-MM-YYYY'),
                             okButtonText: "ตกลง"
                             });
 				

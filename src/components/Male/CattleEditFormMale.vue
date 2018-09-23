@@ -12,13 +12,13 @@
                     <StackLayout class="card">
                     <AvatarCattle  :cattle="form"/> 
                        
-                    <GridLayout rows="auto" columns="*,*,*">
-                    <Button row="0" col="0" class="change-image" @tap="selectImage">เลือกภาพ</Button>
-                    <Button row="0" col="1" class="change-image" @tap="captureImage">ถ่ายภาพ</Button>
-                    
-                </GridLayout> 
-                        <StackLayout class="card-menu " style="background-color:#6A5ACD;" orientation="vertical">
-                            <Label :text="$baseUrl+'/api/v1/farmer/cattles/'+form.id+'/avatar'" class=" dark" />
+                    <GridLayout rows="auto" style="padding:10%;" columns="*,*,*">
+                    <Button row="0" col="0" class="circle bg-violet wh"   @tap="selectImage">เลือกภาพ</Button>
+                    <Button row="0" col="1"  class="circle bg-violet wh"    @tap="captureImage">ถ่ายภาพ</Button>
+                     <Button row="0" col="2" class="circle bg-orange wh"   @tap="gotoManage">การจัดการ</Button>
+                    </GridLayout>  
+
+                        <StackLayout  class="card-menu " style="background-color:#6A5ACD;" orientation="vertical"> 
                             <GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*">
                                 <StackLayout class="gr">
                                     <Label class="gr-label light" text="ชื่อ" row="0" col="0" />
@@ -37,7 +37,7 @@
                             <GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*">
                                 <StackLayout class="gr">
                                     <Label class="gr-label light" text="วันเกิด" row="0" col="0" />
-                                </StackLayout>
+                                </StackLayout> 
                                 <TextField class="gr-text" row="0" col="1" @tap="setDate(form,'birth_date')" hint="โปรดกรอกข้อมูล"
                                     :text="`${ form.birth_date ? $moment(form.birth_date).format('DD MMMM YYYY') : 'โปรดกรอกข้อมูล'}`" />
                             </GridLayout>
@@ -74,11 +74,11 @@
                                 <TextField class="gr-text" row="0" col="1" @tap="setChoice(form,'cattle_source','แหล่งที่มา')"
                                     :text="`${getChoiceTextByID(form.cattle_source) || 'ไม่ระบุ'}`" />
                             </GridLayout>
-                            <Button text="การจัดการ" class="circle" style="background-color:white; color:#284677;" @tap="gotoManage" />
+                             
 
                         </StackLayout>
                     </StackLayout>
-
+                             0
                 </StackLayout>
             </ScrollView>
         </StackLayout>

@@ -20,7 +20,7 @@
     "axios": "^0.18.0",
     "babel-polyfill": "^6.26.0",
     "font-awesome": "^4.7.0",
-    "lodash": "^4.17.10",
+    "lodash": "^4.17.11",
     "moment": "^2.22.2",
     "nativescript-camera": "^4.0.2",
     "nativescript-cardview": "^3.1.1",

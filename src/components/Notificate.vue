@@ -7,10 +7,10 @@
 			<StackLayout>
 				 <ListView class="list-group" for="noti in data"  style="height:1250px">
             <v-template>
-                <FlexboxLayout v-if="noti.title" flexDirection="row" class="list-group-item"> 
-                <Label :text="noti.title" class="list-group-item-heading" style="width: 60%" />
-								<Label :text="$moment(noti.start).format('dddd-DD-MM-YYYY')" class="list-group-item-heading" style="font-size:16px; width: 60%" />
-                </FlexboxLayout>
+                <StackLayout v-if="noti.title" flexDirection="row" class="list-group-item"> 
+                <Label :text="noti.title" class="list-group-item-heading" style="width: 100%" />
+								<Label :text="$moment(noti.start).format('dddd-DD-MM-YYYY')" class="list-group-item-heading" style="font-size:16px; width: 100%" />
+                </StackLayout>
             </v-template>
             </ListView>
 			</StackLayout>

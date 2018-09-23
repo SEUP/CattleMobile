@@ -7,6 +7,9 @@ ActionBar{
 .bg-blue{
     background: rgba(0, 96, 186, 1); 
 }
+.bg-orange{
+    background-color: #FF8C00;
+}
 .bg-violet{
     background-color: #5c03af;
 }
