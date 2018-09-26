@@ -38,7 +38,7 @@
                             <StackLayout  style="padding-left:9%; padding-top:9%;" class="text" row="0" col="1">
                                 <Label class="cattlelist-header" style="font-size:18px;" :text="'ชื่อโค: '+checkNull(cattle.name)"/>
                                 <Label  :text="'เบอร์หู: '+checkNull(cattle.ear_number)"/>
-                                 <Label   :text="'จำนวนวันที่เลี้ยง: '+checkNull(totalDay(cattle)) + ' วัน'"/> 
+                                 <Label   :text="'จำนวนวันที่เลี้ยง: '+totalDay(cattle) + ' วัน'"/> 
                             </StackLayout>
                             <Label row="0" col="2" class="fa"
                                 :text="'fa-chevron-right' | fonticon"/>
