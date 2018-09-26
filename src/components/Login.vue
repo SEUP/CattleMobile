@@ -16,13 +16,13 @@
                 </StackLayout>
                 <Button android:drawableLeft="@drawable/icon" text="เข้าสู่ระบบ" @tap="login" class="btn fw" />
             </StackLayout>
-            <StackLayout orientation="horizontal">1.0.1
-
+            <StackLayout orientation="horizontal">
+                <Label text="Version 1.0.2"></Label>
             </StackLayout>
-            <Label text="Version 1.0.1"></Label>
+            
         </FlexboxLayout>
 
-    </Page>
+    </Page> 
 </template>
 
 <style scoped>
