@@ -1,24 +1,28 @@
 <template>
-    <Page class="page">
+    <Page class="page"    >    
         <ActionBar title="พ่อพันธุ์">
-            <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" @tap="back"/>
+              <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" @tap="back"/>
             <ActionItem @tap="addForm" ios.systemIcon="1" android.systemIcon="ic_input_add"/>
         </ActionBar>
 
-        <ScrollView>
-         <ListView for="cattle in l.filter(cattles.data,function(item){return  item.cattle_type.indexOf('020100')>-1;})">
+        <ScrollView> 
+         <ListView for="cattle in datas ">
                 <v-template >
                     <CattleListItem   @tap="editCattle(cattle)" :cattle="cattle"/>
                 </v-template>
             </ListView>
             
         </ScrollView>
-    </Page>
+    </Page> 
 </template>
 <script>
     import {mapState} from 'vuex'
     import {Image} from "ui/image";
     import CattleListItem from "./Cattle/CattleListItem"
+
+        import * as application from "application";
+        import * as platform from "platform";
+        import * as utils from "utils/utils";
 
     export default {
         components : {
@@ -26,6 +30,7 @@
         },
         data() {
             return {
+                datas:{},
                     l :require('lodash'),
                 cattles: null,
             }
@@ -37,12 +42,26 @@
             })
         },
          created() {
-                   this.$store.dispatch("mobile/allowBack",'home')
+            this.$store.dispatch("mobile/allowBack",'home')
             this.breederMale();
+
+       
+           let tmp_data  = this.l.filter(this.cattles.data,function(item){
+                    try {
+                    return item.cattle_type.indexOf('020100')>-1;
+                    } catch (error) {
+                        return null;
+                    }
+             
+                }) 
+             
+        
+            this.datas = tmp_data;
 
          
         },
-        methods: {
+        methods: { 
+              
             breederMale: async function(){ 
                this.cattles = this.breedsMale;
          

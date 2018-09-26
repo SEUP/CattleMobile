@@ -2,68 +2,78 @@
     <Page class="page">
         <ActionBar style="background-color:#00ace6; color:white;" title="เพิ่มพ่อพันธ์ุ">  
             <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" @tap="$router.go(-1)"/> 
-            <ActionItem ios.systemIcon="3" @tap="saveBreedsMale" android.systemIcon="ic_menu_save" ios.position="right"/>
-            <ActionItem @tap="$router.go(-1)" ios.systemIcon="1" android.systemIcon="ic_menu_close_clear_cancel"/>
+            <ActionItem ios.systemIcon="3" @tap="saveBreedsMale" android.systemIcon="ic_menu_save" ios.position="right"/> 
         </ActionBar>
           <StackLayout  class="bg" orientation="vertical"> 
                
                  <ScrollView sdkExampleTitle sdkToggleNavButton style="margin-top:2%; height:100%;">
-                    	<StackLayout> 
+                    	<StackLayout>  
                        <StackLayout class="card">
 					<StackLayout class="card-menu " style="background-color:#6A5ACD;" orientation="vertical">
+            
 					 <Label text="ข้อมูลโค" class="f30 dark" /> 
-						 <GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*"> 
-							<StackLayout class="gr">
+
+						 <StackLayout class="txt-gr"  > 
+							<StackLayout class="gr" >
 								<Label class="gr-label light" text="ชื่อ" row="0" col="0" />
 							</StackLayout>
-							<TextField v-model="form.name" class="gr-text" row="0" col="1"  hint="โปรดกรอกข้อมูล" />
-						</GridLayout> 
+							<TextField v-model="form.name"   class="gr-text" row="0" col="1"  hint="โปรดกรอกข้อมูล" />
+						</StackLayout> 
 
-                         <GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*"> 
-							<StackLayout class="gr">
+              <StackLayout class="txt-gr" > 
+							<StackLayout class="gr"> 
 								<Label class="gr-label light" text="เบอร์หู" row="0" col="0" />
 							</StackLayout>
 							<TextField v-model="form.ear_number" class="gr-text" row="0" col="1"  hint="โปรดกรอกข้อมูล" />
-						</GridLayout>
+						</StackLayout> 
 
-                        <GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*">
+                        <StackLayout class="txt-gr" >
 							<StackLayout class="gr">
 								<Label class="gr-label light" text="วันเกิด" row="0" col="0" />
 							</StackLayout>
 							<TextField class="gr-text" row="0" col="1" @tap="setDate(form,'birth_date')" hint="โปรดกรอกข้อมูล" :text="`${ form.birth_date ? $moment(form.birth_date).format('DD MMMM YYYY') : 'โปรดกรอกข้อมูล'}`" />
-						</GridLayout>
+						</StackLayout>
 
-                        <GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*"> 
-							<StackLayout class="gr">
-								<Label class="gr-label light" text="อายุ" row="0" col="0" />
-							</StackLayout>
-							<TextField  :text="yearOld()+'ปี'+' '+monthOld()+'เดือน'" class="gr-text" row="0" col="1"  hint="โปรดกรอกข้อมูล" />
-						</GridLayout>
+                <StackLayout class="txt-gr" >
+                                <StackLayout class="gr">
+                                    <Label class="gr-label light" text="อายุ" row="0" col="0" />
+                                </StackLayout>
+
+                                <GridLayout columns="*, *" rows="*, *">  
+                                <TextField v-model="old.year" :text="ageChange(old)" class="gr-text" row="0" col="0" hint="0 ปี" />
+                                 <Label class="gr-label bg-white light" style="background-color:#E6E6FA;" text="ปี" row="0" col="1" />
+                                 </GridLayout>
+                                 <GridLayout columns="*, *" rows="*, *">  
+                                 <TextField v-model="old.month"  :text="ageChange(old)" class="gr-text" row="0" col="0" hint="0 เดือน" /> 
+                                  <Label class="gr-label bg-white light" style="background-color:#E6E6FA;" text="เดือน" row="0" col="1" />
+                           </GridLayout>
+
+                            </StackLayout>
 
                         
-                        <GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*">
+                        <StackLayout class="txt-gr" >
 							<StackLayout class="gr">
 								<Label class="gr-label light" text="วันที่ซื้อ" row="0" col="0" />
 							</StackLayout>
 							<TextField class="gr-text" row="0" col="1" @tap="setDate(form,'buy_date')" hint="โปรดกรอกข้อมูล" :text="`${ form.buy_date ? $moment(form.buy_date).format('DD MMMM YYYY') : 'โปรดกรอกข้อมูล'}`" />
-						</GridLayout>
+						</StackLayout>
 
-                        <GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*">
+                        <StackLayout class="txt-gr" >
 							<StackLayout class="gr">
 								<Label class="gr-label light" text="พันธุ์โค" row="0" col="0" />
 							</StackLayout>
 							<TextField class="gr-text" row="0" col="1"  @tap="setChoice(form,'cattle_breeding','พันธุ์โค')" :text="`${getChoiceTextByID(form.cattle_breeding) || 'ไม่ระบุ'}`" />
-						</GridLayout>
+						</StackLayout>
 
-                        <GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*">
+                        <StackLayout class="txt-gr" >
 							<StackLayout class="gr">
 								<Label class="gr-label light" text="พันธุ์โค" row="0" col="0" />
 							</StackLayout>
 							<TextField class="gr-text" row="0" col="1"  @tap="setChoice(form,'cattle_source','แหล่งที่มา')" :text="`${getChoiceTextByID(form.cattle_source) || 'ไม่ระบุ'}`" />
-						</GridLayout>
+						</StackLayout>
 					</StackLayout>
                    </StackLayout>
- 
+  
                 	</StackLayout>
                  </ScrollView>
            </StackLayout>
@@ -84,10 +94,14 @@ export default {
   data() {
     return {
       form: {},
+       old:{year:0,month:0},
       tre: null
     };
   },
-  async create() {      this.$store.dispatch("mobile/allowBack",'malebreed')},
+  async create() {      this.$store.dispatch("mobile/allowBack",'malebreed')
+   this.yearOld();
+        this.monthOld();
+  },
   computed: {
     ...mapGetters({
       getChoiceTextByID: "choice/getChoiceTextByID"
@@ -98,13 +112,25 @@ export default {
   },
   methods: {
         
-         monthOld(){ 
-               return this.$moment().diff(this.form.birth_date, 'month')%12;
-            },
+         monthOld() {
+                     this.old.month =  this.$moment().diff(this.form.birth_date, 'month') % 12;
+                },
 
-            yearOld(){ 
-               return this.$moment().diff(this.form.birth_date, 'years');;
-            },
+                yearOld() {
+                    this.old.year =  this.$moment().diff(this.form.birth_date, 'years');;
+                },
+            ageChange: async function (age) {
+       if(this.form.birth_date != null){
+        let today = this.$moment();
+      
+        today.subtract(parseInt(age.year), 'years');
+        today.subtract(parseInt(age.month), 'months'); 
+        console.log(parseInt(age.year+'/'+age.month));
+        this.form.birth_date = today.format("YYYY-MM-DD")
+          }
+        return age;
+      },
+         
     saveBreedsMale: async function() {
       this.form.farmer_id = this.user.id;
       this.form.cattle_status = "010100";
@@ -150,12 +176,14 @@ export default {
       console.log("setChoice", parent[key]);
     },
     setDate: async function(parent, key) {
+ 
       console.log("setDate");
       let result = await this.$showModal(DatePickerModal);
       this.$set(parent, key, result);
       console.log("setDate", parent[key]);
-      console.log(this.form.birth_date);
-      console.log(this.form.buy_date);
+      console.log(this.form.birth_date); 
+        this.yearOld();
+        this.monthOld();
     }
   }
 };

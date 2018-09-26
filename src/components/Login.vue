@@ -6,15 +6,15 @@
             <Image src="~/images/login.png" class="logo" />
             <StackLayout class="form">
                 <StackLayout class="input-field">
-                    <TextField v-model="form.username" hint="ชื่อผู้ใช้" class="input" />
+                    <TextField v-model="form.username" hint="ชื่อผู้ใช้" class="input fw" />
                     <StackLayout class="hr-light"></StackLayout>
                 </StackLayout>
 
                 <StackLayout class="input-field">
-                    <TextField v-model="form.password" hint="รหัสผ่าน" secure="true" class="input" />
+                    <TextField v-model="form.password" hint="รหัสผ่าน" secure="true" class="input fw" />
                     <StackLayout class="hr-light"></StackLayout>
                 </StackLayout>
-                <Button android:drawableLeft="@drawable/icon" text="เข้าสู่ระบบ" @tap="login" class="btn" />
+                <Button android:drawableLeft="@drawable/icon" text="เข้าสู่ระบบ" @tap="login" class="btn fw" />
             </StackLayout>
             <StackLayout orientation="horizontal">1.0.1
 

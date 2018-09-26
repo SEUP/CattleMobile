@@ -14,12 +14,12 @@
          <StackLayout class="card">
 					<StackLayout class="card-menu bg-violet" orientation="vertical">
 				  
-					<GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*">
+					<StackLayout class="txt-gr" >
 							<StackLayout class="gr">
 								<Label class="gr-label light" text="วัน/เดือน/ปี" row="0" col="0" />
 							</StackLayout>
 							<TextField class="gr-text" row="0" col="1" @tap="setDate(form,'first_symptoms_date')" hint="โปรดกรอกข้อมูล" :text="`${ form.first_symptoms_date ? $moment(form.first_symptoms_date).format('DD MMMM YYYY') : 'โปรดกรอกข้อมูล'}`" />
-						</GridLayout>
+						</StackLayout>
 
 					</StackLayout>
        </StackLayout>

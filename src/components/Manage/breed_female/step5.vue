@@ -7,25 +7,35 @@
                 <Label class="dark" text="ถัดไป" row="0" col="0" />
             </StackLayout>
         </ActionItem>
+        
 		</ActionBar> 
     	 	<ScrollView width="100%" height="100%;" class="bg-wh">
 			<StackLayout>
         	<StackLayout class="card">
 					<StackLayout class="card-menu bg-violet" orientation="vertical">
 
-      	<GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*">
+      	<StackLayout class="txt-gr" >
 							<StackLayout class="gr">
 								<Label class="gr-label light" text="วัน/เดือน/ปี" row="0" col="0" />
 							</StackLayout>
 							<TextField class="gr-text" row="0" col="1" @tap="setDate(form,'check_date')" hint="โปรดกรอกข้อมูล" :text="`${ form.check_date ? $moment(form.check_date).format('DD MMMM YYYY') : 'โปรดกรอกข้อมูล'}`" />
-						</GridLayout>
+						</StackLayout>
 
-            <GridLayout  v-if="form.breeding_result == '120100'"  class="txt-gr" columns="*, 2*" rows="2*, 3*">
+            
+            <StackLayout class="txt-gr" >
 							<StackLayout class="gr">
-								<Label class="gr-label light" text="วันที่คาดว่าจะคลอด" row="0" col="0" />
+								<Label class="gr-label light" text="ผลการตรวจการผสมพันธุ์" row="0" col="0" />
 							</StackLayout>
-							<TextField class="gr-text" row="0" col="1"  @tap="setChoice(form,'form.options.baby_date_birth"','ตรวจการกลับสัตว์')" :text="`${getChoiceTextByID(form.form.options.baby_date_birth") || 'ไม่ระบุ'}`" />
-						</GridLayout>
+							<TextField class="gr-text" row="0" col="1"  @tap="setChoice(form,'breeding_result','ผลการตรวจการผสมพันธุ์')" :text="`${getChoiceTextByID(form.breeding_result) || 'ไม่ระบุ'}`" />
+						</StackLayout>     
+
+ 	          <StackLayout class="txt-gr" v-if="form.breeding_result != '120200' && form.breeding_result != null" >
+							<StackLayout class="gr">
+								<Label class="gr-label light" text="วันที่ควาดว่าจะคลอด" row="0" col="0" />
+							</StackLayout>
+							<TextField class="gr-text" row="0" col="1" @tap="setDate(form.options,'baby_date_birth')" hint="โปรดกรอกข้อมูล" :text="`${ form.options.baby_date_birth ? $moment(form.options.baby_date_birth).format('DD MMMM YYYY') : 'โปรดกรอกข้อมูล'}`" />
+						</StackLayout>
+
 
   </StackLayout>
     </StackLayout>
@@ -68,11 +78,16 @@ export default {
 			  
     },
     gotoStep: async function(){
+      if(this.form.breeding_result != '120200'){
             
         this.form.induction_date = this.$moment(this.form.induction_date ).format('YYYY-MM-DD')
         let cattle = await this.$store.dispatch("breeder_female/step1", this.form); 
     
-         this.$router.push({ name:'step6',params: {cattle: this.data,form:cattle} })
+         this.$router.push({ name:'step6',params: {cattle: this.data,form:cattle} })}
+         else{
+           alert('กรุณาบันทึก เเละผสมพันธุ์ใหม่');
+           this.$router.back();
+         }
     },
 		load(){
             

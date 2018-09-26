@@ -24,7 +24,8 @@
     "nativescript-local-notifications": "^2.0.5",
     "nativescript-master-technology": "^1.1.1",
     "nativescript-exit": "^1.0.1",
-    "nativescript-screen-orientation": "^2.0.0"
+    "nativescript-screen-orientation": "^2.0.0",
+    "nativescript-statusbar": "^4.0.1"
   },
   "devDependencies": {
     "babel-traverse": "6.26.0",

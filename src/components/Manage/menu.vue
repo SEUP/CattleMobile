@@ -56,7 +56,7 @@ export default {
                         link:"khun",
                 },
                 {
-                    name: "การฉีดวัคซีน",
+                    name: "การทำวัคซีน",
                     imageSrc: "https://www.mainstreetfamilycare.com/wp-content/uploads/2017/03/service-icon-vaccines.png",
                     type:"nal",
                     link:"vaccine",

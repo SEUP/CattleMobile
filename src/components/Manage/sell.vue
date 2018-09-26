@@ -10,56 +10,56 @@
 				<StackLayout class="card">
 					<StackLayout class="card-menu bg-violet" orientation="vertical">
 					 <Label text="การจำหน่าย" class="f30 dark" />
-						<GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*">
+						<StackLayout class="txt-gr" >
 							<StackLayout class="gr">
 								<Label class="gr-label light" text="วัน/เดือน/ปี" row="0" col="0" />
 							</StackLayout>
 							<TextField class="gr-text" row="0" col="1" @tap="setDate(form,'sale_date')" hint="โปรดกรอกข้อมูล" :text="`${ form.sale_date ? $moment(form.sale_date).format('DD MMMM YYYY') : 'โปรดกรอกข้อมูล'}`" />
-						</GridLayout>
+						</StackLayout>
 
-							<GridLayout  class="txt-gr" columns="*, 2*" rows="2*, 3*"> 
+							<StackLayout  class="txt-gr" > 
 							<StackLayout class="gr">
 								<Label class="gr-label light" text="จำนวนวันที่เลี้ยง" row="0" col="0" />
 							</StackLayout>
 							<TextField class="gr-text" row="0" col="1" :text="date()"  hint="โปรดกรอกข้อมูล" />
-						</GridLayout>
+						</StackLayout>
 
-					 	 <GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*">
+					 	 <StackLayout class="txt-gr" >
 							<StackLayout class="gr">
 								<Label class="gr-label light" text="หมายเหตุ" row="0" col="0" />
 							</StackLayout> 
 							<TextField class="gr-text" row="0" col="1"  @tap="setChoice(form,'sale_note','หมายเหตุการจำหน่าย')" :text="`${getChoiceTextByID(form.sale_note) || 'ไม่ระบุ'}`" />
-						</GridLayout>
+						</StackLayout>
 
-						<GridLayout v-if="form.sale_note == '220100'" class="txt-gr" columns="*, 2*" rows="2*, 3*">
+						<StackLayout v-if="form.sale_note == '220100'" class="txt-gr" >
 							<StackLayout class="gr">
 								<Label class="gr-label light" text="ช่องทางการจำหน่าย" row="0" col="0" />
 							</StackLayout>
 							<TextField class="gr-text" row="0" col="1"  @tap="setChoice(form,'sale_chanel','ช่องทางการจำหน่าย')" :text="`${getChoiceTextByID(form.sale_chanel) || 'ไม่ระบุ'}`" />
-						</GridLayout>
+						</StackLayout>
 
-							<GridLayout v-if="form.sale_note == '220100'"  class="txt-gr" columns="*, 2*" rows="2*, 3*">
+							<StackLayout v-if="form.sale_note == '220100'"  class="txt-gr" >
 							<StackLayout class="gr">
 								<Label class="gr-label light" text="ลักษณะการจำหน่าย" row="0" col="0" />
 							</StackLayout>
 							<TextField class="gr-text" row="0" col="1"  @tap="setChoice(form,'sale_characteristics','ลักษณะการจำหน่าย')" :text="`${getChoiceTextByID(form.sale_characteristics) || 'ไม่ระบุ'}`" />
-						</GridLayout>
+						</StackLayout>
 
-						  <GridLayout v-if="form.sale_note == '220100'"  class="txt-gr" columns="*, 2*" rows="2*, 3*"> 
+						  <StackLayout v-if="form.sale_note == '220100'"  class="txt-gr" > 
 							<StackLayout class="gr">
 								<Label class="gr-label light" text="น้ำหนัก" row="0" col="0" />
 							</StackLayout>
 							<TextField v-model="form.length_sale" class="gr-text" row="0" col="1"  hint="โปรดกรอกข้อมูล" />
-						</GridLayout>
+						</StackLayout>
 
 				
 
-						  <GridLayout v-if="form.sale_note == '220100'"  class="txt-gr" columns="*, 2*" rows="2*, 3*"> 
+						  <StackLayout v-if="form.sale_note == '220100'"  class="txt-gr" > 
 							<StackLayout class="gr">
 								<Label class="gr-label light" text="ราคา" row="0" col="0" />
 							</StackLayout>
 							<TextField v-model="form.sale_price" class="gr-text" row="0" col="1"  hint="โปรดกรอกข้อมูล" />
-						</GridLayout>
+						</StackLayout>
  
  
 
@@ -127,18 +127,35 @@ export default {
 		},
 
 		date(){
-			let birthDate = this.$moment(this.data.birth_date)
-      let saleDate = this.$moment(this.form.sale_date)
-			 
-			let dateDiff = birthDate.diff(saleDate,'day')
-			return dateDiff;
+		
+     
+				let dateDiff  = 0
+				if(this.form.sale_date != null){
+
+        if(this.data.birth || this.data.buy_date == null){
+          let birthDate = this.$moment(this.data.birth_date)
+          let saleDate = this.$moment(this.form.sale_date)
+
+          dateDiff = birthDate.diff(saleDate,'day')
+
+
+        }else {
+					
+          let buyDate = this.$moment(this.data.buy_date)
+          let saleDate = this.$moment(this.form.sale_date)
+
+          dateDiff = buyDate.diff(saleDate,'day')
+
+        }}
+        return dateDiff ? Math.abs(dateDiff) : 0
 		},
 			 load(){
             
 			  this.data =  this.$route.params.cattle; 
 				this.form.cattle_id = this.data.id;
-				this.read();
-		},
+				console.log(this.data);  
+		 
+		}, 
 		setChoice: async function(parent, key, to) {
       console.log("setChoice");
       let options = {

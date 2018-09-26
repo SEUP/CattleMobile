@@ -6,7 +6,7 @@
         </ActionBar>
 
         <ScrollView>
-         <ListView for="cattle in l.filter(cattles.data,function(item){return  item.cattle_type.indexOf('020400')>-1;})">
+         <ListView for="cattle in datas">
                 <v-template >
                     <CattleListItem   @tap="editCattle(cattle)" :cattle="cattle"/>
                 </v-template>
@@ -39,6 +39,17 @@
          created() {
               this.$store.dispatch("mobile/allowBack",'home')
             this.breederMale();
+             let tmp_data  = this.l.filter(this.cattles.data,function(item){
+                    try {
+                    return item.cattle_type.indexOf('020400')>-1;
+                    } catch (error) {
+                        return null;
+                    }
+             
+                }) 
+             
+        
+            this.datas = tmp_data;
  
         },
         methods: {

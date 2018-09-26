@@ -14,26 +14,26 @@
    	     <StackLayout class="card">
 					<StackLayout class="card-menu bg-violet" orientation="vertical">
 				  
-					 	 <GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*">
+					 	 <StackLayout class="txt-gr" >
 							<StackLayout class="gr">
 								<Label class="gr-label light" text="การเหนี่ยวนำ" row="0" col="0" />
 							</StackLayout>
 							<TextField class="gr-text" row="0" col="1"  @tap="setChoice(form,'induction','การเหนี่ยวนำการเป็นสัด')" :text="`${getChoiceTextByID(form.induction) || 'ไม่ระบุ'}`" />
-						</GridLayout>
+						</StackLayout>
  	                    
-                         <GridLayout v-if="form.induction == '270100'"  class="txt-gr" columns="*, 2*" rows="2*, 3*"> 
+                         <StackLayout v-if="form.induction == '270100'"  class="txt-gr"  > 
 							<StackLayout class="gr">
 								<Label class="gr-label light" text="วิธีใช่เหนี่ยวนำ" row="0" col="0" />
 							</StackLayout>
 							<TextField v-model="form.options.induction" class="gr-text" row="0" col="1"  hint="โปรดกรอกข้อมูล" />
-						</GridLayout>
+						</StackLayout>
                         
-                        <GridLayout v-if="form.induction == '270100'" class="txt-gr" columns="*, 2*" rows="2*, 3*">
+                        <StackLayout v-if="form.induction == '270100'" class="txt-gr"  >
 							<StackLayout class="gr">
 								<Label class="gr-label light" text="วัน/เดือน/ปี" row="0" col="0" />
 							</StackLayout>
 							<TextField class="gr-text" row="0" col="1" @tap="setDate(form,'induction_date')" hint="โปรดกรอกข้อมูล" :text="`${ form.induction_date ? $moment(form.induction_date).format('DD MMMM YYYY') : 'โปรดกรอกข้อมูล'}`" />
-						</GridLayout>
+						</StackLayout>
 
 					</StackLayout>
                     </StackLayout>

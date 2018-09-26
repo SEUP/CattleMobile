@@ -1,7 +1,7 @@
 <template>
-   <StackLayout>
-        <Image v-if="!cattle.image_url" src="~/images/logo.png" class="avatar"/> 
-        <Image v-else :src="$baseUrl+cattle.image_url" class="avatar"/>
+   <StackLayout style=" height:35%; width:100%;">
+        <Image v-if="!cattle.image_url" src="~/images/noCattle.png" class="logo" stretch="aspectFill"/> 
+        <Image v-else :src="$baseUrl+cattle.image_url" class="logo" stretch="aspectFill"/> 
    </StackLayout>
  
 </template>

@@ -4,7 +4,7 @@
             <StackLayout  class="bg" orientation="vertical"> 
             <WrapLayout  class="header" style="margin-top:4%; margin-left:4%;" orientation="horizontal" height="70">
 		
-                   	<WrapLayout style="  width:20%; height:100%;" orientation="horizontal">
+                   	<WrapLayout style=" width:120px; height:120px; " orientation="horizontal">
 					       <Avatar/>
 				</WrapLayout>
 				<WrapLayout @tap="profile" style=" padding-left:3%;width:80%; height:100%;" orientation="vertical">
@@ -22,7 +22,7 @@
 							</WrapLayout>
 							<WrapLayout style=" width:80%; height:100%;" orientation="vertical">
 								<Label style="margin-top:10%; color:white; font-size:20px;" text="พ่อพันธ์ุ" />
-								<Label style="color:white;" text="จัดการข้อมูลพ่อพันธุ์โคของคุณเช่น เพิ่ม ลบ แก้ไข" />
+								<Label style="color:white;" text="จัดการข้อมูลพ่อพันธุ์โคของคุณ" />
 							</WrapLayout>
 						</WrapLayout>
 					</WrapLayout>
@@ -34,7 +34,7 @@
 							</WrapLayout>
 							<WrapLayout style=" width:80%; height:100%;" orientation="vertical">
 								<Label style="margin-top:10%; color:white; font-size:20px;" text="แม่พันธ์ุ" />
-								<Label style="color:white;" text="จัดการข้อมูลแม่พันธ์ุโคของคุณเช่น เพิ่ม ลบ แก้ไข" />
+								<Label style="color:white;" text="จัดการข้อมูลแม่พันธ์ุโคของคุณ " />
 							</WrapLayout>
 						</WrapLayout>
 					</WrapLayout>
@@ -46,7 +46,7 @@
 							</WrapLayout>
 							<WrapLayout style=" width:80%; height:100%;" orientation="vertical">
 								<Label style="margin-top:10%; color:white; font-size:20px;" text="โคขุน" />
-								<Label style="color:white;" text="จัดการข้อมูลโคขุนของคุณเช่น เพิ่ม ลบ แก้ไข" />
+								<Label style="color:white;" text="จัดการข้อมูลโคขุนของคุณ " />
 							</WrapLayout>
 						</WrapLayout>
 					</WrapLayout>
@@ -58,7 +58,7 @@
 							</WrapLayout>
 							<WrapLayout style=" width:80%; height:100%;" orientation="vertical">
 								<Label style="margin-top:10%; color:white; font-size:20px;" text="โคแรกเกิด" />
-								<Label style="color:white;" text="จัดการข้อมูลโคแรกเกิดของคุณเช่น เพิ่ม ลบ แก้ไข" />
+								<Label style="color:white;" text="จัดการข้อมูลโคแรกเกิดของคุณ " />
 							</WrapLayout>
 						</WrapLayout>
 					</WrapLayout>
@@ -93,13 +93,13 @@
 							<WrapLayout style="  width:20%; height:100%;" orientation="horizontal">
 								<Image style="margin:10%; height:50;width:50;" src="https://cdn0.iconfinder.com/data/icons/free-skycons-mix-april-1/128/yumminky-skycons-mix-01-128.png"
 								/>
-							</WrapLayout>
+							</WrapLayout> 
 							<WrapLayout style=" width:80%; height:100%;" orientation="vertical">
 								<Label style="margin-top:10%; color:white; font-size:20px;" text="ข้อมูลฟาร์ม" />
 								<Label style="color:white;" text="จัดการข้อมูลฟาร์มของคุณ" />
 							</WrapLayout>
 						</WrapLayout>
-					</WrapLayout>
+					</WrapLayout> 
 
 					<WrapLayout @tap="listNoti" row="7" style="padding-top:8%;" orientation="horizontal" height="70">
 						<WrapLayout class="btns" orientation="horizontal">
@@ -228,6 +228,7 @@
                 this.$router.push('/meatbreed')
 			},
 			 listSellBreed: function () {
+				   
                 this.$router.push('/Sellbreed')
             },
             listYoungBreed: function () {

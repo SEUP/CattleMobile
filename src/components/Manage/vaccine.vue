@@ -9,48 +9,48 @@
 
 				<StackLayout class="card">
 					<StackLayout class="card-menu bg-violet" orientation="vertical">
-					 <Label text="การให้วัคซีน" class="f30 dark" />
-						<GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*">
+					 <Label text="การทำวัคซีน" class="f30 dark" />
+						<StackLayout class="txt-gr" >
 							<StackLayout class="gr">
 								<Label class="gr-label light" text="วัน/เดือน/ปี" row="0" col="0" />
 							</StackLayout>
 							<TextField class="gr-text" row="0" col="1" @tap="setDate(form,'vaccine_date')" hint="โปรดกรอกข้อมูล" :text="`${ form.vaccine_date ? $moment(form.vaccine_date).format('DD MMMM YYYY') : 'โปรดกรอกข้อมูล'}`" />
-						</GridLayout>
+						</StackLayout>
 
-					 	 <GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*">
+					 	 <StackLayout class="txt-gr" >
 							<StackLayout class="gr">
 								<Label class="gr-label light" text="ชนิดวัคซีน" row="0" col="0" />
 							</StackLayout>
 							<TextField class="gr-text" row="0" col="1"  @tap="setChoice(form,'vaccine_type','ชนิดวัคซีน')" :text="`${getChoiceTextByID(form.vaccine_type) || 'ไม่ระบุ'}`" />
-						</GridLayout>
+						</StackLayout>
 
-            <GridLayout  class="txt-gr" columns="*, 2*" rows="2*, 3*">
+            <StackLayout  class="txt-gr" >
 							<StackLayout class="gr">
 								<Label class="gr-label light" text="ผู้ทำ" row="0" col="0" />
 							</StackLayout>
 							<TextField class="gr-text" row="0" col="1"  @tap="setChoice(form,'maker','ผู้ทำ')" :text="`${getChoiceTextByID(form.maker) || 'ไม่ระบุ'}`" />
-						</GridLayout>
+						</StackLayout>
 
-							<GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*">
+							<StackLayout class="txt-gr" >
 							<StackLayout class="gr">
 								<Label class="gr-label light" text="ชุดการผลิต" row="0" col="0" />
 							</StackLayout>
 							<TextField class="gr-text" row="0" col="1"  hint="โปรดกรอกข้อมูล" v-model="form.vaccine_set" />
-						</GridLayout>
+						</StackLayout>
 
-							<GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*">
+							<StackLayout class="txt-gr" >
 							<StackLayout class="gr">
 								<Label class="gr-label light" text="วันผลิต" row="0" col="0" />
 							</StackLayout>
 							<TextField class="gr-text" row="0" col="1" @tap="setDate(form,'mfg_date')" hint="โปรดกรอกข้อมูล" :text="`${ form.mfg_date ? $moment(form.mfg_date).format('DD MMMM YYYY') : 'โปรดกรอกข้อมูล'}`" />
-						</GridLayout>
+						</StackLayout>
   
-							<GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*">
+							<StackLayout class="txt-gr" >
 							<StackLayout class="gr">
 								<Label class="gr-label light" text="วันหมดอายุ" row="0" col="0" />
 							</StackLayout>
 							<TextField class="gr-text" row="0" col="1" @tap="setDate(form,'exp_date')" hint="โปรดกรอกข้อมูล" :text="`${ form.exp_date ? $moment(form.exp_date).format('DD MMMM YYYY') : 'โปรดกรอกข้อมูล'}`" />
-						</GridLayout>
+						</StackLayout>
  
 
 					</StackLayout>
@@ -103,8 +103,10 @@ export default {
         let data = await this.$store.dispatch(
           "cattle/load",
           this.data.farmer_id
-        );
-      this.read();
+				);
+		 
+				this.form = {};
+				this.load();
       }
                   
 		},

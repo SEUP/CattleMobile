@@ -13,19 +13,19 @@
          <StackLayout class="card">
 					<StackLayout class="card-menu bg-violet" orientation="vertical">
 				  
-					<GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*">
+					<StackLayout class="txt-gr" >
 							<StackLayout class="gr">
 								<Label class="gr-label light" text="วัน/เดือน/ปี" row="0" col="0" />
 							</StackLayout>
-							<TextField class="gr-text" row="0" col="1" @tap="setDate(form,'real_birth_date')" hint="โปรดกรอกข้อมูล" :text="`${ form.breeding_date ? $moment(form.real_birth_date).format('DD MMMM YYYY') : 'โปรดกรอกข้อมูล'}`" />
-						</GridLayout>
+							<TextField class="gr-text" row="0" col="1" @tap="setDate(form,'real_birth_date')" hint="โปรดกรอกข้อมูล" :text="`${ form.real_birth_date ? $moment(form.real_birth_date).format('DD MMMM YYYY') : 'โปรดกรอกข้อมูล'}`" />
+						</StackLayout>
 
-            <GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*">
+            <StackLayout class="txt-gr" >
 							<StackLayout class="gr">
 								<Label class="gr-label light" text="ผลคลอด" row="0" col="0" />
 							</StackLayout>
 							<TextField class="gr-text" row="0" col="1"  @tap="setChoice(form,'birth_outcomes','ผลการคลอด')" :text="`${getChoiceTextByID(form.birth_outcomes) || 'ไม่ระบุ'}`" />
-						</GridLayout>            
+						</StackLayout>            
 
 					</StackLayout>
        </StackLayout>

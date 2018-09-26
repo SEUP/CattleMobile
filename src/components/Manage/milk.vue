@@ -10,42 +10,42 @@
 				<StackLayout class="card">
 					<StackLayout class="card-menu bg-violet" orientation="vertical">
 					 <Label text="ข้อมูลเเรกเกิด" class="f30 dark" />
-						<GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*">
+						<StackLayout class="txt-gr" >
 							<StackLayout class="gr">
 								<Label class="gr-label light" text="วัน/เดือน/ปี" row="0" col="0" />
 							</StackLayout>
 							<TextField class="gr-text" row="0" col="1" @tap="setDate(form,'start_date')" hint="โปรดกรอกข้อมูล" :text="`${ form.start_date ? $moment(form.start_date).format('DD MMMM YYYY') : 'โปรดกรอกข้อมูล'}`" />
-						</GridLayout>
+						</StackLayout>
 
-            			<GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*"> 
+            			<StackLayout class="txt-gr" > 
 							<StackLayout class="gr">
 								<Label class="gr-label light" text="น้ำหนัก" row="0" col="0" />
 							</StackLayout>
 							<TextField v-model="form.start_weight" class="gr-text" row="0" col="1"  hint="โปรดกรอกข้อมูล" />
-						</GridLayout>
+						</StackLayout>
 
-						<GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*"> 
+						<StackLayout class="txt-gr" > 
 							<StackLayout class="gr">
 								<Label class="gr-label light" text="ความยาวลำตัว" row="0" col="0" />
 							</StackLayout>
 							<TextField v-model="form.start_length" class="gr-text" row="0" col="1"  hint="โปรดกรอกข้อมูล" />
-						</GridLayout>
+						</StackLayout>
 
 
-						<GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*"> 
+						<StackLayout class="txt-gr" > 
 							<StackLayout class="gr">
 								<Label class="gr-label light" text="รอบอก" row="0" col="0" />
 							</StackLayout>
 							<TextField v-model="form.start_chest" class="gr-text" row="0" col="1"  hint="โปรดกรอกข้อมูล" />
-						</GridLayout>
+						</StackLayout>
 
 
-						<GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*"> 
+						<StackLayout class="txt-gr" > 
 							<StackLayout class="gr">
 								<Label class="gr-label light" text="ความสูง" row="0" col="0" />
 							</StackLayout>
 							<TextField v-model="form.start_height" class="gr-text" row="0" col="1"  hint="โปรดกรอกข้อมูล" />
-						</GridLayout>
+						</StackLayout>
 
 					</StackLayout>
 				</StackLayout> 
@@ -53,42 +53,42 @@
 					<StackLayout class="card">
 					<StackLayout class="card-menu bg-violet" orientation="vertical">
 					 <Label text="ข้อมูลเมื่อหย่านม" class="f30 dark" />
-						<GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*">
+						<StackLayout class="txt-gr" >
 							<StackLayout class="gr">
 								<Label class="gr-label light" text="วัน/เดือน/ปี" row="0" col="0" />
 							</StackLayout>
 							<TextField class="gr-text" row="0" col="1" @tap="setDate(form,'end_date')" hint="โปรดกรอกข้อมูล" :text="`${ form.end_date ? $moment(form.end_date).format('DD MMMM YYYY') : 'โปรดกรอกข้อมูล'}`" />
-						</GridLayout>
+						</StackLayout>
 
-            			<GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*"> 
+            			<StackLayout class="txt-gr" > 
 							<StackLayout class="gr">
 								<Label class="gr-label light" text="น้ำหนัก" row="0" col="0" />
 							</StackLayout>
 							<TextField v-model="form.end_weight" class="gr-text" row="0" col="1"  hint="โปรดกรอกข้อมูล" />
-						</GridLayout>
+						</StackLayout>
 
-						<GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*"> 
+						<StackLayout class="txt-gr" > 
 							<StackLayout class="gr">
 								<Label class="gr-label light" text="ความยาวลำตัว" row="0" col="0" />
 							</StackLayout>
 							<TextField v-model="form.end_length" class="gr-text" row="0" col="1"  hint="โปรดกรอกข้อมูล" />
-						</GridLayout>
+						</StackLayout>
 
 
-						<GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*"> 
+						<StackLayout class="txt-gr" > 
 							<StackLayout class="gr">
 								<Label class="gr-label light" text="รอบอก" row="0" col="0" />
 							</StackLayout>
 							<TextField v-model="form.end_chest" class="gr-text" row="0" col="1"  hint="โปรดกรอกข้อมูล" />
-						</GridLayout>
+						</StackLayout>
 
 
-						<GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*"> 
+						<StackLayout class="txt-gr" > 
 							<StackLayout class="gr">
 								<Label class="gr-label light" text="ความสูง" row="0" col="0" />
 							</StackLayout>
 							<TextField v-model="form.end_height" class="gr-text" row="0" col="1"  hint="โปรดกรอกข้อมูล" />
-						</GridLayout>
+						</StackLayout>
 
 					</StackLayout>
 				</StackLayout> 

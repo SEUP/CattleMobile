@@ -1,16 +1,22 @@
 <template>
     <Page class="page">
-        <ActionBar title="แก้ไข">
-            <NavigationButton text="Go Back"  android.systemIcon="ic_menu_back" @tap="$router.go(-1)" />
+        <ActionBar :title="form.name" >
+            <NavigationButton text="Go Back"  android.systemIcon="ic_menu_back" @tap="$router.back()" />
             <ActionItem ios.systemIcon="3"  @tap="update" android.systemIcon="ic_menu_save" ios.position="right" />
             <ActionItem @tap="deleteCattle"   color="red" ios.systemIcon="1" android.systemIcon="ic_menu_delete" ios.position="right" />
         </ActionBar>
         <StackLayout class="bg" orientation="vertical">
-
-            <ScrollView sdkExampleTitle sdkToggleNavButton style="margin-top:2%; height:100%;">
+         
+            <ScrollView sdkExampleTitle sdkToggleNavButton style=" height:100%;">
+             
                 <StackLayout>
+                           <NavigationButton text="Go Back"  android.systemIcon="ic_menu_back" @tap="$router.go(-1)" />
+            <ActionItem ios.systemIcon="3"  @tap="update" android.systemIcon="ic_menu_save" ios.position="right" />
+            <ActionItem @tap="deleteCattle"   color="red" ios.systemIcon="1" android.systemIcon="ic_menu_delete" ios.position="right" />
+      
+                        <AvatarCattle  :cattle="form"/> 
                     <StackLayout class="card">
-                    <AvatarCattle  :cattle="form"/> 
+                    
                        
                     <GridLayout rows="auto" style="padding:10%;" columns="*,*,*">
                     <Button row="0" col="0" class="circle bg-violet wh"   @tap="selectImage">เลือกภาพ</Button>
@@ -19,66 +25,74 @@
                     </GridLayout>  
 
                         <StackLayout  class="card-menu " style="background-color:#6A5ACD;" orientation="vertical"> 
-                            <GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*">
+                            <StackLayout class="txt-gr" >
                                 <StackLayout class="gr">
                                     <Label class="gr-label light" text="ชื่อ" row="0" col="0" />
                                 </StackLayout>
                           
                                 <TextField v-model="form.name" class="gr-text" row="0" col="1" hint="โปรดกรอกข้อมูล" />
-                            </GridLayout>
+                            </StackLayout>
 
-                            <GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*">
+                            <StackLayout class="txt-gr" >
                                 <StackLayout class="gr">
                                     <Label class="gr-label light" text="เบอร์หู" row="0" col="0" />
                                 </StackLayout>
                                 <TextField v-model="form.ear_number" class="gr-text" row="0" col="1" hint="โปรดกรอกข้อมูล" />
-                            </GridLayout>
+                            </StackLayout>
 
-                            <GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*">
+                            <StackLayout class="txt-gr" >
                                 <StackLayout class="gr">
                                     <Label class="gr-label light" text="วันเกิด" row="0" col="0" />
                                 </StackLayout> 
                                 <TextField class="gr-text" row="0" col="1" @tap="setDate(form,'birth_date')" hint="โปรดกรอกข้อมูล"
                                     :text="`${ form.birth_date ? $moment(form.birth_date).format('DD MMMM YYYY') : 'โปรดกรอกข้อมูล'}`" />
-                            </GridLayout>
+                            </StackLayout>
 
-                            <GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*">
+                            <StackLayout class="txt-gr" >
                                 <StackLayout class="gr">
                                     <Label class="gr-label light" text="อายุ" row="0" col="0" />
                                 </StackLayout>
-                                <TextField :text="yearOld()+'ปี'+' '+monthOld()+'เดือน'" class="gr-text" row="0" col="1"
-                                    hint="โปรดกรอกข้อมูล" />
-                            </GridLayout>
 
+                                <GridLayout columns="*, *" rows="*, *">  
+                                <TextField v-model="old.year" :text="ageChange(old)" class="gr-text" row="0" col="0" hint="0 ปี" />
+                                 <Label class="gr-label bg-white light" style="background-color:#E6E6FA;" text="ปี" row="0" col="1" />
+                                 </GridLayout>
+                                 <GridLayout columns="*, *" rows="*, *">  
+                                 <TextField v-model="old.month"  :text="ageChange(old)" class="gr-text" row="0" col="0" hint="0 เดือน" /> 
+                                  <Label class="gr-label bg-white light" style="background-color:#E6E6FA;" text="เดือน" row="0" col="1" />
+                           </GridLayout>
 
-                            <GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*">
+                            </StackLayout>
+
+ 
+                            <StackLayout class="txt-gr" >
                                 <StackLayout class="gr">
                                     <Label class="gr-label light" text="วันที่ซื้อ" row="0" col="0" />
                                 </StackLayout>
                                 <TextField class="gr-text" row="0" col="1" @tap="setDate(form,'buy_date')" hint="โปรดกรอกข้อมูล"
                                     :text="`${ form.buy_date ? $moment(form.buy_date).format('DD MMMM YYYY') : 'โปรดกรอกข้อมูล'}`" />
-                            </GridLayout>
+                            </StackLayout>
 
-                            <GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*">
+                            <StackLayout class="txt-gr" >
                                 <StackLayout class="gr">
                                     <Label class="gr-label light" text="พันธุ์โค" row="0" col="0" />
                                 </StackLayout>
                                 <TextField class="gr-text" row="0" col="1" @tap="setChoice(form,'cattle_breeding','พันธุ์โค')"
                                     :text="`${getChoiceTextByID(form.cattle_breeding) || 'ไม่ระบุ'}`" />
-                            </GridLayout>
+                            </StackLayout>
 
-                            <GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*">
+                            <StackLayout class="txt-gr" >
                                 <StackLayout class="gr">
                                     <Label class="gr-label light" text="แหล่งที่มา" row="0" col="0" />
                                 </StackLayout>
                                 <TextField class="gr-text" row="0" col="1" @tap="setChoice(form,'cattle_source','แหล่งที่มา')"
                                     :text="`${getChoiceTextByID(form.cattle_source) || 'ไม่ระบุ'}`" />
-                            </GridLayout>
+                            </StackLayout>
                              
 
                         </StackLayout>
                     </StackLayout>
-                             0
+                             
                 </StackLayout>
             </ScrollView>
         </StackLayout>
@@ -111,7 +125,9 @@ const ImageCropper = require("nativescript-imagecropper").ImageCropper;
                 x: "Start",
                 form: {},
                 formTo: {},
-                  imageCropper: new ImageCropper(),
+                old:{year:0,month:0},
+               imageCropper: new ImageCropper(),
+                
             }
         },
         created() {
@@ -129,6 +145,8 @@ const ImageCropper = require("nativescript-imagecropper").ImageCropper;
                 link ='malebreed';
             }
             this.$store.dispatch("mobile/allowBack",link)
+              this.yearOld();
+            this.monthOld();
 
         },
         computed: {
@@ -151,12 +169,26 @@ const ImageCropper = require("nativescript-imagecropper").ImageCropper;
                 const frame = getFrameById("firstFrame");
                 frame.navigate(navigationEntry)
             },
+
+              ageChange: async function (age) {
+        let today = this.$moment();
+            
+        today.set('date', 1)
+        today.subtract(parseInt(age.year), 'years');
+        today.subtract(parseInt(age.month), 'months'); 
+        console.log(parseInt(age.year+'/'+age.month));
+        this.form.birth_date = today.format("YYYY-MM-DD")
+        
+        return age;
+      },
              
             gotoManage() {
                 let data_cattle_send = {
                     id: this.form.id,
                     type: this.form.cattle_type,
-                    farmer_id: this.form.farmer_id
+                    farmer_id: this.form.farmer_id,
+                    birth_date:this.form.birth_date,
+                    sale_date:this.form.sale_date
                 }
                 this.$router.push({
                     name: 'manage_cattle',
@@ -192,11 +224,11 @@ const ImageCropper = require("nativescript-imagecropper").ImageCropper;
                 },
 
                 monthOld() {
-                    return this.$moment().diff(this.form.birth_date, 'month') % 12;
+                     this.old.month =  this.$moment().diff(this.form.birth_date, 'month') % 12;
                 },
 
                 yearOld() {
-                    return this.$moment().diff(this.form.birth_date, 'years');;
+                    this.old.year =  this.$moment().diff(this.form.birth_date, 'years');;
                 },
                 breederMale: function () {
                     this.form = this.$route.params.cattle;
@@ -256,6 +288,8 @@ const ImageCropper = require("nativescript-imagecropper").ImageCropper;
                             console.log("setDate", parent[key]);
                             console.log(this.form.birth_date);
                             console.log(this.form.buy_date);
+                            this.yearOld();
+                            this.monthOld();
                         },
                         ValidURL: function (str) {
                 let regexp = /^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/;
@@ -308,6 +342,7 @@ const ImageCropper = require("nativescript-imagecropper").ImageCropper;
                         }   
                       
              await this.$store.dispatch('cattle/uploadAvatar', parm);
+              let data = await this.$store.dispatch("cattle/load", this.form.farmer_id);
              let temp_form = {id:this.form.farmer_id,param:this.form.id}
                      this.form = await this.$store.dispatch("cattle/getCattleById", temp_form);
 
@@ -315,6 +350,7 @@ const ImageCropper = require("nativescript-imagecropper").ImageCropper;
                         alert('Error');
                     }
                 })
+                
 
             },
             croppingImage: async function (source, options) {

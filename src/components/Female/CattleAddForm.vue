@@ -33,13 +33,21 @@
 							<TextField class="gr-text" row="0" col="1" @tap="setDate(form,'birth_date')" hint="โปรดกรอกข้อมูล" :text="`${ form.birth_date ? $moment(form.birth_date).format('DD MMMM YYYY') : 'โปรดกรอกข้อมูล'}`" />
 						</GridLayout>
 
-                        <GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*"> 
-							<StackLayout class="gr">
-								<Label class="gr-label light" text="อายุ" row="0" col="0" />
-							</StackLayout>
-							<TextField  :text="yearOld()+'ปี'+' '+monthOld()+'เดือน'" class="gr-text" row="0" col="1"  hint="โปรดกรอกข้อมูล" />
-						</GridLayout>
+                       <StackLayout class="txt-gr" >
+                                <StackLayout class="gr">
+                                    <Label class="gr-label light" text="อายุ" row="0" col="0" />
+                                </StackLayout>
 
+                                <GridLayout columns="*, *" rows="*, *">  
+                                <TextField v-model="old.year" :text="ageChange(old)" class="gr-text" row="0" col="0" hint="0 ปี" />
+                                 <Label class="gr-label bg-white light" style="background-color:#E6E6FA;" text="ปี" row="0" col="1" />
+                                 </GridLayout>
+                                 <GridLayout columns="*, *" rows="*, *">  
+                                 <TextField v-model="old.month"  :text="ageChange(old)" class="gr-text" row="0" col="0" hint="0 เดือน" /> 
+                                  <Label class="gr-label bg-white light" style="background-color:#E6E6FA;" text="เดือน" row="0" col="1" />
+                           </GridLayout>
+
+                            </StackLayout>
                         
                         <GridLayout class="txt-gr" columns="*, 2*" rows="2*, 3*">
 							<StackLayout class="gr">
@@ -83,6 +91,7 @@ export default {
   data() {
     return {
       form: {},
+       old:{year:0,month:0},
       tre: null
     };
   },
@@ -96,13 +105,24 @@ export default {
     })
   },
   methods: {
-         monthOld(){ 
-               return this.$moment().diff(this.form.birth_date, 'month')%12;
-            },
+          monthOld() {
+                     this.old.month =  this.$moment().diff(this.form.birth_date, 'month') % 12;
+                },
 
-            yearOld(){ 
-               return this.$moment().diff(this.form.birth_date, 'years');;
-            },
+                yearOld() {
+                    this.old.year =  this.$moment().diff(this.form.birth_date, 'years');;
+                },
+            ageChange: async function (age) {
+          if(this.form.birth_date != null){
+        let today = this.$moment();
+        today.set('date', 1)
+        today.subtract(parseInt(age.year), 'years');
+        today.subtract(parseInt(age.month), 'months'); 
+        console.log(parseInt(age.year+'/'+age.month));
+        this.form.birth_date = today.format("YYYY-MM-DD")
+          }
+        return age;
+      },
     saveBreedsMale: async function() {
       this.form.farmer_id = this.user.id;
       this.form.cattle_status = "010100";
@@ -154,6 +174,8 @@ export default {
       console.log("setDate", parent[key]);
       console.log(this.form.birth_date);
       console.log(this.form.buy_date);
+      this.monthOld();
+            this.yearOld();
     }
   }
 };

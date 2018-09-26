@@ -18,12 +18,14 @@ const mutations = {
 const actions = { 
   backSell: async function(context,form){ 
     let cattles = null;
+    console.log('/api/v1/farmer/farmer/'+form.farmer_id+'/cattles/'+form.id);
     let resultv = await axios.get('/api/v1/farmer/farmer/'+form.farmer_id+'/cattles/'+form.id)
     .then((response) => {
+      console.log('Load Ok'); 
       cattles = response.data  
     })
     .catch((error) => {
- 
+      console.log(error.stack);
     })
 
     cattles.cattle_status = "010100"
@@ -33,28 +35,50 @@ const actions = {
         
       })
       .catch((error) => {
-        console.log(error.stack);
+        console.log(error.stack); 
         alert('เกิดข้อผิดพลาดยกเลิกการจำหน่าย');
       });
     
   },
+
+  read: async function(context, id){
+    let res = 0;
+    console.log("/api/v1/farmer/farmer/"+id+"/cattles?keyword=&cattle_status=010200"); 
+    let result = await axios.get("/api/v1/farmer/farmer/"+id+"/cattles?keyword=&cattle_status=010200")
+      .then((response) => { 
+        res =  response.data; 
+       
+      })
+      .catch((error) => { 
+        alert('เกิดข้อผิดพลาดในการโหลดข้อมูล'); 
+      });
+    
+     return res;
+},
+
+  /*
   loadSell: async function (context,id) {
     console.log('breeder/load');
-    let breeders = null; 
-    let result = await axios.get("/api/v1/farmer/farmer/"+id+"/cattles?keyword=&cattle_status=010200",
+    let breeders = null;  
+    let result =  await axios.get("/api/v1/farmer/farmer/"+id+"/cattles?keyword=&cattle_status=010200",
         {params: {all: true}})
         .then((response) => {
             breeders = response.data  
+            console.log('Load success');
+            state.breedSell =  response.data  
+    
         })
         .catch((error) => {
-            breeders = null;
+        
+          console.log('tag', 'erre')
         })
 
-        state.breedSell =  breeders;
-       //state.breedsMale =  "id = "+id;
+        
+   
+        return breeders;
    
 },
-   
+   */
 
   uploadAvatar: async function(context,form){ 
     let result = await axios.post('/api/v1/farmer/cattles/'+form.id+'/avatar', {img:form.img})
