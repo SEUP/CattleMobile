@@ -34,7 +34,7 @@
                     <Label class="text">{{user.email}}</Label>
                 </StackLayout>
                 <StackLayout class="data-item">
-                    <Label class="label">รหัสประจำตัว</Label>
+                    <Label class="label">รหัสบัตรประจำตัวประชาชน</Label>
                     <Label class="text">{{user.personal_id}}</Label>
                 </StackLayout>
                 <StackLayout class="data-item">
